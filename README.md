@@ -3,7 +3,7 @@ s1260201 GT
 
 This motivative is exact?
 
- SDF(Signed Distance Field) modering is a better  method for rendering curves than polygon modering. In this research, I’ll implement SDF-based modeling system for beginners in Unity.
+ SDF(Signed Distance Field) modering is a better  method for rendering curves than polygon modering. In this research, I’ll implement SDF-based modeling system to make easier in Unity.
 <br>
 
 How to use
