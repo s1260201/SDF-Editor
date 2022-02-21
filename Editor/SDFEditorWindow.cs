@@ -1,37 +1,36 @@
 ﻿using UnityEngine;
 using UnityEditor;
-
-using UnityEngine.UIElements;
+using UnityEditorInternal;
 
 
 public class SDFEditorWindow : EditorWindow
 {
     public Material material;
     Editor gameObjectEditor;
+    public Shader shader;
+    private Shader temp_shader;
+    private GameObject[] objlist;
+    private ReorderableList reorderobjList;
 
 
     [MenuItem("Window/SDF-Editor")]
     static void Open()
     {
-        /*
-        var window = GetWindow<SDFEditorWindow>();
-        //ウィンドウサイズ設定(minとmaxを=しているのはウィンドウサイズを固定するため)
-        window.maxSize = window.minSize = new Vector2(WINDOWSIZE_W, WINDOWSIZE_H);
-        */
         //EditorWindow.GetWindow("SDFEditorWindow");
         var window = GetWindow<SDFEditorWindow>("SDFEditorWindow");
     }
 
     void OnGUI()
     {
-        //  実際のウィンドウのコードはここに書きます
-        EditorGUILayout.BeginHorizontal();
         EditorGUILayout.BeginVertical();
-            EditorGUILayout.BeginHorizontal();
-                EditorGUILayout.LabelField("Material");
-                material = (Material) EditorGUILayout.ObjectField(material, typeof(Material), true);
-            EditorGUILayout.EndHorizontal();
-        
+            EditorGUILayout.LabelField("Shader");
+            shader = (Shader) EditorGUILayout.ObjectField(shader, typeof(Shader), true);
+        EditorGUILayout.EndVertical();
+
+        if (GUILayout.Button("Export")){
+            Debug.Log("Export");
+        }
+        /*
             if (material != null)
             {
                 if (gameObjectEditor == null)
@@ -39,8 +38,6 @@ public class SDFEditorWindow : EditorWindow
 
                 gameObjectEditor.OnPreviewGUI(GUILayoutUtility.GetRect(100, 100), EditorStyles.whiteLabel);
             }
-        EditorGUILayout.EndVertical();
-        EditorGUILayout.LabelField("Material");
-        EditorGUILayout.EndVertical();
+        */
     }
 }
