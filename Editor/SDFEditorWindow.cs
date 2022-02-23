@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using UnityEditorInternal;
+using System.IO;
 
 
 public class SDFEditorWindow : EditorWindow
@@ -11,6 +12,7 @@ public class SDFEditorWindow : EditorWindow
     private Shader temp_shader;
     private GameObject[] objlist;
     private ReorderableList reorderobjList;
+    string sname;
 
 
     [MenuItem("Window/SDF-Editor")]
@@ -23,11 +25,12 @@ public class SDFEditorWindow : EditorWindow
     void OnGUI()
     {
         EditorGUILayout.BeginVertical();
-            EditorGUILayout.LabelField("Shader");
-            shader = (Shader) EditorGUILayout.ObjectField(shader, typeof(Shader), true);
+        shader = (Shader) EditorGUILayout.ObjectField("Shader", shader, typeof(Shader), true);
+        sname = EditorGUILayout.TextField("File name","");
         EditorGUILayout.EndVertical();
 
         if (GUILayout.Button("Export")){
+            //shader = temp_shader;
             Debug.Log("Export");
         }
         /*
