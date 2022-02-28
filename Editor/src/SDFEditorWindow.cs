@@ -3,6 +3,16 @@ using UnityEditor;
 using UnityEditorInternal;
 using System.IO;
 
+/*
+public class Obj : MonoBehaviour
+{
+    public LObject(int typeNum)
+    {
+        int objType = typeNum;
+    }
+    private List<LObject> _objList;
+}
+*/
 
 public class SDFEditorWindow : EditorWindow
 {
@@ -13,6 +23,7 @@ public class SDFEditorWindow : EditorWindow
     private GameObject[] objlist;
     private ReorderableList reorderobjList;
     string sname;
+    bool showingMenu = false;
 
 
     [MenuItem("Window/SDF-Editor")]
@@ -29,10 +40,20 @@ public class SDFEditorWindow : EditorWindow
         sname = EditorGUILayout.TextField("File name","");
         EditorGUILayout.EndVertical();
 
-        if (GUILayout.Button("Export")){
-            //shader = temp_shader;
-            Debug.Log("Export");
+        if (!showingMenu)
+        {
+            if (GUILayout.Button("New Shader"))
+            {
+                //shader = temp_shader;
+                Debug.Log("Making");
+                showingMenu = true;
+            }
         }
+        else
+        {
+            EditorGUILayout.LabelField("Editor Screen");
+        }
+        
         /*
             if (material != null)
             {

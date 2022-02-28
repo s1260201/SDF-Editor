@@ -1,11 +1,8 @@
-﻿Shader "Custom/RayMarchingStep1"
+﻿Shader "SDFE/Template"
 {
 	Properties
 	{
-		_Radius("Radius", Range(0.0,1.0)) = 1.0
-		_XLight("Light-X", Float) = 0.0
-		_YLight("Light-Y", Float) = 0.0
-		_ZLight("Light-Z", Float) = 0.0
+
 	}
 	SubShader
 	{
@@ -48,17 +45,44 @@
 				return o;
 			}
 
-			float _Radius;
-			float _XLight;
-			float _YLight;
-			float _ZLight;
-			float3 _SkyBottomColor;
+			// *Sphere
+			float sdSphere(float3 p, float r)
+			{
+				return length(p) - r;
+			}
 
-			
-			float sphere(float3 pos)
-            {
-                return length(pos) - _Radius;
-            }
+			// *Box
+			float sdBox(float3 p, float3 b){
+				float3 q = abs(p) - b;
+				return length(max(q,0.0)) + min(max(q.x,max(q.y,q.z)),0.0);
+			}
+
+			// *RoundBox
+			float sdRoundBox(float3 p, float3 b, float r){
+				float3 q = abs(p) - b;
+				return length(max(q,0.0)) + min(max(q.x,max(q.y,q.z)),0.0) - r;
+			}
+
+			// *Torus
+			float sdTorus(float3 p, float3 t){
+				float2 q = float2(length(p.xz) - t.x, p.y);
+				return length(q) - t.y;
+			}
+
+			// *Cylinder
+			float sdCappedCylinder(float3 p, float3 a, float3 b, float r) //(レイポジ, 下面座標, 上面座標, 太さ)  右手左手系に注意
+			{
+				float3  ba = b - a;
+				float3  pa = p - a;
+				float baba = dot(ba,ba);
+				float paba = dot(pa,ba);
+				float x = length(pa*baba-ba*paba) - r*baba;
+				float y = abs(paba-baba*0.5)-baba*0.5;
+				float x2 = x*x;
+				float y2 = y*y*baba;
+				float d = (max(x,y)<0.0)?-min(x2,y2):(((x>0.0)?x2:0.0)+((y>0.0)?y2:0.0));
+				return sign(d)*sqrt(abs(d))/baba;
+			}
 
 			float mod(float x, float y)
             {
@@ -74,57 +98,29 @@
             {
                 return mod(p, interval) - interval * 0.5;
             }
-            
-            float dBalls(float3 p)
-            {
-                p.z = opRep(p.z, 4);
-                return sphere(p - float3(0, 1, 0));
-            }
 
 
-			//円柱の距離関数
-			float sdCappedCylinder(float3 p, float3 a, float3 b, float r) //(レイポジ, 下面座標, 上面座標, 太さ)  右手左手系に注意
-			{
-				float3  ba = b - a;
-				float3  pa = p - a;
-				float baba = dot(ba,ba);
-				float paba = dot(pa,ba);
-				float x = length(pa*baba-ba*paba) - r*baba;
-				float y = abs(paba-baba*0.5)-baba*0.5;
-				float x2 = x*x;
-				float y2 = y*y*baba;
-				float d = (max(x,y)<0.0)?-min(x2,y2):(((x>0.0)?x2:0.0)+((y>0.0)?y2:0.0));
-				return sign(d)*sqrt(abs(d))/baba;
-			}
-
-			//Boxの距離関数
-			float sdBox( float3 p, float3 b )
-			{
-				float3 q = abs(p) - b;
-				return length(max(q,0.0)) + min(max(q.x,max(q.y,q.z)),0.0);
-			}
-
-			float dTrii(float3 p, float3 a, float3 b, float r){
-				p.z = opRep(p.z,4);
-				return sdCappedCylinder(p,a,b,r);
-			}
-
-			float dBox(float3 p,float3 a){
-				p.z = opRep(p.z,4);
-				return sdBox(p,a);
-			}
 
 			// input obj info there
+			
 			float getSdf(float3 pos){
+				/*
 				float marchingDist = dTrii(pos,float3(0.75,0.0,0.0),float3(0.75,2.3,0.0) ,0.1);
 				float marchingDist2 = dTrii(pos,float3(-0.75,0.0,0.0),float3(-0.75,2.3,0.0) ,0.1);
 				float marchingDist3 = dBox(float3(pos.x,pos.y-2.3,pos.z),float3(1.2,0.1,0.2));
 				float marchingDist4 = dBox(float3(pos.x,pos.y-1.8,pos.z),float3(0.7,0.1,0.2));
+				*/
 
+				// float obj1 = ***;
+				// float obj2 = ***;
+				// obj2= min(obj1, obj2);
+				// float obj3 = ***;
+				// obj3 = max(obj2, obj3);
+				// return obj3;
 
-				//
-				return min(min(min(marchingDist,marchingDist2),marchingDist3),marchingDist4);
+				return 0;
 			}
+			
 
 			float calcSoftshadow(float3 ro, float3 rd, float mint, float tmax)
             {
@@ -144,13 +140,12 @@
                 }
                 return clamp(res, 0.0, 1.0);
             }
-
+			
 			float4 rayMarch(float3 pos, float3 rayDir, int StepNum){
-				float3 light = float3(_XLight,_YLight,_ZLight);
 				int fase = 0;
 				float t = 0;
 				float d = getSdf(pos);
-				float3 col = float3(0.549,0.431,0.282);
+				float3 col = float3(0,0,0);
 
 				while(fase < StepNum && abs(d) > 0.001){
 					t += d;
@@ -158,17 +153,13 @@
 					d = getSdf(pos);
 					fase++;
 				}
-				float shadow = calcSoftshadow(pos, light, 0.25, 5);
-				float invFog = exp(-0.15 * t);
-				col *= shadow;
-                col = lerp(_SkyBottomColor, col, invFog);
 				if(step(StepNum,fase)){
 					return float4(0,0,0,1);
 				}else{
 					return float4(col,1);
-				}
-				
+				}				
 			}
+			
 
 			fixed4 frag(v2f i) : SV_Target
 			{
@@ -181,7 +172,6 @@
 				int StepNum = 30;
 				float t = 0;
 				return rayMarch(pos,rayDir,StepNum);
-
 			}
 			ENDCG
 		}
