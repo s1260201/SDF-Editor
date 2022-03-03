@@ -1,0 +1,107 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6425111504669077069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: Box
+  m_EditorClassIdentifier: Assembly-CSharp-Editor::Box
+  graph: {fileID: 11400000}
+  position: {x: -152, y: -152}
+  ports:
+    keys: []
+    values: []
+  p: {x: 0, y: 0, z: 0}
+  b: {x: 0, y: 0, z: 0}
+  sd: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ca7561255ac94c45826438f8006e85a, type: 3}
+  m_Name: RaymaGraph
+  m_EditorClassIdentifier: 
+  nodes:
+  - {fileID: 0}
+  - {fileID: 2093382906488181012}
+--- !u!114 &2093382906488181012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: Box
+  m_EditorClassIdentifier: Assembly-CSharp:RayMarching:Box
+  graph: {fileID: 11400000}
+  position: {x: -136, y: -184}
+  ports:
+    keys:
+    - p
+    - b
+    - sd
+    values:
+    - _fieldName: p
+      _node: {fileID: 2093382906488181012}
+      _typeQualifiedName: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: b
+      _node: {fileID: 2093382906488181012}
+      _typeQualifiedName: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: sd
+      _node: {fileID: 2093382906488181012}
+      _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  p: {x: 0, y: 0, z: 0}
+  b: {x: 0, y: 0, z: 0}
+  sd: 0
+--- !u!114 &7121267395481880489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: Box
+  m_EditorClassIdentifier: Assembly-CSharp-Editor:RayMarching:Box
+  graph: {fileID: 11400000}
+  position: {x: -184, y: -248}
+  ports:
+    keys: []
+    values: []
+  p: {x: 0, y: 0, z: 0}
+  b: {x: 0, y: 0, z: 0}
+  sd: 0
