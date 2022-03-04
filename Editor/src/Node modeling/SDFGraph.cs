@@ -1,8 +1,14 @@
 using UnityEngine;
 using XNode;
+using System;
 
-[CreateAssetMenu(fileName ="RaymaGraph", menuName ="Node Graph/RaymaGraph")]
-public class SDFGraph : NodeGraph
+
+namespace SDFModeling
 {
-    
+    [Serializable, CreateAssetMenu(fileName = "RaymaGraph", menuName = "Node Graph/RaymaGraph")]
+    public class SDFGraph : NodeGraph
+    {
+
+    }
 }
+
