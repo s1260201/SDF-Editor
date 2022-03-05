@@ -6,7 +6,7 @@ using System;
 namespace SDFModeling
 {
     [Serializable, CreateAssetMenu(fileName = "RaymaGraph", menuName = "Node Graph/RaymaGraph")]
-    public class SDFGraph : NodeGraph
+    public class SDFGraph : XNode.NodeGraph
     {
 
     }

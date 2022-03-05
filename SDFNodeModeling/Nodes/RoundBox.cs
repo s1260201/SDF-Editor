@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 
-namespace RayMarching
+namespace SDF.Model
 {
     public class RoundBox : XNode.Node
     {

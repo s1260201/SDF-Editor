@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 
-namespace RayMarching
+namespace SDF.Model
 {
     public class Torus : XNode.Node
     {
