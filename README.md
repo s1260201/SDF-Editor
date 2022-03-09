@@ -16,3 +16,7 @@ How to use
 memo
 
 - App or Extending the Editor ?
+
+
+Link
+https://github.com/Siccity/xNode/releases/tag/1.7
