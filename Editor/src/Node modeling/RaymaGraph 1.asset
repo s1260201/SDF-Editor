@@ -1,206 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7845666289000826056
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Timer
-  m_EditorClassIdentifier: Assembly-CSharp:SDF.General:Timer
-  graph: {fileID: 11400000}
-  position: {x: -376, y: 72}
-  ports:
-    keys:
-    - start
-    - t
-    values:
-    - _fieldName: start
-      _node: {fileID: -7845666289000826056}
-      _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: t
-      _node: {fileID: -7845666289000826056}
-      _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-  start: 0
-  t: 0
---- !u!114 &-6020702242518818491
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f02e18a491156148b022e32ca51b0d1, type: 3}
-  m_Name: Torus
-  m_EditorClassIdentifier: 
-  graph: {fileID: 11400000}
-  position: {x: -344, y: -168}
-  ports:
-    keys:
-    - p
-    - t
-    - sd
-    values:
-    - _fieldName: p
-      _node: {fileID: -6020702242518818491}
-      _typeQualifiedName: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      connections: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: t
-      _node: {fileID: -6020702242518818491}
-      _typeQualifiedName: UnityEngine.Vector2, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      connections: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: sd
-      _node: {fileID: -6020702242518818491}
-      _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-  p: {x: 0, y: 0, z: 0}
-  t: {x: 0, y: 0}
-  sd: 0
---- !u!114 &-6005546096492214836
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a92d4f8b8b1d33642915bd0282b79064, type: 3}
-  m_Name: Box
-  m_EditorClassIdentifier: 
-  graph: {fileID: 11400000}
-  position: {x: 200, y: -152}
-  ports:
-    keys:
-    - p
-    - b
-    - sd
-    values:
-    - _fieldName: p
-      _node: {fileID: -6005546096492214836}
-      _typeQualifiedName: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      connections: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: b
-      _node: {fileID: -6005546096492214836}
-      _typeQualifiedName: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      connections: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: sd
-      _node: {fileID: -6005546096492214836}
-      _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-  p: {x: 0, y: 0, z: 0}
-  b: {x: 0, y: 0, z: 0}
-  sd: 0
---- !u!114 &-5398417462263588000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d7613d53092e44a4c99b2da4869cf26c, type: 3}
-  m_Name: Plane
-  m_EditorClassIdentifier: 
-  graph: {fileID: 11400000}
-  position: {x: 200, y: -8}
-  ports:
-    keys:
-    - p
-    - n
-    - h
-    - sd
-    values:
-    - _fieldName: p
-      _node: {fileID: -5398417462263588000}
-      _typeQualifiedName: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      connections: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: n
-      _node: {fileID: -5398417462263588000}
-      _typeQualifiedName: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      connections: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: h
-      _node: {fileID: -5398417462263588000}
-      _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: sd
-      _node: {fileID: -5398417462263588000}
-      _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-  p: {x: 0, y: 0, z: 0}
-  n: {x: 0, y: 0, z: 0}
-  h: 0
-  sd: 0
---- !u!114 &-3978348385972077723
+--- !u!114 &-5630942707012948194
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -213,25 +13,22 @@ MonoBehaviour:
   m_Name: Output
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 328, y: 200}
+  position: {x: 280, y: 152}
   ports:
     keys:
     - Value
     values:
     - _fieldName: Value
-      _node: {fileID: -3978348385972077723}
+      _node: {fileID: -5630942707012948194}
       _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
-      connections:
-      - fieldName: t
-        node: {fileID: 5454000569734439961}
-        reroutePoints: []
+      connections: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
   Value: 0
---- !u!114 &-152193514105223892
+--- !u!114 &-4448164911232962793
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -240,37 +37,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f02e18a491156148b022e32ca51b0d1, type: 3}
-  m_Name: Torus
+  m_Script: {fileID: 11500000, guid: 8649b50ada4a8fa4b83ec265844b6d07, type: 3}
+  m_Name: Cos
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -72, y: -24}
+  position: {x: 40, y: -40}
   ports:
     keys:
-    - p
-    - t
-    - sd
+    - x
+    - f
     values:
-    - _fieldName: p
-      _node: {fileID: -152193514105223892}
-      _typeQualifiedName: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
+    - _fieldName: x
+      _node: {fileID: -4448164911232962793}
+      _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
       connections: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-    - _fieldName: t
-      _node: {fileID: -152193514105223892}
-      _typeQualifiedName: UnityEngine.Vector2, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      connections: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: sd
-      _node: {fileID: -152193514105223892}
+    - _fieldName: f
+      _node: {fileID: -4448164911232962793}
       _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
       connections: []
@@ -278,9 +65,47 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  p: {x: 0, y: 0, z: 0}
-  t: {x: 0, y: 0}
-  sd: 0
+  x: 0
+  f: 0
+--- !u!114 &-2697744657281532237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce9450b3d39607b44be1c47f7f6bce40, type: 3}
+  m_Name: Sin
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 40, y: 40}
+  ports:
+    keys:
+    - x
+    - f
+    values:
+    - _fieldName: x
+      _node: {fileID: -2697744657281532237}
+      _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: f
+      _node: {fileID: -2697744657281532237}
+      _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  x: 0
+  f: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,16 +119,15 @@ MonoBehaviour:
   m_Name: RaymaGraph 1
   m_EditorClassIdentifier: 
   nodes:
-  - {fileID: -6020702242518818491}
-  - {fileID: -6005546096492214836}
-  - {fileID: 1810914510537721006}
-  - {fileID: -5398417462263588000}
-  - {fileID: -152193514105223892}
-  - {fileID: 5332512160581497234}
-  - {fileID: -7845666289000826056}
-  - {fileID: 5454000569734439961}
-  - {fileID: -3978348385972077723}
---- !u!114 &1810914510537721006
+  - {fileID: -5630942707012948194}
+  - {fileID: -4448164911232962793}
+  - {fileID: -2697744657281532237}
+  - {fileID: 4518065303687527830}
+  - {fileID: 387083584299629495}
+  - {fileID: 7917560912597170105}
+  - {fileID: 595774665529774176}
+  - {fileID: 455374630004759015}
+--- !u!114 &387083584299629495
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -316,7 +140,7 @@ MonoBehaviour:
   m_Name: Box
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -72, y: -168}
+  position: {x: -232, y: 136}
   ports:
     keys:
     - p
@@ -324,7 +148,7 @@ MonoBehaviour:
     - sd
     values:
     - _fieldName: p
-      _node: {fileID: 1810914510537721006}
+      _node: {fileID: 387083584299629495}
       _typeQualifiedName: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections: []
@@ -333,7 +157,7 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 0
     - _fieldName: b
-      _node: {fileID: 1810914510537721006}
+      _node: {fileID: 387083584299629495}
       _typeQualifiedName: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       connections: []
@@ -342,7 +166,7 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 0
     - _fieldName: sd
-      _node: {fileID: 1810914510537721006}
+      _node: {fileID: 387083584299629495}
       _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
       connections: []
@@ -353,7 +177,7 @@ MonoBehaviour:
   p: {x: 0, y: 0, z: 0}
   b: {x: 0, y: 0, z: 0}
   sd: 0
---- !u!114 &5332512160581497234
+--- !u!114 &455374630004759015
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -362,27 +186,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce9450b3d39607b44be1c47f7f6bce40, type: 3}
-  m_Name: Sin
+  m_Script: {fileID: 11500000, guid: b3ef325c554fc2a42b9a9351c8b68351, type: 3}
+  m_Name: Head
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -344, y: -24}
+  position: {x: -584, y: -56}
   ports:
     keys:
-    - x
-    - f
+    - a
     values:
-    - _fieldName: x
-      _node: {fileID: 5332512160581497234}
-      _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: f
-      _node: {fileID: 5332512160581497234}
+    - _fieldName: a
+      _node: {fileID: 455374630004759015}
       _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
       connections: []
@@ -390,9 +204,9 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  x: 0
-  f: 0
---- !u!114 &5454000569734439961
+  actionType: 0
+  a: 0
+--- !u!114 &595774665529774176
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -401,18 +215,79 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: Timer
-  m_EditorClassIdentifier: Assembly-CSharp:SDF.General:Timer
+  m_Script: {fileID: 11500000, guid: a75606f5b35f1eb4588bf17a96f48b49, type: 3}
+  m_Name: Round Box
+  m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -8, y: 168}
+  position: {x: -232, y: -200}
+  ports:
+    keys:
+    - p
+    - b
+    - r
+    - sd
+    values:
+    - _fieldName: p
+      _node: {fileID: 595774665529774176}
+      _typeQualifiedName: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: b
+      _node: {fileID: 595774665529774176}
+      _typeQualifiedName: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: r
+      _node: {fileID: 595774665529774176}
+      _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: sd
+      _node: {fileID: 595774665529774176}
+      _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  p: {x: 0, y: 0, z: 0}
+  b: {x: 0, y: 0, z: 0}
+  r: 0
+  sd: 0
+--- !u!114 &4518065303687527830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa89ce33eb7360644af3159c448e8e71, type: 3}
+  m_Name: Timer
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 40, y: 120}
   ports:
     keys:
     - start
     - t
     values:
     - _fieldName: start
-      _node: {fileID: 5454000569734439961}
+      _node: {fileID: 4518065303687527830}
       _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
       connections: []
@@ -421,16 +296,74 @@ MonoBehaviour:
       _typeConstraint: 0
       _dynamic: 0
     - _fieldName: t
-      _node: {fileID: 5454000569734439961}
+      _node: {fileID: 4518065303687527830}
       _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
-      connections:
-      - fieldName: Value
-        node: {fileID: -3978348385972077723}
-        reroutePoints: []
+      connections: []
       _direction: 1
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
   start: 0
-  t: 22.69009
+  t: 0
+--- !u!114 &7917560912597170105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7613d53092e44a4c99b2da4869cf26c, type: 3}
+  m_Name: Plane
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -231, y: -34}
+  ports:
+    keys:
+    - p
+    - n
+    - h
+    - sd
+    values:
+    - _fieldName: p
+      _node: {fileID: 7917560912597170105}
+      _typeQualifiedName: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: n
+      _node: {fileID: 7917560912597170105}
+      _typeQualifiedName: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: h
+      _node: {fileID: 7917560912597170105}
+      _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: sd
+      _node: {fileID: 7917560912597170105}
+      _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  p: {x: 0, y: 0, z: 0}
+  n: {x: 0, y: 0, z: 0}
+  h: 0
+  sd: 0

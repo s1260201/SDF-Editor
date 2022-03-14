@@ -1,7 +1,7 @@
 using UnityEngine;
 using System;
 
-namespace SDF.Output
+namespace SDF.Controll
 {
     public class Output: XNode.Node
     {
