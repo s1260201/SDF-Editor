@@ -190,7 +190,7 @@ MonoBehaviour:
   m_Name: Head
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -584, y: -56}
+  position: {x: -568, y: -40}
   ports:
     keys:
     - a
