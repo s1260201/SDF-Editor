@@ -13,8 +13,11 @@ namespace SDF
     {
         float s;
 
-        public Sphere()
+        public Sphere(Vector3 pos, float s)
         {
+            this.pos = pos;
+            this.s = s;
+
             float Sdf()
             {
                 return SdSphere();
@@ -22,11 +25,6 @@ namespace SDF
             float SdSphere()
             {
                 return pos.magnitude - s;
-            }
-            void getValue(Vector3 pos, float s)
-            {
-                this.pos = pos;
-                this.s = s;
             }
         }
     }
