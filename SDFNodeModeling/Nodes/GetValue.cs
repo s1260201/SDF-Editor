@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SDF;
 
 namespace SDFModeling
 {
@@ -10,16 +11,15 @@ namespace SDFModeling
 
         private void ShowValue()
         {
-            float value = _graph.OutputNode();
+            List<SDFObj> value = _graph.OutputNode();
             Debug.Log(value);
         }
 
         private void Update()
         {
-            float value = _graph.OutputNode();
+            List<SDFObj> value = _graph.OutputNode();
             Debug.Log(value);
         }
 
     }
 }
-

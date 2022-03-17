@@ -11,7 +11,6 @@ namespace SDF.Model
         [Input] public List<SDFObj> inputObject;
         [Input] public Vector3 p;
         [Input] public float s;
-        //[Output] public float sd;
         [Output] public List<SDFObj> outputObject;
 
         public override object GetValue(XNode.NodePort port)

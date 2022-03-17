@@ -33,8 +33,11 @@ namespace SDF
     {
         protected Vector3 b;
 
-        public Box()
+        public Box(Vector3 pos, Vector3 b)
         {
+            this.pos = pos;
+            this.b = b;
+
             float Sdf()
             {
                 return SdBox();
@@ -48,11 +51,6 @@ namespace SDF
 
                 return q.magnitude + Math.Min(Math.Max(q.x, Math.Max(q.y, q.z)), 0.0f);
             }
-            void getValue(Vector3 pos, Vector3 b)
-            {
-                this.pos = pos;
-                this.b = b;
-            }
         }
     }
 
@@ -61,13 +59,17 @@ namespace SDF
         protected Vector3 b;
         float r;
 
-        public RoundBox()
+        public RoundBox(Vector3 pos, Vector3 b, float r)
         {
+            this.pos = pos;
+            this.b = b;
+            this.r = r;
+
             float Sdf()
             {
-                return SdBox();
+                return SdRoundBox();
             }
-            float SdBox()
+            float SdRoundBox()
             {
                 Vector3 q = pos - b;
                 q.x = Math.Max(q.x, 0.0f);
@@ -75,12 +77,6 @@ namespace SDF
                 q.z = Math.Max(q.z, 0.0f);
 
                 return q.magnitude + Math.Min(Math.Max(q.x, Math.Max(q.y, q.z)), 0.0f) - r;
-            }
-            void getValue(Vector3 pos, Vector3 b, float r)
-            {
-                this.pos = pos;
-                this.b = b;
-                this.r = r;
             }
         }
     }

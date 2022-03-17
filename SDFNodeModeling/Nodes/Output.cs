@@ -10,7 +10,7 @@ namespace SDF.Controll
         public ActionType actionType = ActionType.Preview;
         public enum ActionType { Preview, Render }
 
-        [Input(ShowBackingValue.Never)] public float Value;
+        [Input(ShowBackingValue.Never)] public List<SDFObj> inputObject;
 
         public override object GetValue(XNode.NodePort port)
         {
@@ -24,11 +24,9 @@ namespace SDF.Controll
                     return 1;
             }
         }
-
-        public float OutputSD()
+        public List<SDFObj> OutputList()
         {
-            float sd = GetInputValue<float>("Value", this.Value);
-            return sd;
+            return GetInputValue<List<SDFObj>>("List",this.inputObject);
         }
     }
 }

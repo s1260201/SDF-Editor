@@ -2,6 +2,8 @@ using UnityEngine;
 using XNode;
 using System;
 using SDF.Controll;
+using System.Collections.Generic;
+using SDF;
 
 
 namespace SDFModeling
@@ -9,7 +11,7 @@ namespace SDFModeling
     [Serializable, CreateAssetMenu(fileName = "RaymaGraph", menuName = "Node Graph/RaymaGraph")]
     public class SDFGraph : XNode.NodeGraph
     {
-        public float OutputNode()
+        public List<SDFObj> OutputNode()
         {
             Output result = null;
             foreach (var node in nodes)
@@ -20,8 +22,8 @@ namespace SDFModeling
                     break;
                 }
             }
-            float value = result.OutputSD();
-            return value;
+            List<SDFObj> list = result.OutputList();
+            return list;
         }
     }
 }
