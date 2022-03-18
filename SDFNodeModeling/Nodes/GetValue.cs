@@ -15,11 +15,5 @@ namespace SDFModeling
             Debug.Log(value);
         }
 
-        private void Update()
-        {
-            List<SDFObj> value = _graph.OutputNode();
-            Debug.Log(value);
-        }
-
     }
 }

@@ -8,10 +8,12 @@ namespace SDF.Model
 {
     public class SphereNode : XNode.Node
     {
-        [Input] public List<SDFObj> inputObject;
+        [Input(ShowBackingValue.Never)] public List<SDFObj> inputObject;
         [Input] public Vector3 p;
         [Input] public float s;
         [Output] public List<SDFObj> outputObject;
+
+        Sphere obj = null;
 
         public override object GetValue(XNode.NodePort port)
         {
@@ -19,9 +21,14 @@ namespace SDF.Model
             p = GetInputValue<Vector3>("p", this.p);
             s = GetInputValue<float>("s", this.s);
 
-            Sphere obj = new Sphere(p, s);
-
-            outputObject.Add(obj);
+            if (obj == null)
+            {
+                obj = new Sphere(p, s);
+            }
+            if (outputObject != null)
+            {
+                outputObject.Add(obj);
+            }
 
             return outputObject;
         }
