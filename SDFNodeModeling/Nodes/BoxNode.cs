@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace SDF.Model
 {
-    public class BoxNode : XNode.Node
+    public class BoxNode : SDFNode
     {
         [Input] public List<SDFObj> inputObject;
         [Input] public Vector3 p;
@@ -18,14 +18,6 @@ namespace SDF.Model
             outputObject = GetInputValue<List<SDFObj>>("List", this.inputObject);
             p = GetInputValue<Vector3>("p", this.p);
             b = GetInputValue<Vector3>("b", this.b);
-
-            /*
-            Vector3 q;
-            q.x = Math.Max(Math.Abs(p.x) - b.x, 0.0f);
-            q.y = Math.Max(Math.Abs(p.y) - b.y, 0.0f);
-            q.z = Math.Max(Math.Abs(p.z) - b.z, 0.0f);
-            sd = q.magnitude + Math.Min(Math.Max(q.x, Math.Max(q.y, q.z)), 0.0f);
-            */
 
             Box obj = new Box(p, b);
             outputObject.Add(obj);

@@ -8,12 +8,12 @@ namespace SDFModeling
     public class GetValue : MonoBehaviour
     {
         [SerializeField] SDFGraph _graph;
-
+        /*
         private void ShowValue()
         {
             List<SDFObj> value = _graph.OutputNode();
             Debug.Log(value);
         }
-
+        */
     }
 }

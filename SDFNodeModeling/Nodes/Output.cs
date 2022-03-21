@@ -2,15 +2,16 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 using SDF;
+using XNode;
 
 namespace SDF.Controll
 {
-    public class Output: XNode.Node
+    public class Output: SDFNode
     {
         public ActionType actionType = ActionType.Preview;
         public enum ActionType { Preview, Render }
 
-        [Input(ShowBackingValue.Never)] public List<SDFObj> inputObject;
+        [Input(ShowBackingValue.Never)] public Node inputNode;
 
         public override object GetValue(XNode.NodePort port)
         {
@@ -20,13 +21,12 @@ namespace SDF.Controll
                 default:
                     return 0;
                 case ActionType.Render:
-                    List<SDFObj> objList = new List<SDFObj>();
                     return 1;
             }
         }
-        public List<SDFObj> OutputList()
+        public Node OutputList()
         {
-            return GetInputValue<List<SDFObj>>("List",this.inputObject);
+            return GetInputValue<Node>("Node",this.inputNode);
         }
     }
 }

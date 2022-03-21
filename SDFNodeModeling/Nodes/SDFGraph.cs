@@ -11,6 +11,7 @@ namespace SDFModeling
     [Serializable, CreateAssetMenu(fileName = "RaymaGraph", menuName = "Node Graph/RaymaGraph")]
     public class SDFGraph : XNode.NodeGraph
     {
+        /*
         public List<SDFObj> OutputNode()
         {
             Output result = null;
@@ -22,9 +23,10 @@ namespace SDFModeling
                     break;
                 }
             }
-            List<SDFObj> list = result.OutputList();
+            //List<SDFObj> list = result.OutputList();
             return list;
         }
+        */
     }
 }
 

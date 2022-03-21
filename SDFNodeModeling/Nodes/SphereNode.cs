@@ -2,47 +2,26 @@ using UnityEngine;
 using System;
 using SDF;
 using System.Collections.Generic;
+using XNode;
 
 
 namespace SDF.Model
 {
-    public class SphereNode : XNode.Node
+    public class SphereNode : SDFNode
     {
-        [Input(ShowBackingValue.Never)] public List<SDFObj> inputObject;
+        [Input(ShowBackingValue.Never)] public Node inputNode;
         [Input] public Vector3 p;
         [Input] public float s;
-        [Output] public List<SDFObj> outputObject;
-
-        Sphere obj = null;
+        [Output] public Node outputNode;
 
         public override object GetValue(XNode.NodePort port)
         {
-            outputObject = GetInputValue<List<SDFObj>>("List",this.inputObject);
+            outputNode = GetInputValue<Node>("List",this.inputNode);
             p = GetInputValue<Vector3>("p", this.p);
             s = GetInputValue<float>("s", this.s);
 
-            if (obj == null)
-            {
-                obj = new Sphere(p, s);
-            }
-            if (outputObject != null)
-            {
-                outputObject.Add(obj);
-            }
-
-            return outputObject;
+            return outputNode;
         }
-
-        /*
-        public override object GetValue(XNode.NodePort port)
-        {
-            p = GetInputValue<Vector3>("p", this.p);
-            s = GetInputValue<float>("s", this.s);
-
-            sd = p.magnitude - s;
-            return sd;
-        }
-        */
     }
 }
 
