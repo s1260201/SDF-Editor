@@ -20,10 +20,20 @@ namespace SDF.Model
             outputNode = GetInputValue<SDFNode>("List",this.inputNode);
             p = GetInputValue<Vector3>("p", this.p);
             s = GetInputValue<float>("s", this.s);
-
+            Sphere sphere = new Sphere(this.p, this.s);
+            List<SDFObj> objList;
+            if (outputNode == null)
+            {
+                objList = new List<SDFObj>();
+            }
+            else
+            {
+                //objList = outputNode.getList();
+            }
             return outputNode;
         }
         
+        /*
         public override List<SDFObj> OutputList()
         {
             Sphere sphere = new Sphere(this.p, this.s);
@@ -38,8 +48,8 @@ namespace SDF.Model
             }
             objList.Add(sphere);
             return objList;
-
         }
+        */
     }
 }
 
