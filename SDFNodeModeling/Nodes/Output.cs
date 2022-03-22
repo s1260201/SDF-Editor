@@ -11,10 +11,11 @@ namespace SDF.Controll
         public ActionType actionType = ActionType.Preview;
         public enum ActionType { Preview, Render }
 
-        [Input(ShowBackingValue.Never)] public Node inputNode;
+        [Input(ShowBackingValue.Never)] public SDFNode inputNode;
 
         public override object GetValue(XNode.NodePort port)
         {
+            SDFNode inputNode = GetInputValue<SDFNode>("InputNode", this.inputNode);
             switch (actionType)
             {
                 case ActionType.Preview:
@@ -24,9 +25,16 @@ namespace SDF.Controll
                     return 1;
             }
         }
-        public Node OutputList()
+        
+        public override List<SDFObj> OutputList()
         {
-            return GetInputValue<Node>("Node",this.inputNode);
+            //SDFNode parent = GetInputValue<SDFNode>("InputNode", this.inputNode);
+            //SDFNode parent = this.inputNode;
+            if (this.inputNode == null) Debug.Log("parent is null.");
+            List<SDFObj> objList;
+            objList= inputNode.OutputList();
+            return objList;
         }
+        
     }
 }
