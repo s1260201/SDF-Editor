@@ -13,7 +13,9 @@ namespace SDF
     {
         [SerializeField] SDFGraph sdfGraph;
         public List<SDFObj> list;
-        string path = "Assets/Shader/src/Template.shader";
+        string readPath = "Assets/Shader/src/Sample.shader";
+        string writePath = "Assets/Shader/Export/Sample1.shader";
+
         // Update is called once per frame
         void Start()
         {
@@ -23,23 +25,53 @@ namespace SDF
             */
             // Test list
             list = new List<SDFObj>();
+
             Vector3 pos = new Vector3(0,0,0);
             Sphere sphere = new Sphere(pos,2);
             list.Add(sphere);
-            int num = 1;
+            int i = 0;
             try
             {
                 Regex reg = new Regex("// SDF");
-                StreamReader streamReader = new StreamReader(path);
+                StreamReader streamReader = new StreamReader(readPath);
+                StreamWriter streamWriter = new StreamWriter(writePath);
                 string line = null;
+
                 while ((line = streamReader.ReadLine()) != null)
                 {
+                    //Debug.Log(line);
                     if (reg.Match(line).Success)
                     {
-                        StreamWriter streamWriter = new StreamWriter(path);
+                        Debug.Log("Match");
+                        
+                        /*
+                        while(list[i]!=null){
+                        switch (list[i].GetType())
+                        {
+                            case Sphere:
+                                streamWriter.WriteLine("float marchingDist = sdSphere(pos,0.5);");
+                                break;
+                            case Box:
+                                break;
+                            case Plane:
+                                break;
+                        }
+                        i++;
+                        }
+                        */
                         streamWriter.WriteLine("float marchingDist = sdSphere(pos,0.5);");
+                        streamWriter.Flush();
                         Debug.Log("Clear");
                     }
+                    else
+                    {
+                        Debug.Log(line);
+                        streamWriter.WriteLine(line);
+                        streamWriter.Flush();
+                        i++;
+                        Debug.Log(i);
+                    }
+
                 }
             }
             catch(Exception e)

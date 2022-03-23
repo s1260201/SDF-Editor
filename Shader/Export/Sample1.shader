@@ -1,4 +1,4 @@
-﻿Shader "SDFE/Sample"
+Shader "SDFE/Sample"
 {
 	Properties
 	{
@@ -53,7 +53,7 @@
 			
 			float getSdf(float3 pos){
 				
-				// SDF
+float marchingDist = sdSphere(pos,0.5);
 				return marchingDist;
 			}
 
