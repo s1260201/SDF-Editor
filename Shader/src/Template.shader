@@ -104,12 +104,14 @@
 			// input obj info there
 			
 			float getSdf(float3 pos){
-				/*
-				float marchingDist = dTrii(pos,float3(0.75,0.0,0.0),float3(0.75,2.3,0.0) ,0.1);
-				float marchingDist2 = dTrii(pos,float3(-0.75,0.0,0.0),float3(-0.75,2.3,0.0) ,0.1);
-				float marchingDist3 = dBox(float3(pos.x,pos.y-2.3,pos.z),float3(1.2,0.1,0.2));
-				float marchingDist4 = dBox(float3(pos.x,pos.y-1.8,pos.z),float3(0.7,0.1,0.2));
-				*/
+				
+				//float marchingDist = dTrii(pos,float3(0.75,0.0,0.0),float3(0.75,2.3,0.0) ,0.1);
+				//float marchingDist2 = dTrii(pos,float3(-0.75,0.0,0.0),float3(-0.75,2.3,0.0) ,0.1);
+				float marchingDist3 = sdBox(float3(0,0,0),float3(0.5,0.5,0.5));
+				//float marchingDist4 = sdBox(float3(0,1,0),float3(1,1,1));
+				//return min(marchingDist3, marchingDist4);
+				return marchingDist3;
+				// AddSDF
 
 				// float obj1 = ***;
 				// float obj2 = ***;
@@ -118,10 +120,10 @@
 				// obj3 = max(obj2, obj3);
 				// return obj3;
 
-				return 0;
+				//return 0;
 			}
 			
-
+			/*
 			float calcSoftshadow(float3 ro, float3 rd, float mint, float tmax)
             {
                 // bounding volume
@@ -140,12 +142,13 @@
                 }
                 return clamp(res, 0.0, 1.0);
             }
+			*/
 			
 			float4 rayMarch(float3 pos, float3 rayDir, int StepNum){
 				int fase = 0;
 				float t = 0;
 				float d = getSdf(pos);
-				float3 col = float3(0,0,0);
+				float3 col = 0;
 
 				while(fase < StepNum && abs(d) > 0.001){
 					t += d;
@@ -154,23 +157,22 @@
 					fase++;
 				}
 				if(step(StepNum,fase)){
-					return float4(0,0,0,1);
+					return float4(1,1,1,1);
 				}else{
-					return float4(col,1);
+					return float4(col,0);
 				}				
 			}
 			
 
 			fixed4 frag(v2f i) : SV_Target
 			{
-				float3 col = float3(0,0,0);
+				float3 col = float3(1,1,1);
 				// レイの初期位置(ピクセルのワールド座標)
 				float3 pos = i.pos.xyz;
 				// レイの進行方向
 				float3 rayDir = normalize(pos.xyz - _WorldSpaceCameraPos);
 
 				int StepNum = 30;
-				float t = 0;
 				return rayMarch(pos,rayDir,StepNum);
 			}
 			ENDCG
