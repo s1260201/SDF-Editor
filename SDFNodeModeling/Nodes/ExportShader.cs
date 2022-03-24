@@ -13,8 +13,9 @@ namespace SDF
     {
         [SerializeField] SDFGraph sdfGraph;
         public List<SDFObj> list;
-        string readPath = "Assets/Shader/src/Sample.shader";
-        string writePath = "Assets/Shader/Export/Sample1.shader";
+        [SerializeField] string readPath = "Assets/Shader/src/Sample.shader";
+        [SerializeField] string writePath = "Assets/Shader/Export/Sample1.shader";
+        [SerializeField] string ShaderName = "Sample";
 
         // Update is called once per frame
         void Start()
@@ -30,6 +31,7 @@ namespace SDF
             Sphere sphere = new Sphere(pos,2);
             list.Add(sphere);
             int i = 0;
+            
             try
             {
                 Regex reg = new Regex("// SDF");
@@ -71,8 +73,10 @@ namespace SDF
                         i++;
                         Debug.Log(i);
                     }
-
                 }
+                streamReader.Close();
+                streamWriter.Close();
+
             }
             catch(Exception e)
             {

@@ -169,6 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sdfGraph: {fileID: 0}
   list: []
+  ShaderName: 
 --- !u!1 &241135424
 GameObject:
   m_ObjectHideFlags: 0
