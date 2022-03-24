@@ -24,14 +24,20 @@ namespace SDF
             list = sdfGraph.OutputNode();
             Debug.Log(list);
             */
+
             // Test list
             list = new List<SDFObj>();
-
             Vector3 pos = new Vector3(0,0,0);
             Sphere sphere = new Sphere(pos,2);
             list.Add(sphere);
-            int i = 0;
+
+            OutputShader();
             
+            
+        }
+
+        public void OutputShader()
+        {
             try
             {
                 Regex reg = new Regex("// SDF");
@@ -45,7 +51,7 @@ namespace SDF
                     if (reg.Match(line).Success)
                     {
                         Debug.Log("Match");
-                        
+
                         /*
                         while(list[i]!=null){
                         switch (list[i].GetType())
@@ -58,7 +64,7 @@ namespace SDF
                             case Plane:
                                 break;
                         }
-                        i++;
+                        
                         }
                         */
                         streamWriter.WriteLine("float marchingDist = sdSphere(pos,0.5);");
@@ -67,22 +73,19 @@ namespace SDF
                     }
                     else
                     {
-                        Debug.Log(line);
+                        //Debug.Log(line);
                         streamWriter.WriteLine(line);
                         streamWriter.Flush();
-                        i++;
-                        Debug.Log(i);
                     }
                 }
                 streamReader.Close();
                 streamWriter.Close();
 
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Debug.LogError("The file could not be read");
             }
-            
         }
     }
 }
