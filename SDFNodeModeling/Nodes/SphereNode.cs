@@ -19,7 +19,8 @@ namespace SDF.Model
             outputObjectList = GetInputValue<List<SDFObj>>("List",this.inputObjectList);
             p = GetInputValue<Vector3>("p", this.p);
             s = GetInputValue<float>("s", this.s);
-            Sphere obj = new Sphere(p, s); ;
+            //Sphere obj = new Sphere(p, s);
+            Sphere obj = new Sphere();
             if (outputObjectList == null)
             {
                 List<SDFObj> list = new List<SDFObj>();

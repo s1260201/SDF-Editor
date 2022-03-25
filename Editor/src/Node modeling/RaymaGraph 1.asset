@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Output
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 168, y: 72}
+  position: {x: 120, y: 72}
   ports:
     keys:
     - inputObject
@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: Sphere
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -104, y: -27.5}
+  position: {x: -120, y: 8}
   ports:
     keys:
     - outputObjectList
@@ -934,7 +934,7 @@ MonoBehaviour:
   m_Name: Sphere
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -392, y: -72}
+  position: {x: -344, y: -72}
   ports:
     keys:
     - outputObjectList

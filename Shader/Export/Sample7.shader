@@ -54,6 +54,7 @@ Shader "SDFE/Sample"
 			float getSdf(float3 pos){
 				
 float marchingDist = sdSphere(pos,0.5);
+float marchingDist = sdBox(pos,float3(0.5,0.5,0.5));
 				return marchingDist;
 			}
 

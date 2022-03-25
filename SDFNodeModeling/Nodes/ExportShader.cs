@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using System.IO;
 using System.Text.RegularExpressions;
 using System;
+using System.Reflection;
 
 namespace SDF
 {
@@ -26,24 +27,33 @@ namespace SDF
             */
 
             // Test list
-            list = new List<SDFObj>();
-            Vector3 pos = new Vector3(0,0,0);
-            Sphere sphere = new Sphere(pos,2);
-            list.Add(sphere);
+            
 
-            OutputShader();
-            
-            
+            OutputShader();  
         }
 
         public void OutputShader()
         {
+            list = new List<SDFObj>();
+            Vector3 pos = new Vector3(0, 0, 0);
+            Sphere sphere = new Sphere();
+            sphere.s = 0.2f;
+            Box box = new Box(pos, new Vector3(0.2f, 0.2f, 0.2f));
+
+            Debug.Log(sphere.GetType());
+
+            list.Add(sphere);
+            list.Add(new Box(pos, new Vector3(0.2f, 0.2f, 0.2f)));
+            //Debug.Log(list);
+            Debug.Log(list[0].GetType());
+            
             try
             {
                 Regex reg = new Regex("// SDF");
                 StreamReader streamReader = new StreamReader(readPath);
                 StreamWriter streamWriter = new StreamWriter(writePath);
                 string line = null;
+                int i = 0;
 
                 while ((line = streamReader.ReadLine()) != null)
                 {
@@ -51,24 +61,34 @@ namespace SDF
                     if (reg.Match(line).Success)
                     {
                         Debug.Log("Match");
-
-                        /*
-                        while(list[i]!=null){
-                        switch (list[i].GetType())
-                        {
-                            case Sphere:
+                        Debug.Log(list);
+                        while(i < list.Count){
+                            Debug.Log(i);
+                            if (list[i] is SDF.Sphere)
+                            {
+                                Debug.Log("Get");
                                 streamWriter.WriteLine("float marchingDist = sdSphere(pos,0.5);");
-                                break;
-                            case Box:
-                                break;
-                            case Plane:
-                                break;
-                        }
+                            }
+                            else if(list[i].GetType() == typeof(Box))
+                            {
+                                streamWriter.WriteLine("float marchingDist = sdBox(pos,float3(0.5,0.5,0.5));");
+
+                            }
+                            else if(list[i].GetType() == typeof(RoundBox))
+                            {
+                                streamWriter.WriteLine("float marchingDist = sdRoundBox(pos,float3(0.5,0.5,0.5),0.1);");
+
+                            }
+                            else
+                            {
+                                Debug.LogError("Unknown Node.");
+                            }
+                            streamWriter.Flush();
+                            i++;
                         
                         }
-                        */
-                        streamWriter.WriteLine("float marchingDist = sdSphere(pos,0.5);");
-                        streamWriter.Flush();
+                       
+                        
                         Debug.Log("Clear");
                     }
                     else

@@ -1,5 +1,5 @@
-using UnityEngine;
 using System;
+using UnityEngine;
 
 
 namespace SDF
@@ -9,24 +9,32 @@ namespace SDF
         public Vector3 pos;
     }
 
+    /*
     public class Sphere : SDFObj
     {
         float s;
+
 
         public Sphere(Vector3 pos, float s)
         {
             this.pos = pos;
             this.s = s;
 
-            float Sdf()
+        }
+               float Sdf()
             {
                 return SdSphere();
             }
             float SdSphere()
             {
                 return pos.magnitude - s;
-            }
-        }
+            }  
+    }
+    */
+
+    public class Sphere : SDFObj
+    {
+        public float s;
     }
 
     public class Box : SDFObj
