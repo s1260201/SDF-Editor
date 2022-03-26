@@ -28,7 +28,11 @@ namespace SDF.Model
             q.z = Math.Max(Math.Abs(p.z) - b.z, 0.0f);
             return q.magnitude + Math.Min(Math.Max(q.x, Math.Max(q.y, q.z)), 0.0f) - r;
             */
-            RoundBox obj = new RoundBox(p, b, r);
+            //RoundBox obj = new RoundBox(p, b, r);
+            RoundBox obj = new RoundBox();
+            obj.pos = p;
+            obj.b = this.b;
+            obj.r = this.r;
             outputObject.Add(obj);
             return outputObject;
         }

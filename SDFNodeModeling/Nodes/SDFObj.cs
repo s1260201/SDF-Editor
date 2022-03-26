@@ -39,7 +39,19 @@ namespace SDF
 
     public class Box : SDFObj
     {
-        protected Vector3 b;
+        public Vector3 b;
+    }
+    public class RoundBox : SDFObj
+    {
+        public Vector3 b;
+        public float r;
+    }
+
+
+    /*
+    public class Box : SDFObj
+    {
+        public Vector3 b;
 
         public Box(Vector3 pos, Vector3 b)
         {
@@ -61,11 +73,12 @@ namespace SDF
             }
         }
     }
-
+    */
+    /*
     public class RoundBox : SDFObj
     {
-        protected Vector3 b;
-        float r;
+        public Vector3 b;
+        public float r;
 
         public RoundBox(Vector3 pos, Vector3 b, float r)
         {
@@ -88,6 +101,7 @@ namespace SDF
             }
         }
     }
+    */
     /*
     public class RoundBox : Box
     {

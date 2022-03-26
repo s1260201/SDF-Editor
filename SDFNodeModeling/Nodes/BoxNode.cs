@@ -27,7 +27,10 @@ namespace SDF.Model
             sd = q.magnitude + Math.Min(Math.Max(q.x, Math.Max(q.y, q.z)), 0.0f);
             */
 
-            Box obj = new Box(p, b);
+            //Box obj = new Box(p, b);
+            Box obj = new Box();
+            obj.pos = p;
+            obj.b = this.b;
             outputObject.Add(obj);
             return outputObject;
         }

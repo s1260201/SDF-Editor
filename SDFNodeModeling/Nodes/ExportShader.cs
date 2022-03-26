@@ -35,15 +35,13 @@ namespace SDF
         public void OutputShader()
         {
             list = new List<SDFObj>();
-            Vector3 pos = new Vector3(0, 0, 0);
-            Sphere sphere = new Sphere();
-            sphere.s = 0.2f;
-            Box box = new Box(pos, new Vector3(0.2f, 0.2f, 0.2f));
+            //Vector3 pos = new Vector3(0, 0, 0);
+            //Sphere sphere = new Sphere();
+            //sphere.s = 0.2f;
+            //Box box = new Box(pos, new Vector3(0.2f, 0.2f, 0.2f));
 
-            Debug.Log(sphere.GetType());
-
-            list.Add(sphere);
-            list.Add(new Box(pos, new Vector3(0.2f, 0.2f, 0.2f)));
+            //list.Add(sphere);
+            //list.Add(new Box(pos, new Vector3(0.2f, 0.2f, 0.2f)));
             //Debug.Log(list);
             Debug.Log(list[0].GetType());
             
@@ -53,10 +51,12 @@ namespace SDF
                 StreamReader streamReader = new StreamReader(readPath);
                 StreamWriter streamWriter = new StreamWriter(writePath);
                 string line = null;
+                //string code;
                 int i = 0;
 
                 while ((line = streamReader.ReadLine()) != null)
                 {
+                    //code = null;
                     //Debug.Log(line);
                     if (reg.Match(line).Success)
                     {
@@ -66,22 +66,25 @@ namespace SDF
                             Debug.Log(i);
                             if (list[i] is SDF.Sphere)
                             {
-                                Debug.Log("Get");
-                                streamWriter.WriteLine("float marchingDist = sdSphere(pos,0.5);");
+                                Sphere sphere = (Sphere)list[i];
+                                streamWriter.WriteLine("float dist" + i + " sdSphere(pos, " + sphere.s + ");");
                             }
-                            else if(list[i].GetType() == typeof(Box))
+                            else if(list[i] is SDF.Box)
                             {
-                                streamWriter.WriteLine("float marchingDist = sdBox(pos,float3(0.5,0.5,0.5));");
+                                Box box = (Box)list[i];
+                                streamWriter.WriteLine("float dist" + i + " sdBox(pos, float3(" + box.b.x + ", " + box.b.y + ", " + box.b.z + "));");
+                                //streamWriter.WriteLine("float marchingDist = sdBox(pos,float3(0.5,0.5,0.5));");
 
                             }
-                            else if(list[i].GetType() == typeof(RoundBox))
+                            else if(list[i] is SDF.RoundBox)
                             {
-                                streamWriter.WriteLine("float marchingDist = sdRoundBox(pos,float3(0.5,0.5,0.5),0.1);");
-
+                                RoundBox roundBox = (RoundBox)list[i];
+                                streamWriter.WriteLine("float dist" + i + " sdRoundBox(pos, float3(" + roundBox.b.x + ", " + roundBox.b.y + ", " + roundBox.b.z + "), " + roundBox.r + ");");
+                                //streamWriter.WriteLine("float marchingDist = sdRoundBox(pos,float3(0.5,0.5,0.5),0.1);");
                             }
                             else
                             {
-                                Debug.LogError("Unknown Node.");
+                                Debug.LogError("Selected an unknown Node.");
                             }
                             streamWriter.Flush();
                             i++;

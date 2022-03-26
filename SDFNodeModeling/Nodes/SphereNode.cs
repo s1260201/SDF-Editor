@@ -21,6 +21,7 @@ namespace SDF.Model
             s = GetInputValue<float>("s", this.s);
             //Sphere obj = new Sphere(p, s);
             Sphere obj = new Sphere();
+            obj.s = this.s;
             if (outputObjectList == null)
             {
                 List<SDFObj> list = new List<SDFObj>();
