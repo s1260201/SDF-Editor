@@ -13,7 +13,7 @@ namespace SDF.Model
         [Input] public float s;
         [Output] public List<SDFObj> outputObjectList;
 
-
+        /*
         public override object GetValue(XNode.NodePort port)
         {
             outputObjectList = GetInputValue<List<SDFObj>>("List",this.inputObjectList);
@@ -28,6 +28,23 @@ namespace SDF.Model
             }
             outputObjectList.Add(obj);
             Debug.Log("Count");
+            return outputObjectList;
+        }
+        */
+
+        public List<SDFObj> outputList()
+        {
+            outputObjectList = GetInputValue<List<SDFObj>>("List", this.inputObjectList);
+            p = GetInputValue<Vector3>("p", this.p);
+            s = GetInputValue<float>("s", this.s);
+            Sphere obj = new Sphere();
+            obj.s = this.s;
+            if (outputObjectList == null)
+            {
+                List<SDFObj> list = new List<SDFObj>();
+            }
+            outputObjectList.Add(obj);
+            Debug.Log("Add obj to list");
             return outputObjectList;
         }
 
