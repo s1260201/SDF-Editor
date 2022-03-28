@@ -6,47 +6,30 @@ using System.Collections.Generic;
 
 namespace SDF.Model
 {
-    public class SphereNode : XNode.Node
+    public class SphereNode : SDFNode
     {
-        [Input(ShowBackingValue.Never)] public List<SDFObj> inputObjectList;
         [Input] public Vector3 p;
         [Input] public float s;
-        [Output] public List<SDFObj> outputObjectList;
-
+        
         /*
-        public override object GetValue(XNode.NodePort port)
+        public override SDFNode getNode()
         {
-            outputObjectList = GetInputValue<List<SDFObj>>("List",this.inputObjectList);
-            p = GetInputValue<Vector3>("p", this.p);
-            s = GetInputValue<float>("s", this.s);
-            //Sphere obj = new Sphere(p, s);
+            if(nextNode == null)
+            {
+                objList = new List<SDFObj>();
+            }
+            else
+            {
+                nextNode.getNode();
+                objList = nextNode.objList;
+            }
             Sphere obj = new Sphere();
             obj.s = this.s;
-            if (outputObjectList == null)
-            {
-                List<SDFObj> list = new List<SDFObj>();
-            }
-            outputObjectList.Add(obj);
-            Debug.Log("Count");
-            return outputObjectList;
+            objList.Add(obj);
+            Debug.Log("Add obj to list");
+            return nextNode;
         }
         */
-
-        public List<SDFObj> outputList()
-        {
-            outputObjectList = GetInputValue<List<SDFObj>>("List", this.inputObjectList);
-            p = GetInputValue<Vector3>("p", this.p);
-            s = GetInputValue<float>("s", this.s);
-            Sphere obj = new Sphere();
-            obj.s = this.s;
-            if (outputObjectList == null)
-            {
-                List<SDFObj> list = new List<SDFObj>();
-            }
-            outputObjectList.Add(obj);
-            Debug.Log("Add obj to list");
-            return outputObjectList;
-        }
 
         /*
         public override object GetValue(XNode.NodePort port)
@@ -58,6 +41,10 @@ namespace SDF.Model
             return sd;
         }
         */
+        public override SDFObj addObj()
+        {
+            return new Sphere();
+        }
     }
 }
 

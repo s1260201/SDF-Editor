@@ -18,23 +18,14 @@ namespace SDF
         [SerializeField] string writePath = "Assets/Shader/Export/Sample1.shader";
         [SerializeField] string ShaderName = "Sample";
 
-        // Update is called once per frame
-        void Start()
-        {
-            /*
-            list = sdfGraph.OutputNode();
-            Debug.Log(list);
-            */
-
-            // Test list
-            
-
-            OutputShader();  
-        }
-
         public void OutputShader()
         {
-            list = new List<SDFObj>();
+            SDFNode outputNode = sdfGraph.OutputNode();
+            list = getAllNodes(outputNode);
+                // Debug.Log(list);
+
+            
+            //list = new List<SDFObj>();
             //Vector3 pos = new Vector3(0, 0, 0);
             //Sphere sphere = new Sphere();
             //sphere.s = 0.2f;
@@ -43,7 +34,6 @@ namespace SDF
             //list.Add(sphere);
             //list.Add(new Box(pos, new Vector3(0.2f, 0.2f, 0.2f)));
             //Debug.Log(list);
-            Debug.Log(list[0].GetType());
             
             try
             {
@@ -64,6 +54,7 @@ namespace SDF
                         Debug.Log(list);
                         while(i < list.Count){
                             Debug.Log(i);
+                            //Debug.Log(list[i].GetType());
                             if (list[i] is SDF.Sphere)
                             {
                                 Sphere sphere = (Sphere)list[i];
@@ -109,6 +100,21 @@ namespace SDF
             {
                 Debug.LogError("The file could not be read");
             }
+        }
+        public List<SDFObj> getAllNodes(SDFNode node)
+        {
+            List<SDFObj> objList;
+            SDFNode parent = node.beforeNode;
+            if (parent != null)
+            {
+                objList = getAllNodes(parent);
+            }
+            else
+            {
+                objList = new List<SDFObj>();
+            }
+            objList.Add(node.addObj());
+            return objList;
         }
     }
 }

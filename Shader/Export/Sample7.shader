@@ -50,12 +50,23 @@ Shader "SDFE/Sample"
 			{
 				return length(p) - r;
 			}
+
+			// *Box
+			float sdBox(float3 p, float3 b){
+				float3 q = abs(p) - b;
+				return length(max(q,0.0)) + min(max(q.x,max(q.y,q.z)),0.0);
+			}
+
+			// *RoundBox
+			float sdRoundBox(float3 p, float3 b, float r){
+				float3 q = abs(p) - b;
+				return length(max(q,0.0)) + min(max(q.x,max(q.y,q.z)),0.0) - r;
+			}
 			
 			float getSdf(float3 pos){
 				
-float marchingDist = sdSphere(pos,0.5);
-float marchingDist = sdBox(pos,float3(0.5,0.5,0.5));
-				return marchingDist;
+				float dist = 0;
+				return dist;
 			}
 
 			float4 rayMarch(float3 pos, float3 rayDir, int StepNum){
