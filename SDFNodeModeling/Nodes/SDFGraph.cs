@@ -11,7 +11,7 @@ namespace SDFModeling
     [Serializable, CreateAssetMenu(fileName = "RaymaGraph", menuName = "Node Graph/RaymaGraph")]
     public class SDFGraph : XNode.NodeGraph
     {
-        public SDFNode OutputNode()
+        public Node GetOutputNode()
         {
             Output result = null;
             foreach (var node in nodes)
@@ -23,6 +23,16 @@ namespace SDFModeling
                 }
             }
             return result;
+        }
+        public List<SDFNode> GetNode()
+        {
+            List<SDFNode> nodeList = new List<SDFNode>();
+            for(int i = 0; i < nodes.Count; i++)
+            {
+                nodeList.Add((SDFNode)nodes[i]);
+
+            }
+            return nodeList;         
         }
     }
 }

@@ -13,32 +13,22 @@ MonoBehaviour:
   m_Name: Sphere
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -88, y: -88}
+  position: {x: -856, y: -72}
   ports:
     keys:
     - nextNode
-    - p
     - s
     - beforeNode
     values:
     - _fieldName: nextNode
       _node: {fileID: -8463678140493105221}
-      _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
+      _typeQualifiedName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
       connections:
       - fieldName: beforeNode
-        node: {fileID: 8003513811961981961}
+        node: {fileID: 530571555239403646}
         reroutePoints: []
       _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: p
-      _node: {fileID: -8463678140493105221}
-      _typeQualifiedName: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      connections: []
-      _direction: 0
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
@@ -53,19 +43,16 @@ MonoBehaviour:
       _dynamic: 0
     - _fieldName: beforeNode
       _node: {fileID: -8463678140493105221}
-      _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections:
-      - fieldName: nextNode
-        node: {fileID: 1686968416250006446}
-        reroutePoints: []
+      _typeQualifiedName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  beforeNode: {fileID: 0}
-  nextNode: {fileID: 0}
-  p: {x: 0, y: -0.5, z: 0}
+  order: 3
+  beforeNode: 2
+  nextNode: 3
   s: 1
 --- !u!114 &11400000
 MonoBehaviour:
@@ -83,6 +70,64 @@ MonoBehaviour:
   - {fileID: -8463678140493105221}
   - {fileID: 1686968416250006446}
   - {fileID: 8003513811961981961}
+  - {fileID: 530571555239403646}
+--- !u!114 &530571555239403646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 771584de7e4c8fd4c8f66a9b98e08d36, type: 3}
+  m_Name: Sphere
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -584, y: -56}
+  ports:
+    keys:
+    - s
+    - nextNode
+    - beforeNode
+    values:
+    - _fieldName: s
+      _node: {fileID: 530571555239403646}
+      _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: nextNode
+      _node: {fileID: 530571555239403646}
+      _typeQualifiedName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: beforeNode
+        node: {fileID: 1686968416250006446}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: beforeNode
+      _node: {fileID: 530571555239403646}
+      _typeQualifiedName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: nextNode
+        node: {fileID: -8463678140493105221}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  order: 1
+  beforeNode: 0
+  nextNode: 1
+  s: 0
 --- !u!114 &1686968416250006446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,32 +141,22 @@ MonoBehaviour:
   m_Name: Sphere
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -376, y: -104}
+  position: {x: -360, y: -56}
   ports:
     keys:
     - nextNode
-    - p
     - s
     - beforeNode
     values:
     - _fieldName: nextNode
       _node: {fileID: 1686968416250006446}
-      _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
+      _typeQualifiedName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
       connections:
       - fieldName: beforeNode
-        node: {fileID: -8463678140493105221}
+        node: {fileID: 8003513811961981961}
         reroutePoints: []
       _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: p
-      _node: {fileID: 1686968416250006446}
-      _typeQualifiedName: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      connections: []
-      _direction: 0
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
@@ -136,16 +171,19 @@ MonoBehaviour:
       _dynamic: 0
     - _fieldName: beforeNode
       _node: {fileID: 1686968416250006446}
-      _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections: []
+      _typeQualifiedName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections:
+      - fieldName: nextNode
+        node: {fileID: 530571555239403646}
+        reroutePoints: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  beforeNode: {fileID: 0}
-  nextNode: {fileID: 0}
-  p: {x: 0, y: 0.5, z: 0}
+  order: 2
+  beforeNode: 1
+  nextNode: 2
   s: 1
 --- !u!114 &8003513811961981961
 MonoBehaviour:
@@ -160,32 +198,22 @@ MonoBehaviour:
   m_Name: Output
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 200, y: 8}
+  position: {x: -120, y: -56}
   ports:
     keys:
     - beforeNode
-    - nextNode
     values:
     - _fieldName: beforeNode
       _node: {fileID: 8003513811961981961}
-      _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
+      _typeQualifiedName: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
       connections:
       - fieldName: nextNode
-        node: {fileID: -8463678140493105221}
+        node: {fileID: 1686968416250006446}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-    - _fieldName: nextNode
-      _node: {fileID: 8003513811961981961}
-      _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-  beforeNode: {fileID: 0}
-  nextNode: {fileID: 0}
+  order: 0
+  beforeNode: 0

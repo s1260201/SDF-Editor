@@ -2,11 +2,13 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 using SDF;
+using XNode;
 
 namespace SDF
 {
     public class Output: SDFNode
     {
+        //[Input(ShowBackingValue.Never)] public int beforeNode = 0;
         //public ActionType actionType = ActionType.Preview;
         //public enum ActionType { Preview, Render }
 

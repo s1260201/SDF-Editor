@@ -7,6 +7,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System;
 using System.Reflection;
+using XNode;
 
 namespace SDF
 {
@@ -14,25 +15,21 @@ namespace SDF
     {
         [SerializeField] SDFGraph sdfGraph;
         public List<SDFObj> list;
+        public List<SDFNode> nodeList;
         [SerializeField] string readPath = "Assets/Shader/src/Sample.shader";
         [SerializeField] string writePath = "Assets/Shader/Export/Sample1.shader";
         [SerializeField] string ShaderName = "Sample";
 
         public void OutputShader()
         {
-            SDFNode outputNode = sdfGraph.OutputNode();
-            list = getAllNodes(outputNode);
-            Debug.Log(list.Count);
-       
-            //list = new List<SDFObj>();
-            //Vector3 pos = new Vector3(0, 0, 0);
-            //Sphere sphere = new Sphere();
-            //sphere.s = 0.2f;
-            //Box box = new Box(pos, new Vector3(0.2f, 0.2f, 0.2f));
-
-            //list.Add(sphere);
-            //list.Add(new Box(pos, new Vector3(0.2f, 0.2f, 0.2f)));
-            //Debug.Log(list);
+            nodeList = sdfGraph.GetNode();
+            //Debug.Log(list.Count);
+            nodeList.Sort((a,b) => a.order - b.order);
+            for(int i = 0; i < nodeList.Count; i++)
+            {
+                if (nodeList[i] is SphereNode) Debug.Log("SphereNode : " + nodeList[i].order);
+                else if (nodeList[i] is Output) Debug.Log("OutputNode : " + nodeList[i].order);
+            }
             
             try
             {
@@ -99,7 +96,7 @@ namespace SDF
             {
                 Debug.LogError("The file could not be read");
             }
-        }
+        }/*
         public List<SDFObj> getAllNodes(SDFNode node)
         {
             List<SDFObj> objList;
@@ -121,6 +118,7 @@ namespace SDF
             }else if(objList[0] is SDF.Sphere)
             return objList;
         }
+        */
     }
 }
 
