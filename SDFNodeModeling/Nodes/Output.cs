@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using SDF;
 
-namespace SDF.Controll
+namespace SDF
 {
     public class Output: SDFNode
     {
@@ -40,9 +40,11 @@ namespace SDF.Controll
             return GetInputValue<List<SDFObj>>("List",this.inputObject);
         }
         */
+        /*
         public SDFNode outputNodes()
         {
             return beforeNode;
         }
+        */
     }
 }

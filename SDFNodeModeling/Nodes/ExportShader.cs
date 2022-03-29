@@ -22,9 +22,8 @@ namespace SDF
         {
             SDFNode outputNode = sdfGraph.OutputNode();
             list = getAllNodes(outputNode);
-                // Debug.Log(list);
-
-            
+            Debug.Log(list.Count);
+       
             //list = new List<SDFObj>();
             //Vector3 pos = new Vector3(0, 0, 0);
             //Sphere sphere = new Sphere();
@@ -104,16 +103,22 @@ namespace SDF
         public List<SDFObj> getAllNodes(SDFNode node)
         {
             List<SDFObj> objList;
-            SDFNode parent = node.beforeNode;
-            if (parent != null)
+            try
             {
+                SDFNode parent = node.getBeforeNode(); // Check parent
                 objList = getAllNodes(parent);
             }
-            else
+            catch(Exception e)
             {
                 objList = new List<SDFObj>();
             }
+            
+             
             objList.Add(node.addObj());
+            if (objList[0] == null)
+            {
+                Debug.Log("list[0] is null");
+            }else if(objList[0] is SDF.Sphere)
             return objList;
         }
     }

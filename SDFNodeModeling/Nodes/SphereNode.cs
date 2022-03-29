@@ -4,12 +4,12 @@ using SDF;
 using System.Collections.Generic;
 
 
-namespace SDF.Model
+namespace SDF
 {
     public class SphereNode : SDFNode
     {
-        [Input] public Vector3 p;
         [Input] public float s;
+        int nodeNum = 1;
         
         /*
         public override SDFNode getNode()
@@ -43,7 +43,9 @@ namespace SDF.Model
         */
         public override SDFObj addObj()
         {
-            return new Sphere();
+            SDF.Sphere sphere = new Sphere();
+            sphere.s = this.s;
+            return sphere;
         }
     }
 }
