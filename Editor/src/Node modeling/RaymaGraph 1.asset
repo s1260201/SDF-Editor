@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sphere
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -88, y: -88}
+  position: {x: -88, y: -8}
   ports:
     keys:
     - nextNode
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: Sphere
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -376, y: -104}
+  position: {x: 104, y: -216}
   ports:
     keys:
     - nextNode
@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Name: Head
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -664, y: -88}
+  position: {x: -264, y: -184}
   ports:
     keys:
     - nextNode
@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Name: Output
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 200, y: 8}
+  position: {x: 216, y: 56}
   ports:
     keys:
     - beforeNode

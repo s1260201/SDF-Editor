@@ -14,7 +14,6 @@ namespace SDF
     public class ExportShader : MonoBehaviour
     {
         [SerializeField] SDFGraph sdfGraph;
-        public List<SDFObj> list;
         [SerializeField] string readPath = "Assets/Shader/src/Sample.shader";
         [SerializeField] string writePath = "Assets/Shader/Export/Sample1.shader";
         [SerializeField] string ShaderName = "Sample";
@@ -75,8 +74,6 @@ namespace SDF
                         {
                             streamWriter.Write("dist0;");
                         }
-                        
-
 
                         Debug.Log("Clear");
                     }
@@ -94,9 +91,7 @@ namespace SDF
             catch (Exception e)
             {
                 Debug.LogError("The file could not be read");
-            }
-
-            
+            }            
 
         }
         public void NextNode()
