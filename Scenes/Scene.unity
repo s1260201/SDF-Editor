@@ -171,8 +171,8 @@ MonoBehaviour:
   list:
   - {fileID: 0}
   readPath: Assets/Shader/src/Sample.shader
-  writePath: Assets/Shader/Export/Sample7.shader
-  ShaderName: Sample2
+  writePath: Assets/Shader/Export/Sample0.shader
+  ShaderName: Sample0
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,7 +305,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 94386ab73006af749a0b3ce1c4849b4f, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

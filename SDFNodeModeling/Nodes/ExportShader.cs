@@ -45,7 +45,7 @@ namespace SDF
                             if (sdfGraph.current is SphereNode)
                             {
                                 SphereNode obj = (SphereNode)sdfGraph.current;
-                                streamWriter.WriteLine("float dist" + i + " sdSphere(float3(pos.x - "+ obj.p.x + ", pos.y -  " + obj.p.y + ", pos.z - " + obj.p.z + "), " + obj.s + ");");
+                                streamWriter.WriteLine("float dist" + i + " = sdSphere(float3(pos.x - "+ obj.p.x + ", pos.y -  " + obj.p.y + ", pos.z - " + obj.p.z + "), " + obj.s + ");");
                             }
                             else
                             {
@@ -59,7 +59,7 @@ namespace SDF
                         streamWriter.Write("dist = ");
                         if(i > 0)
                         {
-                            for (int j = 0; j < i; j++)
+                            for (int j = 0; j < i-1; j++)
                             {
                                 streamWriter.Write("min(");
 
@@ -67,9 +67,9 @@ namespace SDF
                             streamWriter.Write("dist0");
                             for (int j = 1; j < i; j++)
                             {
-                                streamWriter.Write(",dist" + i + ")");
+                                streamWriter.Write(",dist" + j + ")");
                             }
-                            streamWriter.Write(";");
+                            streamWriter.WriteLine(";");
                         }
                         else
                         {

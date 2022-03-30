@@ -83,6 +83,8 @@ MonoBehaviour:
   - {fileID: -8463678140493105221}
   - {fileID: 1686968416250006446}
   - {fileID: 8003513811961981961}
+  - {fileID: 5847746106835701300}
+  current: {fileID: 0}
 --- !u!114 &1686968416250006446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,7 +140,10 @@ MonoBehaviour:
       _node: {fileID: 1686968416250006446}
       _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
-      connections: []
+      connections:
+      - fieldName: nextNode
+        node: {fileID: 5847746106835701300}
+        reroutePoints: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
@@ -147,6 +152,37 @@ MonoBehaviour:
   nextNode: {fileID: 0}
   p: {x: 0, y: 0.5, z: 0}
   s: 1
+--- !u!114 &5847746106835701300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3ef325c554fc2a42b9a9351c8b68351, type: 3}
+  m_Name: Head
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -664, y: -88}
+  ports:
+    keys:
+    - nextNode
+    values:
+    - _fieldName: nextNode
+      _node: {fileID: 5847746106835701300}
+      _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: beforeNode
+        node: {fileID: 1686968416250006446}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  nextNode: {fileID: 0}
 --- !u!114 &8003513811961981961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -164,7 +200,6 @@ MonoBehaviour:
   ports:
     keys:
     - beforeNode
-    - nextNode
     values:
     - _fieldName: beforeNode
       _node: {fileID: 8003513811961981961}
@@ -178,14 +213,4 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-    - _fieldName: nextNode
-      _node: {fileID: 8003513811961981961}
-      _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
   beforeNode: {fileID: 0}
-  nextNode: {fileID: 0}

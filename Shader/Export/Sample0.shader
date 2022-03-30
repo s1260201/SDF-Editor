@@ -66,6 +66,9 @@ Shader "SDFE/Sample"
 			float getSdf(float3 pos){
 				
 				float dist = 0;
+float dist0 = sdSphere(float3(pos.x - 0, pos.y -  0.5, pos.z - 0), 1);
+float dist1 = sdSphere(float3(pos.x - 0, pos.y -  -0.5, pos.z - 0), 1);
+dist = min(dist0,dist1);
 				return dist;
 			}
 
@@ -82,7 +85,7 @@ Shader "SDFE/Sample"
 					fase++;
 				}
 				if(step(StepNum,fase)){
-					return float4(1,1,1,1);
+					return float4(1,1,1,0);
 				}else{
 					return float4(col,1);
 				}				
