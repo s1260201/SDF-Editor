@@ -23,17 +23,6 @@ namespace SDF
         {
             SDFNode outputNode = sdfGraph.HeadNode();
             sdfGraph.current = outputNode;
-            //list = getAllNodes(outputNode);
-       
-            //list = new List<SDFObj>();
-            //Vector3 pos = new Vector3(0, 0, 0);
-            //Sphere sphere = new Sphere();
-            //sphere.s = 0.2f;
-            //Box box = new Box(pos, new Vector3(0.2f, 0.2f, 0.2f));
-
-            //list.Add(sphere);
-            //list.Add(new Box(pos, new Vector3(0.2f, 0.2f, 0.2f)));
-            //Debug.Log(list);
             
             try
             {
@@ -46,43 +35,49 @@ namespace SDF
 
                 while ((line = streamReader.ReadLine()) != null)
                 {
-                    //code = null;
-                    //Debug.Log(line);
                     if (reg.Match(line).Success)
                     {
-                        Debug.Log("Match");
-                        Debug.Log(list);
-                        while(i < list.Count){
+                        while(true){
+                            if (i > 10) break; // Safety
+                            NextNode();
                             Debug.Log(i);
-                            //Debug.Log(list[i].GetType());
-                            if (list[i] is SDF.Sphere)
+                            if (sdfGraph.current is Output) break;
+                            if (sdfGraph.current is SphereNode)
                             {
-                                Sphere sphere = (Sphere)list[i];
-                                streamWriter.WriteLine("float dist" + i + " sdSphere(pos, " + sphere.s + ");"); // I want to write this line to a Node
-                            }
-                            else if(list[i] is SDF.Box)
-                            {
-                                Box box = (Box)list[i];
-                                streamWriter.WriteLine("float dist" + i + " sdBox(pos, float3(" + box.b.x + ", " + box.b.y + ", " + box.b.z + "));");
-                                //streamWriter.WriteLine("float marchingDist = sdBox(pos,float3(0.5,0.5,0.5));");
-
-                            }
-                            else if(list[i] is SDF.RoundBox)
-                            {
-                                RoundBox roundBox = (RoundBox)list[i];
-                                streamWriter.WriteLine("float dist" + i + " sdRoundBox(pos, float3(" + roundBox.b.x + ", " + roundBox.b.y + ", " + roundBox.b.z + "), " + roundBox.r + ");");
-                                //streamWriter.WriteLine("float marchingDist = sdRoundBox(pos,float3(0.5,0.5,0.5),0.1);");
+                                SphereNode obj = (SphereNode)sdfGraph.current;
+                                streamWriter.WriteLine("float dist" + i + " sdSphere(float3(pos.x - "+ obj.p.x + ", pos.y -  " + obj.p.y + ", pos.z - " + obj.p.z + "), " + obj.s + ");");
                             }
                             else
                             {
                                 Debug.LogError("Selected an unknown Node.");
+                                break;
                             }
                             streamWriter.Flush();
                             i++;
                         
                         }
-                       
+                        streamWriter.Write("dist = ");
+                        if(i > 0)
+                        {
+                            for (int j = 0; j < i; j++)
+                            {
+                                streamWriter.Write("min(");
+
+                            }
+                            streamWriter.Write("dist0");
+                            for (int j = 1; j < i; j++)
+                            {
+                                streamWriter.Write(",dist" + i + ")");
+                            }
+                            streamWriter.Write(";");
+                        }
+                        else
+                        {
+                            streamWriter.Write("dist0;");
+                        }
                         
+
+
                         Debug.Log("Clear");
                     }
                     else
@@ -100,30 +95,18 @@ namespace SDF
             {
                 Debug.LogError("The file could not be read");
             }
-        }
-        /*
-        public List<SDFObj> getAllNodes(SDFNode node)
-        {
-            List<SDFObj> objList;
-            try
-            {
-                SDFNode parent = node.getBeforeNode(); // Check parent
-                objList = getAllNodes(parent);
-            }
-            catch(Exception e)
-            {
-                objList = new List<SDFObj>();
-            }
+
             
-             
-            objList.Add(node.addObj());
-            if (objList[0] == null)
-            {
-                Debug.Log("list[0] is null");
-            }else if(objList[0] is SDF.Sphere)
-            return objList;
+
         }
-        */
+        public void NextNode()
+        {
+            foreach(NodePort p in sdfGraph.current.Ports)
+            {
+                sdfGraph.current = p.Connection.node as SDFNode;
+                break;
+            }
+        }
     }
 }
 
