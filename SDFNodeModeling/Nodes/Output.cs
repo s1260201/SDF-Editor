@@ -7,6 +7,7 @@ namespace SDF
 {
     public class Output: SDFNode
     {
+        [Input(ShowBackingValue.Never)] public SDFNode beforeNode;
         //public ActionType actionType = ActionType.Preview;
         //public enum ActionType { Preview, Render }
 

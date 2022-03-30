@@ -6,10 +6,9 @@ using System.Collections.Generic;
 
 namespace SDF
 {
-    public class SphereNode : SDFNode
+    public class SphereNode : SDFObjNode
     {
         [Input] public float s;
-        int nodeNum = 1;
         
         /*
         public override SDFNode getNode()
@@ -41,12 +40,13 @@ namespace SDF
             return sd;
         }
         */
+        /*
         public override SDFObj addObj()
         {
             SDF.Sphere sphere = new Sphere();
             sphere.s = this.s;
             return sphere;
-        }
+        }*/
     }
 }
 

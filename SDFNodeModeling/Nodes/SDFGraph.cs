@@ -11,12 +11,13 @@ namespace SDFModeling
     [Serializable, CreateAssetMenu(fileName = "RaymaGraph", menuName = "Node Graph/RaymaGraph")]
     public class SDFGraph : XNode.NodeGraph
     {
-        public SDFNode OutputNode()
+        public SDFNode current;
+        public SDFNode HeadNode()
         {
-            Output result = null;
+            Head result = null;
             foreach (var node in nodes)
             {
-                result = node as Output;
+                result = node as Head;
                 if (result != null)
                 {
                     break;

@@ -7,6 +7,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System;
 using System.Reflection;
+using XNode;
 
 namespace SDF
 {
@@ -20,9 +21,9 @@ namespace SDF
 
         public void OutputShader()
         {
-            SDFNode outputNode = sdfGraph.OutputNode();
-            list = getAllNodes(outputNode);
-            Debug.Log(list.Count);
+            SDFNode outputNode = sdfGraph.HeadNode();
+            sdfGraph.current = outputNode;
+            //list = getAllNodes(outputNode);
        
             //list = new List<SDFObj>();
             //Vector3 pos = new Vector3(0, 0, 0);
@@ -57,7 +58,7 @@ namespace SDF
                             if (list[i] is SDF.Sphere)
                             {
                                 Sphere sphere = (Sphere)list[i];
-                                streamWriter.WriteLine("float dist" + i + " sdSphere(pos, " + sphere.s + ");");
+                                streamWriter.WriteLine("float dist" + i + " sdSphere(pos, " + sphere.s + ");"); // I want to write this line to a Node
                             }
                             else if(list[i] is SDF.Box)
                             {
@@ -100,6 +101,7 @@ namespace SDF
                 Debug.LogError("The file could not be read");
             }
         }
+        /*
         public List<SDFObj> getAllNodes(SDFNode node)
         {
             List<SDFObj> objList;
@@ -121,6 +123,7 @@ namespace SDF
             }else if(objList[0] is SDF.Sphere)
             return objList;
         }
+        */
     }
 }
 
