@@ -83,7 +83,7 @@
 					fase++;
 				}
 				if(step(StepNum,fase)){
-					return float4(1,1,1,1);
+					return float4(1,1,1,0);
 				}else{
 					return float4(col,1);
 				}				
