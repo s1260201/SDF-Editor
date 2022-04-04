@@ -9,13 +9,14 @@ This motivation is exact?
 How to use
 
 1. Connecting nodes
+![Nodes](Doc/img/Nodes.png)
 
-2. Exporting codes
+2. Exporting shader
+![Inspector](Doc/img/Inspector.png)
+![Shader](Doc/img/SceneView.png)
 
 <br>
-memo
 
-- App or Extending the Editor ?
 
 
 Link
