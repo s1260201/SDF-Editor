@@ -16,7 +16,7 @@ namespace SDF
         [SerializeField] SDFGraph sdfGraph;
         [SerializeField] string readPath = "Assets/Shader/src/Sample.shader";
         [SerializeField] string writePath = "Assets/Shader/Export/Sample1.shader";
-        [SerializeField] string ShaderName = "Sample";
+        //[SerializeField] string ShaderName = "Sample";
 
         public void OutputShader()
         {
@@ -29,7 +29,6 @@ namespace SDF
                 StreamReader streamReader = new StreamReader(readPath);
                 StreamWriter streamWriter = new StreamWriter(writePath);
                 string line = null;
-                //string code;
                 int i = 0;
 
                 while ((line = streamReader.ReadLine()) != null)
@@ -37,13 +36,19 @@ namespace SDF
                     if (reg.Match(line).Success)
                     {
                         while(true){
-                            if (i > 10) break; // Safety
+                            if (i > 5)
+                            {
+                                Debug.Log("i is more than 5.");
+                                break; // Safety
+                            }
+                            Debug.Log("GotoNN");
                             NextNode();
                             Debug.Log(i);
                             if (sdfGraph.current is Output) break;
                             if (sdfGraph.current is SphereNode)
                             {
                                 SphereNode obj = (SphereNode)sdfGraph.current;
+                                Debug.Log("Write sphere code.");
                                 streamWriter.WriteLine("float dist" + i + " = sdSphere(float3(pos.x - "+ obj.p.x + ", pos.y -  " + obj.p.y + ", pos.z - " + obj.p.z + "), " + obj.s + ");");
                             }
                             else
@@ -52,8 +57,9 @@ namespace SDF
                                 break;
                             }
                             streamWriter.Flush();
+                            Debug.Log("Flush!");
                             i++;
-                        
+                            Debug.Log("i is added 1");
                         }
                         streamWriter.Write("dist = ");
                         if(i > 0)
@@ -79,7 +85,6 @@ namespace SDF
                     }
                     else
                     {
-                        //Debug.Log(line);
                         streamWriter.WriteLine(line);
                         streamWriter.Flush();
                     }
@@ -96,11 +101,18 @@ namespace SDF
         }
         public void NextNode()
         {
+
             foreach(NodePort p in sdfGraph.current.Ports)
             {
-                sdfGraph.current = p.Connection.node as SDFNode;
-                break;
+                Debug.Log("foreach");
+                if (p.fieldName == "nextNode")
+                {
+                    sdfGraph.current = p.Connection.node as SDFNode;
+                    break;
+                }
+
             }
+            
         }
     }
 }

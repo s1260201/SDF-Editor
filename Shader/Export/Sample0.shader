@@ -66,8 +66,8 @@ Shader "SDFE/Sample"
 			float getSdf(float3 pos){
 				
 				float dist = 0;
-float dist0 = sdSphere(float3(pos.x - 0, pos.y -  0.5, pos.z - 0), 1);
-float dist1 = sdSphere(float3(pos.x - 0, pos.y -  -0.5, pos.z - 0), 1);
+float dist0 = sdSphere(float3(pos.x - 0, pos.y -  1, pos.z - 0), 1);
+float dist1 = sdSphere(float3(pos.x - 0, pos.y -  -1, pos.z - 0), 2);
 dist = min(dist0,dist1);
 				return dist;
 			}

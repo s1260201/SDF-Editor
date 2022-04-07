@@ -168,11 +168,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sdfGraph: {fileID: 11400000, guid: fc470e839fe6ad64fac676c6e0d4592c, type: 2}
-  list:
-  - {fileID: 0}
   readPath: Assets/Shader/src/Sample.shader
-  writePath: Assets/Shader/Export/Sample0.shader
-  ShaderName: Sample0
+  writePath: Assets/Shader/Export/Sample3.shader
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,7 +469,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 94386ab73006af749a0b3ce1c4849b4f, type: 2}
+  - {fileID: 2100000, guid: 6913506097c89604e869a7de53b37f69, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

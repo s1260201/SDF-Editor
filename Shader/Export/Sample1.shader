@@ -1,4 +1,4 @@
-﻿Shader "SDFE/Sample"
+Shader "SDFE/Sample"
 {
 	Properties
 	{
@@ -62,11 +62,13 @@
 				float3 q = abs(p) - b;
 				return length(max(q,0.0)) + min(max(q.x,max(q.y,q.z)),0.0) - r;
 			}
-
+			
 			float getSdf(float3 pos){
 				
 				float dist = 0;
-				// SDF
+float dist0 = sdSphere(float3(pos.x - 0, pos.y -  0.5, pos.z - 0), 1);
+float dist1 = sdSphere(float3(pos.x - 1, pos.y -  -0.5, pos.z - 0), 1);
+dist = min(dist0,dist1);
 				return dist;
 			}
 
@@ -74,9 +76,7 @@
 				int fase = 0;
 				float t = 0;
 				float d = getSdf(pos);
-				float3 col = float3(0,0,1);
-				float3 lightCol = float3(1,1,1);
-				//float3 lightDir = normalize(WorldSpaceLightDir(pos));
+				float3 col = 0;
 
 				while(fase < StepNum && abs(d) > 0.001){
 					t += d;
@@ -87,7 +87,6 @@
 				if(step(StepNum,fase)){
 					return float4(1,1,1,0);
 				}else{
-					//float shadow = genShadow(pos + normalize(pos) * 0.001, lightDir);
 					return float4(col,1);
 				}				
 			}
