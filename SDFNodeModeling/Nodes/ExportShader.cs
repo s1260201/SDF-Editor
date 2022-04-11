@@ -48,8 +48,12 @@ namespace SDF
                             if (sdfGraph.current is SphereNode)
                             {
                                 SphereNode obj = (SphereNode)sdfGraph.current;
-                                Debug.Log("Write sphere code.");
+                                Debug.Log("Write a sphere code.");
                                 streamWriter.WriteLine("float dist" + i + " = sdSphere(float3(pos.x - "+ obj.p.x + ", pos.y -  " + obj.p.y + ", pos.z - " + obj.p.z + "), " + obj.s + ");");
+                            }else if(sdfGraph.current is BoxNode){
+                                BoxNode obj = (BoxNode)sdfGraph.current;
+                                Debug.Log("Write a Box code");
+                                streamWriter.WriteLine("float dist" + i + " = sdBox(float3(pos.x - "+ obj.p.x + ", pos.y -  " + obj.p.y + ", pos.z - " + obj.p.z + "), float3(" + obj.b.x + "," + obj.b.y + "," + obj.b.z + "));");
                             }
                             else
                             {

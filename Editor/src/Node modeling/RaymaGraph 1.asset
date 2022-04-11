@@ -85,6 +85,7 @@ MonoBehaviour:
   - {fileID: 5847746106835701300}
   - {fileID: -2331794582596666473}
   - {fileID: 1282822934158267970}
+  - {fileID: 8846489497247410697}
   current: {fileID: 8003513811961981961}
 --- !u!114 &1282822934158267970
 MonoBehaviour:
@@ -143,7 +144,7 @@ MonoBehaviour:
         PublicKeyToken=null
       connections:
       - fieldName: beforeNode
-        node: {fileID: 8003513811961981961}
+        node: {fileID: 8846489497247410697}
         reroutePoints: []
       _direction: 1
       _connectionType: 0
@@ -264,7 +265,7 @@ MonoBehaviour:
   m_Name: Output
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 296, y: 24}
+  position: {x: 520, y: 40}
   ports:
     keys:
     - beforeNode
@@ -275,10 +276,77 @@ MonoBehaviour:
         PublicKeyToken=null
       connections:
       - fieldName: nextNode
-        node: {fileID: 1282822934158267970}
+        node: {fileID: 8846489497247410697}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
   beforeNode: {fileID: 0}
+--- !u!114 &8846489497247410697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a92d4f8b8b1d33642915bd0282b79064, type: 3}
+  m_Name: Box
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 264, y: 40}
+  ports:
+    keys:
+    - p
+    - b
+    - beforeNode
+    - nextNode
+    values:
+    - _fieldName: p
+      _node: {fileID: 8846489497247410697}
+      _typeQualifiedName: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: b
+      _node: {fileID: 8846489497247410697}
+      _typeQualifiedName: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: beforeNode
+      _node: {fileID: 8846489497247410697}
+      _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: nextNode
+        node: {fileID: 1282822934158267970}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: nextNode
+      _node: {fileID: 8846489497247410697}
+      _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: beforeNode
+        node: {fileID: 8003513811961981961}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  beforeNode: {fileID: 0}
+  nextNode: {fileID: 0}
+  p: {x: 0, y: 0, z: 0}
+  b: {x: 0.2, y: 0.2, z: 0.2}

@@ -67,4 +67,48 @@ Shader "SDFE/Sample"
 				
 				float dist = 0;
 float dist0 = sdSphere(float3(pos.x - 0, pos.y -  1, pos.z - 0), 1);
-float dist1 = sdSphere(float3(pos.x - 1, pos.y -  0, pos.z - 0), 0.5);
+float dist1 = sdSphere(float3(pos.x - 0.8, pos.y -  0.2, pos.z - 0), 0.5);
+float dist2 = sdSphere(float3(pos.x - -0.8, pos.y -  0.2, pos.z - 0), 0.5);
+float dist3 = sdBox(float3(pos.x - 0, pos.y -  0, pos.z - 0), float3(0.2,0.2,0.2));
+dist = min(min(min(dist0,dist1),dist2),dist3);
+				return dist;
+			}
+
+			float4 rayMarch(float3 pos, float3 rayDir, int StepNum){
+				int fase = 0;
+				float t = 0;
+				float d = getSdf(pos);
+				float3 col = float3(0,0,1);
+				float3 lightCol = float3(1,1,1);
+				//float3 lightDir = normalize(WorldSpaceLightDir(pos));
+
+				while(fase < StepNum && abs(d) > 0.001){
+					t += d;
+					pos += rayDir * d;
+					d = getSdf(pos);
+					fase++;
+				}
+				if(step(StepNum,fase)){
+					return float4(1,1,1,0);
+				}else{
+					//float shadow = genShadow(pos + normalize(pos) * 0.001, lightDir);
+					return float4(col,1);
+				}				
+			}
+			
+
+			fixed4 frag(v2f i) : SV_Target
+			{
+				float3 col = float3(1,1,1);
+				// レイの初期位置(ピクセルのワールド座標)
+				float3 pos = i.pos.xyz;
+				// レイの進行方向
+				float3 rayDir = normalize(pos.xyz - _WorldSpaceCameraPos);
+
+				int StepNum = 30;
+				return rayMarch(pos,rayDir,StepNum);
+			}
+			ENDCG
+		}
+	}
+}

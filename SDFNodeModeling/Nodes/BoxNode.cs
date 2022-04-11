@@ -4,15 +4,12 @@ using SDF;
 using System.Collections.Generic;
 
 
-namespace SDF.Model
+namespace SDF
 {
-    public class BoxNode : XNode.Node
-    {
-        [Input] public List<SDFObj> beforeNode;
+    public class BoxNode : SDFObjNode
+    { 
         [Input] public Vector3 p;
-        [Input] public Vector3 b;
-        [Output] public List<SDFObj> nextNode;
-    
+        [Input] public Vector3 b;   
     }
 }
 
