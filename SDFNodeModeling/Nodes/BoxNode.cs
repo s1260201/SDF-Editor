@@ -1,10 +1,6 @@
 using UnityEngine;
-using System;
-using SDF;
-using System.Collections.Generic;
 
-
-namespace SDF
+namespace SDF.Model
 {
     public class BoxNode : SDFObjNode
     { 

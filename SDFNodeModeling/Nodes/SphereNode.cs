@@ -1,10 +1,6 @@
 using UnityEngine;
-using System;
-using System.Collections.Generic;
-using XNode;
 
-
-namespace SDF
+namespace SDF.Model
 {
     public class SphereNode : SDFObjNode
     {

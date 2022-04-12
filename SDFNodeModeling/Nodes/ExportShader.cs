@@ -1,13 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using SDFModeling;
-using UnityEngine.UI;
 using System.IO;
 using System.Text.RegularExpressions;
 using System;
-using System.Reflection;
 using XNode;
+using SDF.Model;
 
 namespace SDF
 {
@@ -54,6 +51,10 @@ namespace SDF
                                 BoxNode obj = (BoxNode)sdfGraph.current;
                                 Debug.Log("Write a Box code");
                                 streamWriter.WriteLine("float dist" + i + " = sdBox(float3(pos.x - "+ obj.p.x + ", pos.y -  " + obj.p.y + ", pos.z - " + obj.p.z + "), float3(" + obj.b.x + "," + obj.b.y + "," + obj.b.z + "));");
+                            }else if(sdfGraph.current is RoundBoxNode){
+                                RoundBoxNode obj = (RoundBoxNode)sdfGraph.current;
+                                Debug.Log("Write a RoundBox code");
+                                streamWriter.WriteLine("float dist" + i + " = sdRoundBox(float3(pos.x - " + obj.p.x + ", pos.y -  " + obj.p.y + ", pos.z - " + obj.p.z + "), float3(" + obj.b.x + "," + obj.b.y + "," + obj.b.z + ")," + obj.r+ ");");
                             }
                             else
                             {
