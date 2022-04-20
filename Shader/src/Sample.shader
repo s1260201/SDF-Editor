@@ -7,6 +7,7 @@
 		_Radius("Radius", Range(0.0,1.0)) = 0.3
 		_BlurShadow("BlurShadow", Range(0.0,50.0)) = 16.0
 		_Speed("Speed", Range(0.0,10.0)) = 2.0
+		_LightValue("LightLevel",Range(0.0,10.0))=1.25
 	}
 	SubShader
 	{
@@ -32,6 +33,7 @@
 
 			fixed4 _Color;
 			float _Radius,_BlurShadow,_Speed;
+			float4 _LightValue;
 			
 			struct appdata
 			{
@@ -107,6 +109,27 @@
 				}
 				return 1.0 - shadowCoef + r * shadowCoef;
 			}
+			/*
+			float4 lighting(float3 pos)
+			{	
+				float3 mpos =pos;
+				float3 normal =getnormal(mpos);
+				
+				pos =  mul(unity_ObjectToWorld,float4(pos,1)).xyz;
+				normal =  normalize(mul(unity_ObjectToWorld,float4(normal,0)).xyz);
+					
+				float3 viewdir = normalize(pos-_WorldSpaceCameraPos);
+				half3 lightdir = normalize(UnityWorldSpaceLightDir(pos));				
+				float sha = softray(mpos,lightdir,3.3);
+				float4 color = material(mpos);
+				
+				float NdotL = max(0,dot(normal,lightdir));
+				float3 R = -normalize(reflect(lightdir,normal));
+				float3 spec =pow(max(dot(R,-viewdir),0),10);
+
+				float4 col =  sha*(color* NdotL+float4(spec,0));
+				return col;
+			}*/
 
 			float4 rayMarch(float3 pos, float3 rayDir, int StepNum){
 				int fase = 0;
@@ -126,14 +149,18 @@
 				}else{
 					//ライティング
 					float3 lightDir = _WorldSpaceLightPos0.xyz;
-					float3 normal = getNormal(pos);
-					float3 lightColor = _LightColor0;
-
+					float3 normal = getNormal(rayDir);
+					float lightValue = _LightValue;
+					float posonray = mul(unity_WorldToObject,float4(_WorldSpaceCameraPos,1.0));
+					//float3 lightColor = _LightColor0;
+					float4 col = float4(0.0,0.0,0.0,0.0);
+					float diff = clamp(dot(lightDir,normal),0.1,1.0);
+					col = _Color * diff * lightValue;
 					//ソフトシャドウ
-					float shadow = genShadow(pos + normal * 0.001, lightDir);
+					//float shadow = genShadow(pos + normal * 0.001, lightDir);
 
-					fixed4 col = fixed4(lightColor * max(dot(normal, lightDir), 0) * max(0.5, shadow), 1.0);
-					col.rgb += fixed3(0.2f, 0.2f, 0.2f);
+					//fixed4 col = fixed4(lightColor * max(dot(normal, lightDir), 0) * max(0.5, shadow), 1.0);
+					//col.rgb += fixed3(0.2f, 0.2f, 0.2f);
 					return col;
 					//色を乗算
 				}				
@@ -146,7 +173,7 @@
 				// レイの進行方向
 				float3 rayDir = normalize(pos.xyz - _WorldSpaceCameraPos);
 				
-				int StepNum = 30;
+				int StepNum = 50;
 				float4 col = rayMarch(pos,rayDir,StepNum);
 				return col;
 			}

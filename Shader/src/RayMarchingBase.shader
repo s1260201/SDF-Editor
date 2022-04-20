@@ -45,12 +45,12 @@ Shader "RayMarching/Base"
 			};
 
 			struct frag_out{
-				//ï¿½Fï¿½Æ[ï¿½xï¿½ï¿½ï¿½ï¿½Ô‚ï¿½
+				//F‚Æ[“xî•ñ‚ğ•Ô‚·
 				half4 color : SV_Target;
 				float depth : SV_Depth;
 			};
 
-			//ï¿½Jï¿½ï¿½Ô‚ï¿½ï¿½Öï¿½
+			//ŒJ‚è•Ô‚µŠÖ”
 			float3 mod(float3 a, float3 b)
 			{
 				return frac(abs(a / b)) * abs(b);
@@ -61,7 +61,7 @@ Shader "RayMarching/Base"
 				return mod(pos, span) - span * 0.5;
 			}
 			
-			//ï¿½[ï¿½xï¿½ï¿½ï¿½ï¿½vï¿½Zï¿½ï¿½ï¿½Ü‚ï¿½ï¿½B
+			//[“xî•ñ‚ğŒvZ‚µ‚Ü‚·B
 			float computeDepth(float3 pos)
             {
                 float4 vpPos = UnityObjectToClipPos(float4(pos, 1.0));
@@ -92,16 +92,13 @@ Shader "RayMarching/Base"
 			
 			float2 distFunc(float3 pos){
 				float dist = 0; 
-float dist0 = sdBox(float3(pos.x - 0, pos.y -  0, pos.z - 0), float3(1,1,1));
-float dist1 = sdBox(float3(pos.x - 1, pos.y -  1, pos.z - 0), float3(1,1,1));
-float dist2 = sdRoundBox(float3(pos.x - -1, pos.y -  -1, pos.z - 0), float3(1,1,1),0.5);
-dist = min(min(dist0,dist1),dist2);
+				// SDF
 				return dist;
 			}
-			//ï¿½ï¿½ï¿½Cï¿½eï¿½Bï¿½ï¿½ï¿½Oï¿½Æ‚ï¿½ï¿½É•Kï¿½vï¿½É‚È‚ï¿½@ï¿½ï¿½ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½ğ¶ï¿½ï¿½ï¿½ï¿½ï¿½Öï¿½
-			//ï¿½É”ï¿½ï¿½ï¿½ï¿½Èï¿½ï¿½lï¿½Ì‚ï¿½ï¿½ï¿½ï¿½x,y,zï¿½ï¿½ï¿½ï¿½æ“¾ï¿½ï¿½ï¿½Aï¿½ï¿½ï¿½ï¿½ï¿½normalizeï¿½iï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½Ì’ï¿½ï¿½ï¿½ï¿½ï¿½1ï¿½Éjï¿½ï¿½ï¿½é‚±ï¿½Æ‚Å“ï¿½ï¿½ï¿½
+			//ƒ‰ƒCƒeƒBƒ“ƒO‚Æ‚©‚É•K—v‚É‚È‚é–@üƒxƒNƒgƒ‹‚ğ¶¬‚·‚éŠÖ”
+			//‹É”÷¬‚È”’l‚Ì‚¸‚ê‚ğx,y,z‚©‚çæ“¾‚µA‚»‚ê‚ğnormalizeiƒxƒNƒgƒ‹‚Ì’·‚³‚ğ1‚Éj‚·‚é‚±‚Æ‚Å“¾‚é
 			float3 generateNormal(float3 p){
-				//ï¿½ï¿½ï¿½Cï¿½}ï¿½[ï¿½`ï¿½ï¿½ï¿½Oï¿½Å•Kï¿½vï¿½È–@ï¿½ï¿½ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+				//ƒŒƒCƒ}[ƒ`ƒ“ƒO‚Å•K—v‚È–@üƒxƒNƒgƒ‹‚ğì‚é
 				//float d = 0.0001;
 				const float3 d = float3(0.0001,0.0,0.0);
 				float x = distFunc(p+d.xyy)-distFunc(p-d.xyy);
@@ -113,11 +110,11 @@ dist = min(min(dist0,dist1),dist2);
 			v2f vert (VertInput v)
             {
                 v2f o;
-                o.vertex = UnityObjectToClipPos(v.vertex);		//ï¿½ï¿½ï¿½ï¿½ï¿½W(640,360)etc
+                o.vertex = UnityObjectToClipPos(v.vertex);		//ÀÀ•W(640,360)etc
 				o.pos = mul(unity_ObjectToWorld, v.vertex);
 				o.uv = v.uv;
-                o.screenPos = o.vertex;							//UVï¿½ï¿½ï¿½W(0-1)
-                o.worldPos = v.vertex.xyz;						//ï¿½ï¿½Æ‚ï¿½Æ‚Ì’ï¿½ï¿½_ï¿½ï¿½ï¿½W
+                o.screenPos = o.vertex;							//UVÀ•W(0-1)
+                o.worldPos = v.vertex.xyz;						//‚à‚Æ‚à‚Æ‚Ì’¸“_À•W
                 return o;
             }
 			
@@ -125,9 +122,9 @@ dist = min(min(dist0,dist1),dist2);
 			{
 				// Put the results and return this.
 				frag_out o;
-				//ï¿½ï¿½ï¿½Cï¿½}ï¿½[ï¿½`ï¿½ï¿½ï¿½Oï¿½pï¿½Ìƒï¿½ï¿½Cï¿½Ì’ï¿½`
+				//ƒŒƒCƒ}[ƒ`ƒ“ƒO—p‚ÌƒŒƒC‚Ì’è‹`
 				Ray ray;
-				//ï¿½ï¿½ï¿½Cï¿½ÌŒï¿½ï¿½_ï¿½ï¿½ï¿½ï¿½İ‚ÌƒJï¿½ï¿½ï¿½ï¿½ï¿½Ê’uï¿½ï¿½ï¿½ï¿½[ï¿½ï¿½ï¿½hï¿½ï¿½ï¿½Wï¿½É’uï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì‚É’ï¿½`
+				//ƒŒƒC‚ÌŒ´“_‚ğŒ»İ‚ÌƒJƒƒ‰ˆÊ’u‚ğƒ[ƒ‹ƒhÀ•W‚É’u‚«Š·‚¦‚½‚à‚Ì‚É’è‹`
 				//ray.org = mul(unity_WorldToObject,float4(_WorldSpaceCameraPos,1.0));
 				ray.org = i.pos.xyz;
 				ray.dir = normalize(ray.org.xyz - _WorldSpaceCameraPos);
@@ -135,9 +132,9 @@ dist = min(min(dist0,dist1),dist2);
 
 				float3 posOnRay = ray.org;
 				float maxStep = 32;
-				float lightValue = _LightValue; //ï¿½ï¿½ï¿½Cï¿½gï¿½Ì–ï¿½ï¿½é‚³ï¿½ï¿½ï¿½ï¿½
-				float threshold = 0.001;		//ï¿½Õ“Ë‚ï¿½ï¿½ï¿½ï¿½Æ”ï¿½ï¿½è‚·ï¿½ï¿½è‡’l
-				float maxDistance = 10.0;		//ï¿½ï¿½ï¿½Æ‚ÅƒJï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Maxï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ì¬
+				float lightValue = _LightValue; //ƒ‰ƒCƒg‚Ì–¾‚é‚³’²®
+				float threshold = 0.001;		//Õ“Ë‚µ‚½‚Æ”»’è‚·‚éè‡’l
+				float maxDistance = 10.0;		//‚ ‚Æ‚ÅƒJƒƒ‰‚©‚çMax‹——£‚ğì¬
 				float tmp;
 				float2 dist;
 				tmp = 0.0;
@@ -151,15 +148,15 @@ dist = min(min(dist0,dist1),dist2);
 						break;
 				}
 
-				//ï¿½ï¿½ï¿½Cï¿½ï¿½ï¿½Iï¿½uï¿½Wï¿½Fï¿½Nï¿½gï¿½É‚Ô‚Â‚ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+				//ƒŒƒC‚ªƒIƒuƒWƒFƒNƒg‚É‚Ô‚Â‚©‚Á‚½‚©”»’è
 				float4 color = float4(0.0,0.0,0.0,0.0);
-				//ï¿½Ô‚Â‚ï¿½ï¿½ï¿½ï¿½Ä‚ï¿½ï¿½ï¿½Îˆï¿½ï¿½ï¿½è¬ï¿½ï¿½ï¿½ï¿½ï¿½Í‚ï¿½ï¿½Aï¿½å‚«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ç‚»ï¿½Ìƒsï¿½Nï¿½Zï¿½ï¿½ï¿½ï¿½discard(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È‚ï¿½)
+				//‚Ô‚Â‚©‚Á‚Ä‚¢‚ê‚Îˆê’è‚æ‚è¬‚³‚¢‚Í‚¸A‘å‚«‚©‚Á‚½‚ç‚»‚ÌƒsƒNƒZƒ‹‚Ídiscard(ˆ—‚µ‚È‚¢)
 				if(abs(dist.x)>threshold)
 					discard;
 				else{
-					//ï¿½@ï¿½ï¿½ï¿½xï¿½Nï¿½gï¿½ï¿½ï¿½ï¿½ì¬
+					//–@üƒxƒNƒgƒ‹‚ğì¬
 					float3 normal = generateNormal(posOnRay);
-					//_WorldSpaceLightPos0ï¿½ÅƒVï¿½[ï¿½ï¿½ï¿½ï¿½Ìƒï¿½ï¿½Cï¿½gï¿½ÌˆÊ’uï¿½ï¿½æ“¾ï¿½Å‚ï¿½ï¿½ï¿½
+					//_WorldSpaceLightPos0‚ÅƒV[ƒ““à‚Ìƒ‰ƒCƒg‚ÌˆÊ’u‚ğæ“¾‚Å‚«‚é
 					float diff = clamp(dot(_WorldSpaceLightPos0,normal),0.1,1.0);
 					color = _Colors * diff * lightValue;
 				}
