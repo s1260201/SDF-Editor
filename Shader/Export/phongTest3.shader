@@ -1,4 +1,4 @@
-﻿Shader "SDFE/Sample"
+Shader "SDFE/Sample"
 {
 	Properties
 	{
@@ -79,7 +79,10 @@
 			float getSdf(float3 pos){
 				
 				float dist = 0;
-				// SDF
+float dist0 = sdBox(float3(pos.x - 0, pos.y -  0, pos.z - 0), float3(1,1,1));
+float dist1 = sdBox(float3(pos.x - 1, pos.y -  1, pos.z - 0), float3(1,1,1));
+float dist2 = sdRoundBox(float3(pos.x - -1, pos.y -  -1, pos.z - 0), float3(1,1,1),0.5);
+dist = min(min(dist0,dist1),dist2);
 				return dist;
 			}
 			float3 getNormal(float3 pos) {

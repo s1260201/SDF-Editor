@@ -1,11 +1,13 @@
-﻿Shader "SDFE/Sample"
+Shader "SDFE/Sample"
 {
 	Properties
 	{
-		_Color("Albedo Color", COLOR) = (1,1,1,1)
+		_Color("Color", COLOR) = (1,1,1,1)
 
+		_Radius("Radius", Range(0.0,1.0)) = 0.3
 		_BlurShadow("BlurShadow", Range(0.0,50.0)) = 16.0
-		_Metalmess("Metalness", Range(0.0,1.0))=0.5
+		_Speed("Speed", Range(0.0,10.0)) = 2.0
+		_LightValue("LightLevel",Range(0.0,10.0))=1.25
 	}
 	SubShader
 	{
@@ -30,7 +32,8 @@
 			//#include "AutoLight.cginc"
 
 			fixed4 _Color;
-			float _BlurShadow,_Metalmess;
+			float _Radius,_BlurShadow,_Speed;
+			float4 _LightValue;
 			
 			struct appdata
 			{
@@ -79,15 +82,18 @@
 			float getSdf(float3 pos){
 				
 				float dist = 0;
-				// SDF
+float dist0 = sdBox(float3(pos.x - 0, pos.y -  0, pos.z - 0), float3(1,1,1));
+float dist1 = sdBox(float3(pos.x - 1, pos.y -  1, pos.z - 0), float3(1,1,1));
+float dist2 = sdRoundBox(float3(pos.x - -1, pos.y -  -1, pos.z - 0), float3(1,1,1),0.5);
+dist = min(min(dist0,dist1),dist2);
 				return dist;
 			}
 			float3 getNormal(float3 pos) {
 				float d = 0.001;
 				return normalize(float3(
-					getSdf(pos + float3(d, 0, 0)) - getSdf(pos + float3(-d, 0, 0)), // x partial differentiation 偏微分
-					getSdf(pos + float3(0, d, 0)) - getSdf(pos + float3(0, -d, 0)), // y
-					getSdf(pos + float3(0, 0, d)) - getSdf(pos + float3(0, 0, -d))  // z
+					getSdf(pos + float3(d, 0, 0)) - getSdf(pos + float3(-d, 0, 0)),
+					getSdf(pos + float3(0, d, 0)) - getSdf(pos + float3(0, -d, 0)),
+					getSdf(pos + float3(0, 0, d)) - getSdf(pos + float3(0, 0, -d))
 				));
 			}
 
@@ -145,13 +151,13 @@
 					float3 light = normalize(_WorldSpaceLightPos0);
                     
                     // マテリアルのパラメーター
-                    float3 albedo = float3(_Color.r, _Color.g, _Color.b);// アルベド
-                    float metalness = _Metalmess;// メタルネス（金属の度合い）
+                    float3 albedo = float3(1, 1, 1);// アルベド
+                    float metalness = 0.5;// メタルネス（金属の度合い）
 
                     
                     // ライティング計算
                     float diffuse = saturate(dot(normal, light));// 拡散反射
-                    float specular = pow(saturate(dot(reflect(light, normal), rayDir)), 10.0);// 鏡面反射 Phong
+                    float specular = pow(saturate(dot(reflect(light, normal), rayDir)), 10.0);// 鏡面反射
                     float ao = calcAO(pos, normal);// AO : Ambient occlusion
                     //float shadow = calcSoftshadow(pos, light, 0.25, 5);// シャドウ
                     float shadow = genShadow(pos, light);

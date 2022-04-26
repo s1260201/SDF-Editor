@@ -1,4 +1,4 @@
-﻿Shader "SDFE/Sample"
+Shader "SDFE/Sample"
 {
 	Properties
 	{
@@ -79,7 +79,10 @@
 			float getSdf(float3 pos){
 				
 				float dist = 0;
-				// SDF
+float dist0 = sdBox(float3(pos.x - 0, pos.y -  0, pos.z - 0), float3(1,1,1));
+float dist1 = sdBox(float3(pos.x - 1, pos.y -  1, pos.z - 0), float3(1,1,1));
+float dist2 = sdRoundBox(float3(pos.x - -1, pos.y -  -1, pos.z - 0), float3(1,1,1),0.5);
+dist = min(min(dist0,dist1),dist2);
 				return dist;
 			}
 			float3 getNormal(float3 pos) {
@@ -152,14 +155,14 @@
                     // ライティング計算
                     float diffuse = saturate(dot(normal, light));// 拡散反射
                     float specular = pow(saturate(dot(reflect(light, normal), rayDir)), 10.0);// 鏡面反射 Phong
-                    float ao = calcAO(pos, normal);// AO : Ambient occlusion
+                    //float ao = calcAO(pos, normal);// AO : Ambient occlusion
                     //float shadow = calcSoftshadow(pos, light, 0.25, 5);// シャドウ
                     float shadow = genShadow(pos, light);
 
                     // ライティング結果の合成
                     col += albedo * diffuse * shadow * (1 - metalness);// 直接光の拡散反射
                     col += albedo * specular * shadow * metalness;// 直接光の鏡面反射
-                    col += albedo * ao * lerp(float4(0,0,0,0), float4(1,1,1,0), 0.3);// 環境光
+                    //col += albedo * ao * lerp(float4(0,0,0,0), float4(1,1,1,0), 0.3);// 環境光
 					return float4(col,1);
 				}				
 			}		
