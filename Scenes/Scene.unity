@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44271502, g: 0.49184847, b: 0.5716416, a: 1}
+  m_IndirectSpecularColor: {r: 0.44111413, g: 0.4898758, b: 0.56995153, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sdfGraph: {fileID: 11400000, guid: fc470e839fe6ad64fac676c6e0d4592c, type: 2}
   readPath: Assets/Shader/src/Sample.shader
-  writePath: Assets/Shader/Export/phongTest4.shader
+  writePath: Assets/Shader/Export/phongTest3.shader
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -256,14 +256,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
-  m_LocalRotation: {x: 0.7199272, y: -0.4745727, z: 0.28973475, w: 0.41537866}
+  m_LocalRotation: {x: 0.70876104, y: -0.44837612, z: 0.32827434, w: 0.4345719}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 60.819, y: 177.305, z: 245.20401}
+  m_LocalEulerAnglesHint: {x: 65.56, y: 169.467, z: 237.84201}
 --- !u!1 &809263068
 GameObject:
   m_ObjectHideFlags: 0

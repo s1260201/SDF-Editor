@@ -125,6 +125,15 @@ dist = min(min(dist0,dist1),dist2);
                 return clamp(1.0 - 3.0 * occ, 0.0, 1.0) * (0.5 + 0.5 * nor.y);
             }
 
+			float3 acesFilm(float3 x){
+				const float a = 2.51;
+				const float b = 0.03;
+				const float c = 2.43;
+				const float d = 0.59;
+				const float e = 0.14;
+				return saturate((x * (a * x + b)) / (x * ( c * x + d) + e));
+			}
+
 			float4 rayMarch(float3 pos, float3 rayDir, int StepNum){
 				int fase = 0;
 				float t = 0;
@@ -150,19 +159,22 @@ dist = min(min(dist0,dist1),dist2);
                     // マテリアルのパラメーター
                     float3 albedo = float3(_Color.r, _Color.g, _Color.b);// アルベド
                     float metalness = _Metalmess;// メタルネス（金属の度合い）
-
-                    
+                  
                     // ライティング計算
                     float diffuse = saturate(dot(normal, light));// 拡散反射
-                    float specular = pow(saturate(dot(reflect(light, normal), rayDir)), 10.0);// 鏡面反射 Phong
+                    float specular = pow(saturate(dot(reflect(light, normal), -rayDir)), 10.0);// 鏡面反射 Phong
                     float ao = calcAO(pos, normal);// AO : Ambient occlusion
-                    //float shadow = calcSoftshadow(pos, light, 0.25, 5);// シャドウ
-                    float shadow = genShadow(pos, light);
+                    //float ao = 1.0;
+					//float shadow = calcSoftshadow(pos, light, 0.25, 5);// シャドウ
+                    //float shadow = genShadow(pos, light);
+					float shadow = 1.0;
 
                     // ライティング結果の合成
                     col += albedo * diffuse * shadow * (1 - metalness);// 直接光の拡散反射
                     col += albedo * specular * shadow * metalness;// 直接光の鏡面反射
                     col += albedo * ao * lerp(float4(0,0,0,0), float4(1,1,1,0), 0.3);// 環境光
+					//col = acesFilm(col * 0.8);
+					//col = pow(col,1/2.2);
 					return float4(col,1);
 				}				
 			}		

@@ -2,3 +2,4 @@
 *.meta
 xNode/*
 Shader/src/OSS/*
+Shader/Export/temp/*
