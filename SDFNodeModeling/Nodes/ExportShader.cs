@@ -17,9 +17,9 @@ namespace SDF
 
         public void OutputShader()
         {
-            SDFNode outputNode = sdfGraph.HeadNode();
+            SDFNode outputNode = sdfGraph.OutputNode();
             sdfGraph.current = outputNode;
-            
+
             try
             {
                 Regex reg = new Regex("// SDF");
@@ -32,7 +32,8 @@ namespace SDF
                 {
                     if (reg.Match(line).Success)
                     {
-                        while(true){
+                        while (true)
+                        {
                             if (i > 5)
                             {
                                 Debug.Log("i is more than 5.");
@@ -46,15 +47,19 @@ namespace SDF
                             {
                                 SphereNode obj = (SphereNode)sdfGraph.current;
                                 Debug.Log("Write a sphere code.");
-                                streamWriter.WriteLine("float dist" + i + " = sdSphere(float3(pos.x - "+ obj.p.x + ", pos.y -  " + obj.p.y + ", pos.z - " + obj.p.z + "), " + obj.s + ");");
-                            }else if(sdfGraph.current is BoxNode){
+                                streamWriter.WriteLine("float dist" + i + " = sdSphere(float3(pos.x - " + obj.p.x + ", pos.y -  " + obj.p.y + ", pos.z - " + obj.p.z + "), " + obj.s + ");");
+                            }
+                            else if (sdfGraph.current is BoxNode)
+                            {
                                 BoxNode obj = (BoxNode)sdfGraph.current;
                                 Debug.Log("Write a Box code");
-                                streamWriter.WriteLine("float dist" + i + " = sdBox(float3(pos.x - "+ obj.p.x + ", pos.y -  " + obj.p.y + ", pos.z - " + obj.p.z + "), float3(" + obj.b.x + "," + obj.b.y + "," + obj.b.z + "));");
-                            }else if(sdfGraph.current is RoundBoxNode){
+                                streamWriter.WriteLine("float dist" + i + " = sdBox(float3(pos.x - " + obj.p.x + ", pos.y -  " + obj.p.y + ", pos.z - " + obj.p.z + "), float3(" + obj.b.x + "," + obj.b.y + "," + obj.b.z + "));");
+                            }
+                            else if (sdfGraph.current is RoundBoxNode)
+                            {
                                 RoundBoxNode obj = (RoundBoxNode)sdfGraph.current;
                                 Debug.Log("Write a RoundBox code");
-                                streamWriter.WriteLine("float dist" + i + " = sdRoundBox(float3(pos.x - " + obj.p.x + ", pos.y -  " + obj.p.y + ", pos.z - " + obj.p.z + "), float3(" + obj.b.x + "," + obj.b.y + "," + obj.b.z + ")," + obj.r+ ");");
+                                streamWriter.WriteLine("float dist" + i + " = sdRoundBox(float3(pos.x - " + obj.p.x + ", pos.y -  " + obj.p.y + ", pos.z - " + obj.p.z + "), float3(" + obj.b.x + "," + obj.b.y + "," + obj.b.z + ")," + obj.r + ");");
                             }
                             else
                             {
@@ -67,9 +72,9 @@ namespace SDF
                             Debug.Log("i is added 1");
                         }
                         streamWriter.Write("dist = ");
-                        if(i > 0)
+                        if (i > 0)
                         {
-                            for (int j = 0; j < i-1; j++)
+                            for (int j = 0; j < i - 1; j++)
                             {
                                 streamWriter.Write("min(");
 
@@ -101,13 +106,12 @@ namespace SDF
             catch (Exception e)
             {
                 Debug.LogError("The file could not be read");
-            }            
+            }
 
         }
         public void NextNode()
         {
-
-            foreach(NodePort p in sdfGraph.current.Ports)
+            foreach (NodePort p in sdfGraph.current.Ports)
             {
                 Debug.Log("foreach");
                 if (p.fieldName == "nextNode")
@@ -117,7 +121,18 @@ namespace SDF
                 }
 
             }
-            
+        }
+        public void BackNodes()
+        {
+            foreach (NodePort p in sdfGraph.current.Ports)
+            {
+                Debug.Log("foreach");
+                if (p.fieldName == "nextNode")
+                {
+                    sdfGraph.current = p.Connection.node as SDFNode;
+                    break;
+                }
+            }
         }
     }
 }

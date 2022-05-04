@@ -8,7 +8,7 @@ namespace SDF.Controll
         public BoolType boolType = BoolType.Union;
         public enum BoolType { Union, Intersection, Difference }
 
-        [Input(connectionType = ConnectionType.Override, backingValue = ShowBackingValue.Never)] public SDFNode baseNode;
+        [Input(connectionType = ConnectionType.Multiple, backingValue = ShowBackingValue.Never)] public SDFNode baseNode;
         [Input(connectionType = ConnectionType.Multiple, backingValue = ShowBackingValue.Never)] public SDFNode othersNodes;
         [Output] public SDFNode outputNode;
     }

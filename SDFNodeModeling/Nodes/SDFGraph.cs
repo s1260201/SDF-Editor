@@ -12,12 +12,12 @@ namespace SDFModeling
     public class SDFGraph : XNode.NodeGraph
     {
         public SDFNode current;
-        public SDFNode HeadNode()
+        public SDFNode OutputNode()
         {
-            Head result = null;
+            Output result = null;
             foreach (var node in nodes)
             {
-                result = node as Head;
+                result = node as Output;
                 if (result != null)
                 {
                     break;
