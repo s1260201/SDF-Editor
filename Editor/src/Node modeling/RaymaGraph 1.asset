@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-7688301559278278051
+--- !u!114 &-8707984862014623857
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,48 +9,173 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 527744b9e84e9d841a9ac8b924f6664b, type: 3}
-  m_Name: Boolean
+  m_Script: {fileID: 11500000, guid: 771584de7e4c8fd4c8f66a9b98e08d36, type: 3}
+  m_Name: Sphere
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 408, y: -184}
+  position: {x: 232, y: 40}
   ports:
     keys:
-    - othersNodes
-    - baseNode
-    - outputNode
+    - p
+    - s
+    - beforeNode
     values:
-    - _fieldName: othersNodes
-      _node: {fileID: -7688301559278278051}
-      _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
+    - _fieldName: p
+      _node: {fileID: -8707984862014623857}
+      _typeQualifiedName: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
       connections: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-    - _fieldName: baseNode
-      _node: {fileID: -7688301559278278051}
-      _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
+    - _fieldName: s
+      _node: {fileID: -8707984862014623857}
+      _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
       connections: []
       _direction: 0
-      _connectionType: 1
+      _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-    - _fieldName: outputNode
-      _node: {fileID: -7688301559278278051}
+    - _fieldName: beforeNode
+      _node: {fileID: -8707984862014623857}
       _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
+      connections:
+      - fieldName: nodes
+        node: {fileID: 7480220630495179538}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  beforeNode: {fileID: 0}
+  p: {x: 0, y: 0, z: 0}
+  s: 1
+--- !u!114 &-5452131626358422609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a75606f5b35f1eb4588bf17a96f48b49, type: 3}
+  m_Name: Round Box
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -72, y: 88}
+  ports:
+    keys:
+    - p
+    - b
+    - r
+    - beforeNode
+    values:
+    - _fieldName: p
+      _node: {fileID: -5452131626358422609}
+      _typeQualifiedName: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
       connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: b
+      _node: {fileID: -5452131626358422609}
+      _typeQualifiedName: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: r
+      _node: {fileID: -5452131626358422609}
+      _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: beforeNode
+      _node: {fileID: -5452131626358422609}
+      _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: nodes
+        node: {fileID: -1603973200317063050}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  beforeNode: {fileID: 0}
+  p: {x: 0, y: 0, z: 0}
+  b: {x: 0, y: 0, z: 0}
+  r: 0
+--- !u!114 &-1603973200317063050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ed46b64f9c8c1448b5c52659dada78a, type: 3}
+  m_Name: Difference
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -328, y: -8}
+  ports:
+    keys:
+    - beforeNode
+    - nodes
+    - targetNodes
+    values:
+    - _fieldName: beforeNode
+      _node: {fileID: -1603973200317063050}
+      _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: nextNode
+        node: {fileID: 5847746106835701300}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: nodes
+      _node: {fileID: -1603973200317063050}
+      _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: beforeNode
+        node: {fileID: -5452131626358422609}
+        reroutePoints: []
       _direction: 1
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  boolType: 0
-  baseNode: {fileID: 0}
-  othersNodes: {fileID: 0}
-  outputNode: {fileID: 0}
+    - _fieldName: targetNodes
+      _node: {fileID: -1603973200317063050}
+      _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: beforeNode
+        node: {fileID: 7480220630495179538}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  beforeNode: {fileID: 0}
+  targetNodes: {fileID: 0}
+  nodes: {fileID: 0}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,8 +190,65 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodes:
   - {fileID: 5847746106835701300}
-  - {fileID: -7688301559278278051}
+  - {fileID: 81739764399213851}
+  - {fileID: 7480220630495179538}
+  - {fileID: -1603973200317063050}
+  - {fileID: -8707984862014623857}
+  - {fileID: -5452131626358422609}
   current: {fileID: 0}
+--- !u!114 &81739764399213851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a92d4f8b8b1d33642915bd0282b79064, type: 3}
+  m_Name: Box
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 216, y: -152}
+  ports:
+    keys:
+    - p
+    - b
+    - beforeNode
+    values:
+    - _fieldName: p
+      _node: {fileID: 81739764399213851}
+      _typeQualifiedName: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: b
+      _node: {fileID: 81739764399213851}
+      _typeQualifiedName: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: beforeNode
+      _node: {fileID: 81739764399213851}
+      _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: nodes
+        node: {fileID: 7480220630495179538}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  beforeNode: {fileID: 0}
+  p: {x: 0, y: 0, z: 0}
+  b: {x: 0, y: 0, z: 0}
 --- !u!114 &5847746106835701300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80,7 +262,7 @@ MonoBehaviour:
   m_Name: Head
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -264, y: -184}
+  position: {x: -568, y: -40}
   ports:
     keys:
     - nextNode
@@ -89,9 +271,60 @@ MonoBehaviour:
       _node: {fileID: 5847746106835701300}
       _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
-      connections: []
+      connections:
+      - fieldName: beforeNode
+        node: {fileID: -1603973200317063050}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  nextNode: {fileID: 0}
+--- !u!114 &7480220630495179538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea427b64f6d8ace42a928ae3ab7a0977, type: 3}
+  m_Name: Union
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -72, y: -120}
+  ports:
+    keys:
+    - beforeNode
+    - nodes
+    values:
+    - _fieldName: beforeNode
+      _node: {fileID: 7480220630495179538}
+      _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: targetNodes
+        node: {fileID: -1603973200317063050}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: nodes
+      _node: {fileID: 7480220630495179538}
+      _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: beforeNode
+        node: {fileID: 81739764399213851}
+        reroutePoints: []
+      - fieldName: beforeNode
+        node: {fileID: -8707984862014623857}
+        reroutePoints: []
       _direction: 1
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  nextNode: {fileID: 0}
+  beforeNode: {fileID: 0}
+  nodes: {fileID: 0}
