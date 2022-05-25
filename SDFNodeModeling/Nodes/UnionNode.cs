@@ -6,7 +6,7 @@ namespace SDF.Controll.Bool
 {
     public class UnionNode : Operater
     {
-        [Input(connectionType = ConnectionType.Multiple, backingValue = ShowBackingValue.Never)] public SDFNode beforeNode;
+        [Input(backingValue = ShowBackingValue.Never)] public SDFNode beforeNode;
         [Output (dynamicPortList =true)] public List<SDFNode> nodes;
 
         public int listCounter()

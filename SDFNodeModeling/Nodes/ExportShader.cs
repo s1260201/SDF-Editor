@@ -80,9 +80,7 @@ namespace SDF
                             {
                                 UnionNode obj = (UnionNode)popNode;
                                 Debug.Log("Write a Union code");
-                                Queue<int> tmp = new Queue<int>();
                                 int a = obj.listCounter();
-                                // taskStackì‡ÇÃíºãﬂaå¬ÇÃÉmÅ[ÉhÇëŒè€
 
                                 streamWriter.Write("float dist" + i + " = ");
 
@@ -100,20 +98,15 @@ namespace SDF
                             else if (popNode is Head)
                             {
                                 Debug.Log("Write a Head Code");
-                                streamWriter.Write("dist = dist" + --i + ";");
+                                streamWriter.WriteLine("dist = dist" + --i + ";");
                             }
                             else if (popNode is DifferenceNode)
                             {
                                 // Diff is max(-A, B)
                                 DifferenceNode obj = (DifferenceNode)popNode;
                                 Debug.Log("Write a DifferenceNode");
-                                int a = 0;
-                                foreach (NodePort p in obj.Ports)
-                                {
-                                    if (p.fieldName != "beforeNode")
-                                        Debug.Log("Diff : " + a);
-                                    a++;
-                                }
+
+                                streamWriter.Write("float dist" + i + " = max(-dist" + taskStack.Pop() + ", dist" + taskStack.Pop() + ");");
                             }
                             else
                             {
@@ -152,7 +145,7 @@ namespace SDF
             {
                 foreach (NodePort p in node.Ports)
                 {
-                    if (p.fieldName == "nodes")
+                    if (p.fieldName == "targetNodes")
                     {
                         try
                         {
@@ -167,7 +160,7 @@ namespace SDF
                 }
                 foreach (NodePort p in node.Ports)
                 {
-                    if (p.fieldName == "targetNodes")
+                    if (p.fieldName == "negativeNodes")
                     {
                         try
                         {
