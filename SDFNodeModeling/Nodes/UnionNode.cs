@@ -4,9 +4,15 @@ using UnityEngine;
 
 namespace SDF.Controll.Bool
 {
-    public class UnionNode : SDFNode
+    public class UnionNode : Operater
     {
         [Input(connectionType = ConnectionType.Multiple, backingValue = ShowBackingValue.Never)] public SDFNode beforeNode;
-        [Output] public SDFNode nodes;
+        [Output (dynamicPortList =true)] public List<SDFNode> nodes;
+
+        public int listCounter()
+        {
+            return this.nodes.Count;
+        }
     }
+    
 }

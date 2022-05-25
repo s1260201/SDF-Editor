@@ -18,11 +18,14 @@ namespace SDF
         [SerializeField] string writePath = "Assets/Shader/Export/Sample1.shader";
 
         Queue<SDFNode> nodeQ = new Queue<SDFNode>();
+        List<SDFNode> taskList = new List<SDFNode>();
 
         public void OutputShader()
         {
-            NextNode(sdfGraph.HeadNode());
+            //NextNode(sdfGraph.HeadNode());
             Stack<int> taskStack = new Stack<int>();
+
+            NextNode(sdfGraph.HeadNode());
 
             Debug.Log("Start");
 
@@ -45,12 +48,16 @@ namespace SDF
                                 Debug.Log("i is more than 10.");
                                 break; // Safety
                             }
-
+                            
                             SDFNode popNode = nodeQ.Dequeue();
                             Debug.Log(popNode.GetType());
 
+                            if (popNode is UnionNode) Debug.Log("Union node");
+                            else if (popNode is SphereNode) Debug.Log("Sphere node");
+                            else if (popNode is BoxNode) Debug.Log("Box node");
+
+
                             Debug.Log(i);
-                            if (popNode is Output) break;
                             if (popNode is SphereNode)
                             {
                                 SphereNode obj = (SphereNode)popNode;
@@ -74,27 +81,9 @@ namespace SDF
                                 UnionNode obj = (UnionNode)popNode;
                                 Debug.Log("Write a Union code");
                                 Queue<int> tmp = new Queue<int>();
-                                int a = 0;
-                                /*
-                                foreach (NodePort p in obj.Ports)
-                                {
-                                    //if (p.fieldName != "beforeNodes")
-                                    a++;
-                                    Debug.Log("Union : " + a);
-                                }
-                                Debug.Log("a : " + a);
-                                if (a < 2)
-                                {
-                                    Debug.LogError("Nodes are few!");
-                                    break;
-                                }
-                                */
+                                int a = obj.listCounter();
+                                // taskStack“à‚Ì’¼‹ßaŒÂ‚Ìƒm[ƒh‚ð‘ÎÛ
 
-                                // UnionNode@Not yet
-                                // Add function of handling multiplt nodes (Above foreeach cannot search over two nodes)
-                                // If top of stack is model node, pop and check next node. But, if controll node, pop and end.
-
-                                
                                 streamWriter.Write("float dist" + i + " = ");
 
                                 for (int j = 0; j < a - 1; j++)
@@ -111,17 +100,7 @@ namespace SDF
                             else if (popNode is Head)
                             {
                                 Debug.Log("Write a Head Code");
-                                streamWriter.Write("dist = ");
-                                for (int j = 0; j < taskStack.Count - 1; j++)
-                                {
-                                    streamWriter.Write("min(");
-                                }
-                                streamWriter.Write("dist" + taskStack.Pop());
-                                for (int j = 1; j < taskStack.Count; j++)
-                                {
-                                    streamWriter.Write(",dist" + taskStack.Pop() + ")");
-                                }
-                                streamWriter.WriteLine(";");
+                                streamWriter.Write("dist = dist" + --i + ";");
                             }
                             else if (popNode is DifferenceNode)
                             {
@@ -165,29 +144,67 @@ namespace SDF
             }
 
         }
+        
         public void NextNode(SDFNode node)
         {
-            Debug.Log("Test");
-            foreach (NodePort p in node.Ports)
+            //Debug.Log("");
+            if(node is DifferenceNode)
             {
-                if (p.fieldName != "beforeNode")
+                foreach (NodePort p in node.Ports)
                 {
-                    try
+                    if (p.fieldName == "nodes")
                     {
-                        NextNode(p.Connection.node as SDFNode);
+                        try
+                        {
+                            NextNode(p.Connection.node as SDFNode);
+                            break;
+                        }
+                        catch (NullReferenceException e)
+                        {
+                            Debug.LogError("Null conect");
+                        }
                     }
-                    catch (NullReferenceException e)
+                }
+                foreach (NodePort p in node.Ports)
+                {
+                    if (p.fieldName == "targetNodes")
                     {
-
+                        try
+                        {
+                            NextNode(p.Connection.node as SDFNode);
+                            break;
+                        }
+                        catch (NullReferenceException e)
+                        {
+                            Debug.LogError("Null conect");
+                        }
                     }
                 }
             }
+            else
+            {
+                foreach (NodePort p in node.Ports)
+                {
+                    if (p.fieldName != "beforeNode")
+                    {
+                        try
+                        {
+                            NextNode(p.Connection.node as SDFNode);
+                        }
+                        catch (NullReferenceException e)
+                        {
+                            Debug.LogError("Null conect");
+                        }
+                    }
+                }
+            }           
             if (node is UnionNode) Debug.Log("Union node");
             else if (node is SphereNode) Debug.Log("Sphere node");
             else if (node is BoxNode) Debug.Log("Box node");
-            //stackList.Push(node);
             nodeQ.Enqueue(node);
+            
         }
+        
     }
 }
 

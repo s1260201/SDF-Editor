@@ -79,10 +79,11 @@ Shader "SDFE/Sample"
 			float getSdf(float3 pos){
 				
 				float dist = 0;
-float dist0 = sdSphere(float3(pos.x - 0, pos.y -  0, pos.z - 0), 1);
-float dist1 = dist0;
-dist = dist1;
-				return dist;
+float dist0 = sdSphere(float3(pos.x - 0, pos.y -  -1, pos.z - 0), 1);
+float dist1 = sdBox(float3(pos.x - 1, pos.y -  0, pos.z - 0), float3(1,1,1));
+float dist2 = sdSphere(float3(pos.x - 0, pos.y -  0, pos.z - 0), 1);
+float dist3 = min(min(dist2,dist1),dist0);
+dist = dist3;				return dist;
 			}
 			float3 getNormal(float3 pos) {
 				float d = 0.001;

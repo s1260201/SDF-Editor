@@ -7,7 +7,8 @@ namespace SDF.Controll.Bool
     {
         [Input(connectionType = ConnectionType.Multiple, backingValue = ShowBackingValue.Never)] public SDFNode beforeNode;
         [Output] public SDFNode targetNodes;
-        [Output] public SDFNode nodes;
+        [Output(dynamicPortList = true)] public List<SDFNode> nodes;
+
     }
 }
 
