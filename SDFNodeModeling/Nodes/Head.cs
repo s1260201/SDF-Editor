@@ -2,6 +2,6 @@ namespace SDF.Controll
 {
     public class Head : SDFNode
     {
-        [Output] public SDFNode nextNode;
+        [Output(connectionType = ConnectionType.Override)] public SDFNode nextNode;
     }
 }

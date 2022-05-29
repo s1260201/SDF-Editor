@@ -169,7 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sdfGraph: {fileID: 11400000, guid: fc470e839fe6ad64fac676c6e0d4592c, type: 2}
   readPath: Assets/Shader/src/Sample.shader
-  writePath: Assets/Shader/Export/phongTest3.shader
+  writePath: Assets/Shader/Export/expTest.shader
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0

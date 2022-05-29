@@ -5,6 +5,9 @@ using System.Text.RegularExpressions;
 using System;
 using XNode;
 using SDF.Model;
+using SDF.Controll;
+using SDF.Controll.Bool;
+using System.Collections.Generic;
 
 namespace SDF
 {
@@ -13,13 +16,19 @@ namespace SDF
         [SerializeField] SDFGraph sdfGraph;
         [SerializeField] string readPath = "Assets/Shader/src/Sample.shader";
         [SerializeField] string writePath = "Assets/Shader/Export/Sample1.shader";
-        //[SerializeField] string ShaderName = "Sample";
+
+        Queue<SDFNode> nodeQ = new Queue<SDFNode>();
+        List<SDFNode> taskList = new List<SDFNode>();
 
         public void OutputShader()
         {
-            SDFNode outputNode = sdfGraph.HeadNode();
-            sdfGraph.current = outputNode;
-            
+            //NextNode(sdfGraph.HeadNode());
+            Stack<int> taskStack = new Stack<int>();
+
+            NextNode(sdfGraph.HeadNode());
+
+            Debug.Log("Start");
+
             try
             {
                 Regex reg = new Regex("// SDF");
@@ -32,60 +41,84 @@ namespace SDF
                 {
                     if (reg.Match(line).Success)
                     {
-                        while(true){
-                            if (i > 5)
+                        while (nodeQ.Count != 0)
+                        {
+                            if (i > 10)
                             {
-                                Debug.Log("i is more than 5.");
+                                Debug.Log("i is more than 10.");
                                 break; // Safety
                             }
-                            Debug.Log("GotoNN");
-                            NextNode();
+                            
+                            SDFNode popNode = nodeQ.Dequeue();
+                            Debug.Log(popNode.GetType());
+
+                            if (popNode is UnionNode) Debug.Log("Union node");
+                            else if (popNode is SphereNode) Debug.Log("Sphere node");
+                            else if (popNode is BoxNode) Debug.Log("Box node");
+
+
                             Debug.Log(i);
-                            if (sdfGraph.current is Output) break;
-                            if (sdfGraph.current is SphereNode)
+                            if (popNode is SphereNode)
                             {
-                                SphereNode obj = (SphereNode)sdfGraph.current;
+                                SphereNode obj = (SphereNode)popNode;
                                 Debug.Log("Write a sphere code.");
-                                streamWriter.WriteLine("float dist" + i + " = sdSphere(float3(pos.x - "+ obj.p.x + ", pos.y -  " + obj.p.y + ", pos.z - " + obj.p.z + "), " + obj.s + ");");
-                            }else if(sdfGraph.current is BoxNode){
-                                BoxNode obj = (BoxNode)sdfGraph.current;
+                                streamWriter.WriteLine("float dist" + i + " = sdSphere(float3(pos.x - " + obj.p.x + ", pos.y -  " + obj.p.y + ", pos.z - " + obj.p.z + "), " + obj.s + ");");
+                            }
+                            else if (popNode is BoxNode)
+                            {
+                                BoxNode obj = (BoxNode)popNode;
                                 Debug.Log("Write a Box code");
-                                streamWriter.WriteLine("float dist" + i + " = sdBox(float3(pos.x - "+ obj.p.x + ", pos.y -  " + obj.p.y + ", pos.z - " + obj.p.z + "), float3(" + obj.b.x + "," + obj.b.y + "," + obj.b.z + "));");
-                            }else if(sdfGraph.current is RoundBoxNode){
-                                RoundBoxNode obj = (RoundBoxNode)sdfGraph.current;
+                                streamWriter.WriteLine("float dist" + i + " = sdBox(float3(pos.x - " + obj.p.x + ", pos.y -  " + obj.p.y + ", pos.z - " + obj.p.z + "), float3(" + obj.b.x + "," + obj.b.y + "," + obj.b.z + "));");
+                            }
+                            else if (popNode is RoundBoxNode)
+                            {
+                                RoundBoxNode obj = (RoundBoxNode)popNode;
                                 Debug.Log("Write a RoundBox code");
-                                streamWriter.WriteLine("float dist" + i + " = sdRoundBox(float3(pos.x - " + obj.p.x + ", pos.y -  " + obj.p.y + ", pos.z - " + obj.p.z + "), float3(" + obj.b.x + "," + obj.b.y + "," + obj.b.z + ")," + obj.r+ ");");
+                                streamWriter.WriteLine("float dist" + i + " = sdRoundBox(float3(pos.x - " + obj.p.x + ", pos.y -  " + obj.p.y + ", pos.z - " + obj.p.z + "), float3(" + obj.b.x + "," + obj.b.y + "," + obj.b.z + ")," + obj.r + ");");
+                            }
+                            else if (popNode is UnionNode)
+                            {
+                                UnionNode obj = (UnionNode)popNode;
+                                Debug.Log("Write a Union code");
+                                int a = obj.listCounter();
+
+                                streamWriter.Write("float dist" + i + " = ");
+
+                                for (int j = 0; j < a - 1; j++)
+                                {
+                                    streamWriter.Write("min(");
+                                }
+                                streamWriter.Write("dist" + taskStack.Pop());
+                                for (int j = 1; j < a; j++)
+                                {
+                                    streamWriter.Write(",dist" + taskStack.Pop() + ")");
+                                }
+                                streamWriter.WriteLine(";");
+                            }
+                            else if (popNode is Head)
+                            {
+                                Debug.Log("Write a Head Code");
+                                streamWriter.WriteLine("dist = dist" + --i + ";");
+                            }
+                            else if (popNode is DifferenceNode)
+                            {
+                                // Diff is max(-A, B)
+                                DifferenceNode obj = (DifferenceNode)popNode;
+                                Debug.Log("Write a DifferenceNode");
+
+                                streamWriter.Write("float dist" + i + " = max(-dist" + taskStack.Pop() + ", dist" + taskStack.Pop() + ");");
                             }
                             else
                             {
                                 Debug.LogError("Selected an unknown Node.");
                                 break;
                             }
+
                             streamWriter.Flush();
                             Debug.Log("Flush!");
+                            taskStack.Push(i); // ControllNodeˆÈ‰º‚É‚ ‚éObjNode‚Ì”Ô†i‚ð“ü‚ê‚Ä‚¨‚­B
                             i++;
-                            Debug.Log("i is added 1");
                         }
-                        streamWriter.Write("dist = ");
-                        if(i > 0)
-                        {
-                            for (int j = 0; j < i-1; j++)
-                            {
-                                streamWriter.Write("min(");
-
-                            }
-                            streamWriter.Write("dist0");
-                            for (int j = 1; j < i; j++)
-                            {
-                                streamWriter.Write(",dist" + j + ")");
-                            }
-                            streamWriter.WriteLine(";");
-                        }
-                        else
-                        {
-                            streamWriter.Write("dist0;");
-                        }
-
                         Debug.Log("Clear");
                     }
                     else
@@ -101,24 +134,70 @@ namespace SDF
             catch (Exception e)
             {
                 Debug.LogError("The file could not be read");
-            }            
+            }
 
         }
-        public void NextNode()
+        
+        public void NextNode(SDFNode node)
         {
-
-            foreach(NodePort p in sdfGraph.current.Ports)
+            //Debug.Log("");
+            if(node is DifferenceNode)
             {
-                Debug.Log("foreach");
-                if (p.fieldName == "nextNode")
+                foreach (NodePort p in node.Ports)
                 {
-                    sdfGraph.current = p.Connection.node as SDFNode;
-                    break;
+                    if (p.fieldName == "targetNodes")
+                    {
+                        try
+                        {
+                            NextNode(p.Connection.node as SDFNode);
+                            break;
+                        }
+                        catch (NullReferenceException e)
+                        {
+                            Debug.LogError("Null conect");
+                        }
+                    }
                 }
-
+                foreach (NodePort p in node.Ports)
+                {
+                    if (p.fieldName == "negativeNodes")
+                    {
+                        try
+                        {
+                            NextNode(p.Connection.node as SDFNode);
+                            break;
+                        }
+                        catch (NullReferenceException e)
+                        {
+                            Debug.LogError("Null conect");
+                        }
+                    }
+                }
             }
+            else
+            {
+                foreach (NodePort p in node.Ports)
+                {
+                    if (p.fieldName != "beforeNode")
+                    {
+                        try
+                        {
+                            NextNode(p.Connection.node as SDFNode);
+                        }
+                        catch (NullReferenceException e)
+                        {
+                            Debug.LogError("Null conect");
+                        }
+                    }
+                }
+            }           
+            if (node is UnionNode) Debug.Log("Union node");
+            else if (node is SphereNode) Debug.Log("Sphere node");
+            else if (node is BoxNode) Debug.Log("Box node");
+            nodeQ.Enqueue(node);
             
         }
+        
     }
 }
 
