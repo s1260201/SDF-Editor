@@ -9,13 +9,6 @@ namespace SDF.Controll.Bool
         [Output] public SDFNode targetNodes;
         //[Output(dynamicPortList = true)] public List<SDFNode> nodes;
         [Output] public SDFNode negativeNodes;
-
-        /*
-        public int listCounter()
-        {
-            return this.nodes.Count;
-        }
-        */
     }
 }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SDF.Controll.Bool
 {
-    public class UnionNode : Operater
+    public class UnionNode : SDFNode
     {
         [Input(backingValue = ShowBackingValue.Never)] public SDFNode beforeNode;
         [Output (dynamicPortList =true)] public List<SDFNode> nodes;
