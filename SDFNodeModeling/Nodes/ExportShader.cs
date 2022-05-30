@@ -48,7 +48,7 @@ namespace SDF
                                 Debug.Log("i is more than 10.");
                                 break; // Safety
                             }
-                            
+
                             SDFNode popNode = nodeQ.Dequeue();
                             Debug.Log(popNode.GetType());
 
@@ -106,7 +106,15 @@ namespace SDF
                                 DifferenceNode obj = (DifferenceNode)popNode;
                                 Debug.Log("Write a DifferenceNode");
 
-                                streamWriter.Write("float dist" + i + " = max(-dist" + taskStack.Pop() + ", dist" + taskStack.Pop() + ");");
+                                streamWriter.WriteLine("float dist" + i + " = max(-dist" + taskStack.Pop() + ", dist" + taskStack.Pop() + ");");
+                            }
+                            else if (popNode is IntersectionNode)
+                            {
+                                // Intersect is max(A, B)
+                                IntersectionNode obj = (IntersectionNode)popNode;
+                                Debug.Log("Write a IntersectionNode");
+
+                                streamWriter.WriteLine("float dist" + i + " = max(dist" + taskStack.Pop() + ", dist" + taskStack.Pop() + ");");
                             }
                             else
                             {
@@ -137,11 +145,11 @@ namespace SDF
             }
 
         }
-        
+
         public void NextNode(SDFNode node)
         {
             //Debug.Log("");
-            if(node is DifferenceNode)
+            if (node is DifferenceNode)
             {
                 foreach (NodePort p in node.Ports)
                 {
@@ -190,14 +198,14 @@ namespace SDF
                         }
                     }
                 }
-            }           
+            }
             if (node is UnionNode) Debug.Log("Union node");
             else if (node is SphereNode) Debug.Log("Sphere node");
             else if (node is BoxNode) Debug.Log("Box node");
             nodeQ.Enqueue(node);
-            
+
         }
-        
+
     }
 }
 

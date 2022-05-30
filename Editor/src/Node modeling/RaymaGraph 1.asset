@@ -119,13 +119,12 @@ MonoBehaviour:
   m_Name: Union
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -120, y: 216}
+  position: {x: -72, y: 120}
   ports:
     keys:
     - beforeNode
     - nodes
     - nodes 0
-    - nodes 1
     values:
     - _fieldName: beforeNode
       _node: {fileID: -3595457660617559950}
@@ -156,19 +155,6 @@ MonoBehaviour:
         Culture=neutral, PublicKeyToken=b77a5c561934e089
       connections:
       - fieldName: beforeNode
-        node: {fileID: -3513394399251675231}
-        reroutePoints: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 1
-    - _fieldName: nodes 1
-      _node: {fileID: -3595457660617559950}
-      _typeQualifiedName: System.Collections.Generic.List`1[[SDF.SDFNode, Assembly-CSharp,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0,
-        Culture=neutral, PublicKeyToken=b77a5c561934e089
-      connections:
-      - fieldName: beforeNode
         node: {fileID: 6188703782222761675}
         reroutePoints: []
       _direction: 1
@@ -178,60 +164,6 @@ MonoBehaviour:
   beforeNode: {fileID: 0}
   nodes:
   - {fileID: 0}
-  - {fileID: 0}
---- !u!114 &-3513394399251675231
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 771584de7e4c8fd4c8f66a9b98e08d36, type: 3}
-  m_Name: Sphere
-  m_EditorClassIdentifier: 
-  graph: {fileID: 11400000}
-  position: {x: 264, y: 264}
-  ports:
-    keys:
-    - p
-    - s
-    - beforeNode
-    values:
-    - _fieldName: p
-      _node: {fileID: -3513394399251675231}
-      _typeQualifiedName: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      connections: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: s
-      _node: {fileID: -3513394399251675231}
-      _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      connections: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: beforeNode
-      _node: {fileID: -3513394399251675231}
-      _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections:
-      - fieldName: nodes 0
-        node: {fileID: -3595457660617559950}
-        reroutePoints: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-  beforeNode: {fileID: 0}
-  p: {x: 0.5, y: 0.5, z: 0}
-  s: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,9 +184,7 @@ MonoBehaviour:
   - {fileID: 182417376215416239}
   - {fileID: 2554862647291984955}
   - {fileID: -3595457660617559950}
-  - {fileID: -3513394399251675231}
   - {fileID: 6188703782222761675}
-  - {fileID: 1924294772546663210}
   current: {fileID: 5847746106835701300}
 --- !u!114 &81739764399213851
 MonoBehaviour:
@@ -330,7 +260,6 @@ MonoBehaviour:
     - nodes 0
     - nodes 1
     - nodes 2
-    - nodes 3
     values:
     - _fieldName: beforeNode
       _node: {fileID: 182417376215416239}
@@ -393,78 +322,11 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 1
-    - _fieldName: nodes 3
-      _node: {fileID: 182417376215416239}
-      _typeQualifiedName: System.Collections.Generic.List`1[[SDF.SDFNode, Assembly-CSharp,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0,
-        Culture=neutral, PublicKeyToken=b77a5c561934e089
-      connections:
-      - fieldName: beforeNode
-        node: {fileID: 1924294772546663210}
-        reroutePoints: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 1
   beforeNode: {fileID: 0}
   nodes:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
---- !u!114 &1924294772546663210
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f02e18a491156148b022e32ca51b0d1, type: 3}
-  m_Name: Torus
-  m_EditorClassIdentifier: 
-  graph: {fileID: 11400000}
-  position: {x: 232, y: 120}
-  ports:
-    keys:
-    - p
-    - t
-    - beforeNode
-    values:
-    - _fieldName: p
-      _node: {fileID: 1924294772546663210}
-      _typeQualifiedName: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      connections: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: t
-      _node: {fileID: 1924294772546663210}
-      _typeQualifiedName: UnityEngine.Vector2, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      connections: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: beforeNode
-      _node: {fileID: 1924294772546663210}
-      _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections:
-      - fieldName: nodes 3
-        node: {fileID: 182417376215416239}
-        reroutePoints: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-  beforeNode: {fileID: 0}
-  p: {x: 0, y: 0, z: 0}
-  t: {x: 0, y: 0}
 --- !u!114 &2554862647291984955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -568,7 +430,7 @@ MonoBehaviour:
   m_Name: Round Box
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 264, y: 376}
+  position: {x: 248, y: 152}
   ports:
     keys:
     - p
@@ -608,7 +470,7 @@ MonoBehaviour:
       _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
       connections:
-      - fieldName: nodes 1
+      - fieldName: nodes 0
         node: {fileID: -3595457660617559950}
         reroutePoints: []
       _direction: 0
@@ -617,5 +479,5 @@ MonoBehaviour:
       _dynamic: 0
   beforeNode: {fileID: 0}
   p: {x: 0.5, y: 0, z: 0}
-  b: {x: 0, y: 0, z: 0}
+  b: {x: 0.1, y: 1, z: 0.1}
   r: 1
