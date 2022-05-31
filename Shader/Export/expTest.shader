@@ -76,16 +76,17 @@ Shader "SDFE/Sample"
 				return length(max(q,0.0)) + min(max(q.x,max(q.y,q.z)),0.0) - r;
 			}
 
+			float sdTorus( float3 p, float2 t )
+			{
+				float2 q = float2(length(p.xz)-t.x,p.y);
+				return length(q)-t.y;
+			}
+
 			float getSdf(float3 pos){
 				
 				float dist = 0;
-float dist0 = sdSphere(float3(pos.x - 0, pos.y -  -1, pos.z - 0), 1);
-float dist1 = sdBox(float3(pos.x - 1, pos.y -  0, pos.z - 0), float3(1,1,1));
-float dist2 = sdSphere(float3(pos.x - 0, pos.y -  0, pos.z - 0), 1);
-float dist3 = min(min(dist2,dist1),dist0);
-float dist4 = sdRoundBox(float3(pos.x - 0.5, pos.y -  0, pos.z - 0), float3(0.1,1,0.1),1);
-float dist5 = dist4;
-float dist6 = max(-dist5, dist3);dist = dist6;
+float dist0 = sdTorus(float3(pos.x - 0, pos.y -  0, pos.z - 0), float2(1, 0.5));
+dist = dist0;
 				return dist;
 			}
 			float3 getNormal(float3 pos) {

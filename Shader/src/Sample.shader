@@ -76,6 +76,12 @@
 				return length(max(q,0.0)) + min(max(q.x,max(q.y,q.z)),0.0) - r;
 			}
 
+			float sdTorus( float3 p, float2 t )
+			{
+				float2 q = float2(length(p.xz)-t.x,p.y);
+				return length(q)-t.y;
+			}
+
 			float getSdf(float3 pos){
 				
 				float dist = 0;

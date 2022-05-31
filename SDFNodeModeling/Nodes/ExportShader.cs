@@ -113,8 +113,13 @@ namespace SDF
                                 // Intersect is max(A, B)
                                 IntersectionNode obj = (IntersectionNode)popNode;
                                 Debug.Log("Write a IntersectionNode");
-
                                 streamWriter.WriteLine("float dist" + i + " = max(dist" + taskStack.Pop() + ", dist" + taskStack.Pop() + ");");
+                            }
+                            else if (popNode is TorusNode)
+                            {
+                                TorusNode obj = (TorusNode)popNode;
+                                Debug.Log("Write a TorusNode");
+                                streamWriter.WriteLine("float dist" + i + " = sdTorus(float3(pos.x - " + obj.p.x + ", pos.y -  " + obj.p.y + ", pos.z - " + obj.p.z + "), float2(" + obj.t.x + ", " + obj.t.y + "));");
                             }
                             else
                             {
