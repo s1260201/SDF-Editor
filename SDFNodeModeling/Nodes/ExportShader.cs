@@ -120,6 +120,11 @@ namespace SDF
                                 TorusNode obj = (TorusNode)popNode;
                                 Debug.Log("Write a TorusNode");
                                 streamWriter.WriteLine("float dist" + i + " = sdTorus(float3(pos.x - " + obj.p.x + ", pos.y -  " + obj.p.y + ", pos.z - " + obj.p.z + "), float2(" + obj.t.x + ", " + obj.t.y + "));");
+                            }else if(popNode is BlendingNode)
+                            {
+                                BlendingNode obj = (BlendingNode)popNode;
+                                Debug.Log("Write a BlendingNode");
+                                streamWriter.WriteLine("float dist" + i + " = smin(dist" + taskStack.Pop() + ", dist" + taskStack.Pop() + ");");
                             }
                             else
                             {

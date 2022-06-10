@@ -58,6 +58,14 @@
 				return o;
 			}
 
+			float smin(float a, float b) {
+				float k = 0.2;
+				float h = clamp(0.5 + 0.5 * (b - a) / k, 0,1);
+				//return mix(b, a, h) - k * h * (1 - h); 
+				return lerp(b,a,h) - k * h * (1 - h);
+			}
+
+
 			// *Sphere
 			float sdSphere(float3 p, float r)
 			{

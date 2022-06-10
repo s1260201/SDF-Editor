@@ -58,6 +58,14 @@ Shader "SDFE/Sample"
 				return o;
 			}
 
+			float smin(float a, float b) {
+				float k = 0.2;
+				float h = clamp(0.5 + 0.5 * (b - a) / k, 0,1);
+				//return mix(b, a, h) - k * h * (1 - h); 
+				return lerp(b,a,h) - k * h * (1 - h);
+			}
+
+
 			// *Sphere
 			float sdSphere(float3 p, float r)
 			{
@@ -85,8 +93,10 @@ Shader "SDFE/Sample"
 			float getSdf(float3 pos){
 				
 				float dist = 0;
-float dist0 = sdTorus(float3(pos.x - 0, pos.y -  0, pos.z - 0), float2(1, 0.5));
-dist = dist0;
+float dist0 = sdBox(float3(pos.x - 0, pos.y -  0, pos.z - 0), float3(1,1,1));
+float dist1 = sdSphere(float3(pos.x - 0, pos.y -  1, pos.z - 0), 1);
+float dist2 = smin(dist1, dist0);
+dist = dist2;
 				return dist;
 			}
 			float3 getNormal(float3 pos) {
