@@ -66,7 +66,7 @@ MonoBehaviour:
   m_Name: Box
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -440, y: 424}
+  position: {x: -344, y: 520}
   ports:
     keys:
     - p
@@ -97,7 +97,7 @@ MonoBehaviour:
         PublicKeyToken=null
       connections:
       - fieldName: a
-        node: {fileID: -4056299820889410286}
+        node: {fileID: -2997539917017167258}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_Name: Sphere
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -424, y: 632}
+  position: {x: -328, y: 696}
   ports:
     keys:
     - p
@@ -203,7 +203,7 @@ MonoBehaviour:
         PublicKeyToken=null
       connections:
       - fieldName: b
-        node: {fileID: -4056299820889410286}
+        node: {fileID: -2997539917017167258}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
@@ -212,65 +212,6 @@ MonoBehaviour:
   beforeNode: {fileID: 0}
   p: {x: 0, y: 1, z: 0}
   s: 1
---- !u!114 &-4056299820889410286
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 861a97a75100ad24cb99709f69a5f104, type: 3}
-  m_Name: Blending
-  m_EditorClassIdentifier: 
-  graph: {fileID: 11400000}
-  position: {x: -696, y: 552}
-  ports:
-    keys:
-    - beforeNode
-    - a
-    - b
-    values:
-    - _fieldName: beforeNode
-      _node: {fileID: -4056299820889410286}
-      _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections:
-      - fieldName: nextNode
-        node: {fileID: 5847746106835701300}
-        reroutePoints: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: a
-      _node: {fileID: -4056299820889410286}
-      _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections:
-      - fieldName: beforeNode
-        node: {fileID: -5193328190634624219}
-        reroutePoints: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: b
-      _node: {fileID: -4056299820889410286}
-      _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      connections:
-      - fieldName: beforeNode
-        node: {fileID: -4248260358971432490}
-        reroutePoints: []
-      _direction: 1
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-  beforeNode: {fileID: 0}
-  a: {fileID: 0}
-  b: {fileID: 0}
 --- !u!114 &-3595457660617559950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,7 +225,7 @@ MonoBehaviour:
   m_Name: Union
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -8, y: 120}
+  position: {x: 56, y: 232}
   ports:
     keys:
     - beforeNode
@@ -326,6 +267,65 @@ MonoBehaviour:
   beforeNode: {fileID: 0}
   nodes:
   - {fileID: 0}
+--- !u!114 &-2997539917017167258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f68e76eae9b43c540921993a7afe3415, type: 3}
+  m_Name: Smooth Union
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -653.997, y: 583.5853}
+  ports:
+    keys:
+    - beforeNode
+    - a
+    - b
+    values:
+    - _fieldName: beforeNode
+      _node: {fileID: -2997539917017167258}
+      _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: nextNode
+        node: {fileID: 5847746106835701300}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: a
+      _node: {fileID: -2997539917017167258}
+      _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: beforeNode
+        node: {fileID: -5193328190634624219}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: b
+      _node: {fileID: -2997539917017167258}
+      _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: beforeNode
+        node: {fileID: -4248260358971432490}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  beforeNode: {fileID: 0}
+  a: {fileID: 0}
+  b: {fileID: 0}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -349,9 +349,11 @@ MonoBehaviour:
   - {fileID: 2361971784800829831}
   - {fileID: 9009729064024884454}
   - {fileID: 4964473034139439770}
-  - {fileID: -4056299820889410286}
   - {fileID: -5193328190634624219}
   - {fileID: -4248260358971432490}
+  - {fileID: 5844612836183456004}
+  - {fileID: 2780256814338374943}
+  - {fileID: -2997539917017167258}
   current: {fileID: 5847746106835701300}
 --- !u!114 &81739764399213851
 MonoBehaviour:
@@ -547,6 +549,57 @@ MonoBehaviour:
   beforeNode: {fileID: 0}
   aNodes: {fileID: 0}
   bNodes: {fileID: 0}
+--- !u!114 &2780256814338374943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c62871fd47745f741a0d5902e3769c57, type: 3}
+  m_Name: Repeat
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -728, y: 712}
+  ports:
+    keys:
+    - beforeNode
+    - interval
+    - node
+    values:
+    - _fieldName: beforeNode
+      _node: {fileID: 2780256814338374943}
+      _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: interval
+      _node: {fileID: 2780256814338374943}
+      _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: node
+      _node: {fileID: 2780256814338374943}
+      _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  beforeNode: {fileID: 0}
+  interval: 1
+  plane: 0
+  node: {fileID: 0}
 --- !u!114 &4964473034139439770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -560,7 +613,7 @@ MonoBehaviour:
   m_Name: Box
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -136, y: 296}
+  position: {x: -72, y: 408}
   ports:
     keys:
     - p
@@ -600,6 +653,57 @@ MonoBehaviour:
   beforeNode: {fileID: 0}
   p: {x: 0, y: 0, z: 0}
   b: {x: 0.2, y: 1, z: 1}
+--- !u!114 &5844612836183456004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19e541bba2a188f4a84c6f3718ee6d55, type: 3}
+  m_Name: Math
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -263.5, y: -17}
+  ports:
+    keys:
+    - a
+    - b
+    - result
+    values:
+    - _fieldName: a
+      _node: {fileID: 5844612836183456004}
+      _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: b
+      _node: {fileID: 5844612836183456004}
+      _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: result
+      _node: {fileID: 5844612836183456004}
+      _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  a: 0
+  b: 0
+  result: 0
+  mathType: 0
 --- !u!114 &5847746106835701300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -613,7 +717,7 @@ MonoBehaviour:
   m_Name: Head
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -936, y: 488}
+  position: {x: -952, y: 520}
   ports:
     keys:
     - nextNode
@@ -624,7 +728,7 @@ MonoBehaviour:
         PublicKeyToken=null
       connections:
       - fieldName: beforeNode
-        node: {fileID: -4056299820889410286}
+        node: {fileID: -2997539917017167258}
         reroutePoints: []
       _direction: 1
       _connectionType: 1
@@ -644,7 +748,7 @@ MonoBehaviour:
   m_Name: Round Box
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 248, y: 152}
+  position: {x: 312, y: 264}
   ports:
     keys:
     - p

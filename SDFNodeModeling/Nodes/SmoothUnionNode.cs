@@ -1,8 +1,8 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 namespace SDF.Controll
 {
-    public class BlendingNode : SDFNode
+    public class SmoothUnionNode: SDFNode
     {
         [Input(backingValue = ShowBackingValue.Never)] public SDFNode beforeNode;
         [Output] public SDFNode a;
