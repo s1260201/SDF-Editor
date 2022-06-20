@@ -68,7 +68,7 @@ Shader "SDFE/Sample"
                 return x - y * floor(x / y);
             }
 
-			float repeat(float2 p, float2 interval){
+			float2 repeat(float2 p, float2 interval){
 				return mod(p, interval) - interval * 0.5;
 			}
 
@@ -106,10 +106,11 @@ Shader "SDFE/Sample"
 			float getSdf(float3 pos){
 				
 				float dist = 0;
-float dist0 = sdBox(float3(pos.x - 0, pos.y -  0, pos.z - 0), float3(1,1,1));
-float dist1 = sdSphere(float3(pos.x - 0, pos.y -  1, pos.z - 0), 1);
-float dist2 = smin(dist1, dist0);
-dist = dist2;
+pos.xz = repeat(pos.xz, 10);
+float dist1 = sdBox(float3(pos.x - 0, pos.y -  0, pos.z - 0), float3(1,1,1));
+float dist2 = sdSphere(float3(pos.x - 0, pos.y -  1, pos.z - 0), 1);
+float dist3 = smin(dist2, dist1);
+dist = dist3;
 				return dist;
 			}
 			float3 getNormal(float3 pos) {

@@ -280,7 +280,7 @@ MonoBehaviour:
   m_Name: Smooth Union
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -653.997, y: 583.5853}
+  position: {x: -600, y: 744}
   ports:
     keys:
     - beforeNode
@@ -292,8 +292,8 @@ MonoBehaviour:
       _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
       connections:
-      - fieldName: nextNode
-        node: {fileID: 5847746106835701300}
+      - fieldName: node
+        node: {fileID: 2780256814338374943}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
@@ -562,7 +562,7 @@ MonoBehaviour:
   m_Name: Repeat
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -728, y: 712}
+  position: {x: -840, y: 696}
   ports:
     keys:
     - beforeNode
@@ -573,7 +573,10 @@ MonoBehaviour:
       _node: {fileID: 2780256814338374943}
       _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
-      connections: []
+      connections:
+      - fieldName: nextNode
+        node: {fileID: 5847746106835701300}
+        reroutePoints: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
@@ -591,14 +594,17 @@ MonoBehaviour:
       _node: {fileID: 2780256814338374943}
       _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
-      connections: []
+      connections:
+      - fieldName: beforeNode
+        node: {fileID: -2997539917017167258}
+        reroutePoints: []
       _direction: 1
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
   beforeNode: {fileID: 0}
-  interval: 1
-  plane: 0
+  interval: 10
+  plane: 2
   node: {fileID: 0}
 --- !u!114 &4964473034139439770
 MonoBehaviour:
@@ -717,7 +723,7 @@ MonoBehaviour:
   m_Name: Head
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -952, y: 520}
+  position: {x: -984, y: 536}
   ports:
     keys:
     - nextNode
@@ -728,7 +734,7 @@ MonoBehaviour:
         PublicKeyToken=null
       connections:
       - fieldName: beforeNode
-        node: {fileID: -2997539917017167258}
+        node: {fileID: 2780256814338374943}
         reroutePoints: []
       _direction: 1
       _connectionType: 1

@@ -129,7 +129,7 @@ namespace SDF
                             {
                                 RepeatNode obj = (RepeatNode)popNode;
                                 Debug.Log("Write a RepeatNode");
-                                streamWriter.WriteLine("float dist" + i + " = repeat(pos." + obj.plane + ", " + obj.interval + ");");
+                                streamWriter.WriteLine("pos." + obj.plane + " = repeat(pos." + obj.plane + ", " + obj.interval + ");");
                             }
                             else
                             {
@@ -196,6 +196,26 @@ namespace SDF
                         }
                     }
                 }
+            }
+            else if (node is RepeatNode)
+            {
+                nodeQ.Enqueue(node);
+                foreach (NodePort p in node.Ports)
+                {
+                    if (p.fieldName == "node")
+                    {
+                        try
+                        {
+                            NextNode(p.Connection.node as SDFNode);
+                            break;
+                        }
+                        catch (NullReferenceException e)
+                        {
+                            Debug.LogError("Null conect");
+                        }
+                    }
+                }
+                return;
             }
             else
             {
