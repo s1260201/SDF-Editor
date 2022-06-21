@@ -129,7 +129,8 @@ namespace SDF
                             {
                                 RepeatNode obj = (RepeatNode)popNode;
                                 Debug.Log("Write a RepeatNode");
-                                streamWriter.WriteLine("pos." + obj.plane + " = repeat(pos." + obj.plane + ", " + obj.interval + ");");
+                                String repPlane = obj.RepPlane();
+                                streamWriter.WriteLine("pos." + repPlane + " = repeat(pos." + repPlane + ", " + obj.interval + ");");
                             }
                             else
                             {

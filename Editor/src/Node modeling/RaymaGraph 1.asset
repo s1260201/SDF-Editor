@@ -562,7 +562,7 @@ MonoBehaviour:
   m_Name: Repeat
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -840, y: 696}
+  position: {x: -856, y: 520}
   ports:
     keys:
     - beforeNode
@@ -604,7 +604,9 @@ MonoBehaviour:
       _dynamic: 0
   beforeNode: {fileID: 0}
   interval: 10
-  plane: 2
+  x: 1
+  y: 0
+  z: 0
   node: {fileID: 0}
 --- !u!114 &4964473034139439770
 MonoBehaviour:
@@ -723,7 +725,7 @@ MonoBehaviour:
   m_Name: Head
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -984, y: 536}
+  position: {x: -1112, y: 536}
   ports:
     keys:
     - nextNode

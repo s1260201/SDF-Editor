@@ -68,7 +68,20 @@
                 return x - y * floor(x / y);
             }
 
+			float3 mod(float3 x, float3 y)
+            {
+                return x - y * floor(x / y);
+            }
+
+			float repeat(float p, float interval){
+				return mod(p, interval) - interval * 0.5;
+			}
+
 			float2 repeat(float2 p, float2 interval){
+				return mod(p, interval) - interval * 0.5;
+			}
+
+			float3 repeat(float3 p, float3 interval){
 				return mod(p, interval) - interval * 0.5;
 			}
 
