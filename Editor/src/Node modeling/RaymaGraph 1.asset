@@ -326,6 +326,70 @@ MonoBehaviour:
   beforeNode: {fileID: 0}
   a: {fileID: 0}
   b: {fileID: 0}
+--- !u!114 &-254619815474975211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f077a359abc96b34891c710bc4bc5bd9, type: 3}
+  m_Name: Capsule
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -888, y: 872}
+  ports:
+    keys:
+    - p
+    - h
+    - r
+    - beforeNode
+    values:
+    - _fieldName: p
+      _node: {fileID: -254619815474975211}
+      _typeQualifiedName: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: h
+      _node: {fileID: -254619815474975211}
+      _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: r
+      _node: {fileID: -254619815474975211}
+      _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: beforeNode
+      _node: {fileID: -254619815474975211}
+      _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: nextNode
+        node: {fileID: 5847746106835701300}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  beforeNode: {fileID: 0}
+  p: {x: 0, y: 0, z: 0}
+  h: 4
+  r: 2
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -354,6 +418,7 @@ MonoBehaviour:
   - {fileID: 5844612836183456004}
   - {fileID: 2780256814338374943}
   - {fileID: -2997539917017167258}
+  - {fileID: -254619815474975211}
   current: {fileID: 5847746106835701300}
 --- !u!114 &81739764399213851
 MonoBehaviour:
@@ -573,10 +638,7 @@ MonoBehaviour:
       _node: {fileID: 2780256814338374943}
       _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
-      connections:
-      - fieldName: nextNode
-        node: {fileID: 5847746106835701300}
-        reroutePoints: []
+      connections: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
@@ -606,7 +668,7 @@ MonoBehaviour:
   interval: 10
   x: 1
   y: 0
-  z: 0
+  z: 1
   node: {fileID: 0}
 --- !u!114 &4964473034139439770
 MonoBehaviour:
@@ -725,7 +787,7 @@ MonoBehaviour:
   m_Name: Head
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -1112, y: 536}
+  position: {x: -1192, y: 856}
   ports:
     keys:
     - nextNode
@@ -736,7 +798,7 @@ MonoBehaviour:
         PublicKeyToken=null
       connections:
       - fieldName: beforeNode
-        node: {fileID: 2780256814338374943}
+        node: {fileID: -254619815474975211}
         reroutePoints: []
       _direction: 1
       _connectionType: 1

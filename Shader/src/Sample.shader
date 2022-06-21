@@ -98,6 +98,18 @@
 				return length(p) - r;
 			}
 
+			float sdCone(float3 p, float2 c, float h )
+			{
+				float q = length(p.xz);
+				return max(dot(c.xy,float2(q,p.y)),-h-p.y);
+			}
+
+			float sdVerticalCapsule( float3 p, float h, float r )
+			{
+				p.y -= clamp( p.y, 0.0, h );
+				return length( p ) - r;
+			}
+
 			// *Box
 			float sdBox(float3 p, float3 b){
 				float3 q = abs(p) - b;

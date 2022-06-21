@@ -98,6 +98,18 @@ Shader "SDFE/Sample"
 				return length(p) - r;
 			}
 
+			float sdCone(float3 p, float2 c, float h )
+			{
+				float q = length(p.xz);
+				return max(dot(c.xy,float2(q,p.y)),-h-p.y);
+			}
+
+			float sdVerticalCapsule( float3 p, float h, float r )
+			{
+				p.y -= clamp( p.y, 0.0, h );
+				return length( p ) - r;
+			}
+
 			// *Box
 			float sdBox(float3 p, float3 b){
 				float3 q = abs(p) - b;
@@ -119,11 +131,8 @@ Shader "SDFE/Sample"
 			float getSdf(float3 pos){
 				
 				float dist = 0;
-pos.x = repeat(pos.x, 10);
-float dist1 = sdBox(float3(pos.x - 0, pos.y -  0, pos.z - 0), float3(1,1,1));
-float dist2 = sdSphere(float3(pos.x - 0, pos.y -  1, pos.z - 0), 1);
-float dist3 = smin(dist2, dist1);
-dist = dist3;
+float dist0 = sdVerticalCapsule(float3(pos.x - 0,pos.y - 0,pos.z - 0),4,2);
+dist = dist0;
 				return dist;
 			}
 			float3 getNormal(float3 pos) {

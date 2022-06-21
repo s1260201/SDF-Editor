@@ -120,17 +120,34 @@ namespace SDF
                                 TorusNode obj = (TorusNode)popNode;
                                 Debug.Log("Write a TorusNode");
                                 streamWriter.WriteLine("float dist" + i + " = sdTorus(float3(pos.x - " + obj.p.x + ", pos.y -  " + obj.p.y + ", pos.z - " + obj.p.z + "), float2(" + obj.t.x + ", " + obj.t.y + "));");
-                            }else if(popNode is SmoothUnionNode)
+                            }
+                            else if (popNode is SmoothUnionNode)
                             {
                                 SmoothUnionNode obj = (SmoothUnionNode)popNode;
                                 Debug.Log("Write a SmoothUnionNode");
                                 streamWriter.WriteLine("float dist" + i + " = smin(dist" + taskStack.Pop() + ", dist" + taskStack.Pop() + ");");
-                            }else if(popNode is RepeatNode)
+                            }
+                            else if (popNode is RepeatNode)
                             {
                                 RepeatNode obj = (RepeatNode)popNode;
                                 Debug.Log("Write a RepeatNode");
                                 String repPlane = obj.RepPlane();
+                                //streamWriter.WriteLine("float3 rp = pos;");
                                 streamWriter.WriteLine("pos." + repPlane + " = repeat(pos." + repPlane + ", " + obj.interval + ");");
+                            }
+                            /*
+                            else if (popNode is ConeNode)
+                            {
+                                ConeNode obj = (ConeNode)popNode;
+                                Debug.Log("Write a ConeNode");
+                                streamWriter.WriteLine("float dist" + i + " = sdCone(float3(pos.x - " + obj.p.x + ",pos.y - " + obj.p.y + ",pos.z - " + obj.p.z + "),float2(" + obj.c.x + "," + obj.c.y + ")," + obj.h + ");");
+                            }
+                            */
+                            else if(popNode is CapsuleNode)
+                            {
+                                CapsuleNode obj = (CapsuleNode)popNode;
+                                Debug.Log("Write a CapsuleNode");
+                                streamWriter.WriteLine("float dist" + i + " = sdVerticalCapsule(float3(pos.x - " + obj.p.x + ",pos.y - " + obj.p.y + ",pos.z - " + obj.p.z + ")," + obj.h + "," + obj.r + ");");
                             }
                             else
                             {
