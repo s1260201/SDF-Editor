@@ -135,14 +135,15 @@ namespace SDF
                                 //streamWriter.WriteLine("float3 rp = pos;");
                                 streamWriter.WriteLine("pos." + repPlane + " = repeat(pos." + repPlane + ", " + obj.interval + ");");
                             }
-                            /*
+                            
                             else if (popNode is ConeNode)
                             {
                                 ConeNode obj = (ConeNode)popNode;
                                 Debug.Log("Write a ConeNode");
-                                streamWriter.WriteLine("float dist" + i + " = sdCone(float3(pos.x - " + obj.p.x + ",pos.y - " + obj.p.y + ",pos.z - " + obj.p.z + "),float2(" + obj.c.x + "," + obj.c.y + ")," + obj.h + ");");
+                                Vector2 c = obj.triangle(obj.angle);
+                                streamWriter.WriteLine("float dist" + i + " = sdCone(float3(pos.x - " + obj.p.x + ",pos.y - " + obj.p.y + ",pos.z - " + obj.p.z + "),float2(" + c.x + "," + c.y + ")," + obj.h + ");");
                             }
-                            */
+                            
                             else if(popNode is CapsuleNode)
                             {
                                 CapsuleNode obj = (CapsuleNode)popNode;
