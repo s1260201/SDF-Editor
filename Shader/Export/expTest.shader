@@ -131,7 +131,7 @@ Shader "SDFE/Sample"
 			float getSdf(float3 pos){
 				
 				float dist = 0;
-float dist0 = sdCone(float3(pos.x - 0,pos.y - 0,pos.z - 0),float2(0.9659258,0.258819),3);
+float dist0 = sdSphere(float3(pos.x - 0, pos.y -  0, pos.z - 0), 1);
 dist = dist0;
 				return dist;
 			}

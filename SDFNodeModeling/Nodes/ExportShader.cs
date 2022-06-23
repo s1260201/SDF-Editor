@@ -58,6 +58,9 @@ namespace SDF
 
 
                             Debug.Log(i);
+                            streamWriter.WriteLine(popNode.calcsd(i));
+                            
+                            /*
                             if (popNode is SphereNode)
                             {
                                 SphereNode obj = (SphereNode)popNode;
@@ -155,6 +158,7 @@ namespace SDF
                                 Debug.LogError("Selected an unknown Node.");
                                 break;
                             }
+                            */
 
                             streamWriter.Flush();
                             Debug.Log("Flush!");

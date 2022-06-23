@@ -314,10 +314,7 @@ MonoBehaviour:
       _node: {fileID: -3669577284964080706}
       _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
-      connections:
-      - fieldName: nextNode
-        node: {fileID: 5847746106835701300}
-        reroutePoints: []
+      connections: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0
@@ -533,6 +530,7 @@ MonoBehaviour:
   - {fileID: -3669577284964080706}
   - {fileID: 2662300360053850600}
   - {fileID: -6884204389150311394}
+  - {fileID: 875342668777130429}
   current: {fileID: 5847746106835701300}
 --- !u!114 &81739764399213851
 MonoBehaviour:
@@ -672,6 +670,59 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+--- !u!114 &875342668777130429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 771584de7e4c8fd4c8f66a9b98e08d36, type: 3}
+  m_Name: Sphere
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -1089.4978, y: 1139.6958}
+  ports:
+    keys:
+    - p
+    - s
+    - beforeNode
+    values:
+    - _fieldName: p
+      _node: {fileID: 875342668777130429}
+      _typeQualifiedName: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: s
+      _node: {fileID: 875342668777130429}
+      _typeQualifiedName: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      connections: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: beforeNode
+      _node: {fileID: 875342668777130429}
+      _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: nextNode
+        node: {fileID: 5847746106835701300}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  beforeNode: {fileID: 0}
+  p: {x: 0, y: 0, z: 0}
+  s: 1
 --- !u!114 &2361971784800829831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -965,7 +1016,7 @@ MonoBehaviour:
   m_Name: Head
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -1320, y: 936}
+  position: {x: -1384, y: 1000}
   ports:
     keys:
     - nextNode
@@ -976,7 +1027,7 @@ MonoBehaviour:
         PublicKeyToken=null
       connections:
       - fieldName: beforeNode
-        node: {fileID: -3669577284964080706}
+        node: {fileID: 875342668777130429}
         reroutePoints: []
       _direction: 1
       _connectionType: 1

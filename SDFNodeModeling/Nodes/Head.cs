@@ -1,3 +1,4 @@
+using UnityEngine;
 namespace SDF.Controll
 {
     public class Head : SDFNode
@@ -7,5 +8,12 @@ namespace SDF.Controll
         public Shadow shadow = Shadow.phong;
         public enum Shadow { phong, none}
         [Output(connectionType = ConnectionType.Override)] public SDFNode nextNode;
+
+        public override string calcsd(int i)
+        {
+            Debug.Log("Write a Head Code");
+            string str = "dist = dist" + --i + ";";
+            return str;
+        }
     }
 }
