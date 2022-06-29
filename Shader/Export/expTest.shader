@@ -85,6 +85,10 @@ Shader "SDFE/Sample"
 				return mod(p, interval) - interval * 0.5;
 			}
 
+			float2 rot(float2 p, float a){
+				return float2(p.x * cos(a) - p.y*sin(a),p.x*sin(a) + p.y*cos(a));
+			}
+
 			float smin(float a, float b) {
 				float k = 0.2;
 				float h = clamp(0.5 + 0.5 * (b - a) / k, 0,1);
@@ -131,8 +135,9 @@ Shader "SDFE/Sample"
 			float getSdf(float3 pos){
 				
 				float dist = 0;
-float dist0 = sdSphere(float3(pos.x - 0, pos.y -  0, pos.z - 0), 1);
-dist = dist0;
+pos.xy = rot(pos.xy, 45);
+float dist1 = sdBox(float3(pos.x - 0, pos.y -  0, pos.z - 0), float3(1,1,1));
+dist = dist1;
 				return dist;
 			}
 			float3 getNormal(float3 pos) {

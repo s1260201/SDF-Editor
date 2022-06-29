@@ -50,34 +50,12 @@ namespace SDF
                             }
 
                             SDFNode popNode = nodeQ.Dequeue();
-                            Debug.Log(popNode.GetType());
-
-                            if (popNode is UnionNode) Debug.Log("Union node");
-                            else if (popNode is SphereNode) Debug.Log("Sphere node");
-                            else if (popNode is BoxNode) Debug.Log("Box node");
-
 
                             Debug.Log(i);
-                            streamWriter.WriteLine(popNode.calcsd(i));
                             
-                            /*
-                            if (popNode is SphereNode)
+                            if(popNode is SDFObjNode)
                             {
-                                SphereNode obj = (SphereNode)popNode;
-                                Debug.Log("Write a sphere code.");
-                                streamWriter.WriteLine("float dist" + i + " = sdSphere(float3(pos.x - " + obj.p.x + ", pos.y -  " + obj.p.y + ", pos.z - " + obj.p.z + "), " + obj.s + ");");
-                            }
-                            else if (popNode is BoxNode)
-                            {
-                                BoxNode obj = (BoxNode)popNode;
-                                Debug.Log("Write a Box code");
-                                streamWriter.WriteLine("float dist" + i + " = sdBox(float3(pos.x - " + obj.p.x + ", pos.y -  " + obj.p.y + ", pos.z - " + obj.p.z + "), float3(" + obj.b.x + "," + obj.b.y + "," + obj.b.z + "));");
-                            }
-                            else if (popNode is RoundBoxNode)
-                            {
-                                RoundBoxNode obj = (RoundBoxNode)popNode;
-                                Debug.Log("Write a RoundBox code");
-                                streamWriter.WriteLine("float dist" + i + " = sdRoundBox(float3(pos.x - " + obj.p.x + ", pos.y -  " + obj.p.y + ", pos.z - " + obj.p.z + "), float3(" + obj.b.x + "," + obj.b.y + "," + obj.b.z + ")," + obj.r + ");");
+                                streamWriter.WriteLine(popNode.calcsd(i));
                             }
                             else if (popNode is UnionNode)
                             {
@@ -118,12 +96,6 @@ namespace SDF
                                 Debug.Log("Write a IntersectionNode");
                                 streamWriter.WriteLine("float dist" + i + " = max(dist" + taskStack.Pop() + ", dist" + taskStack.Pop() + ");");
                             }
-                            else if (popNode is TorusNode)
-                            {
-                                TorusNode obj = (TorusNode)popNode;
-                                Debug.Log("Write a TorusNode");
-                                streamWriter.WriteLine("float dist" + i + " = sdTorus(float3(pos.x - " + obj.p.x + ", pos.y -  " + obj.p.y + ", pos.z - " + obj.p.z + "), float2(" + obj.t.x + ", " + obj.t.y + "));");
-                            }
                             else if (popNode is SmoothUnionNode)
                             {
                                 SmoothUnionNode obj = (SmoothUnionNode)popNode;
@@ -137,28 +109,18 @@ namespace SDF
                                 String repPlane = obj.RepPlane();
                                 //streamWriter.WriteLine("float3 rp = pos;");
                                 streamWriter.WriteLine("pos." + repPlane + " = repeat(pos." + repPlane + ", " + obj.interval + ");");
-                            }
-                            
-                            else if (popNode is ConeNode)
+                            }else if(popNode is RotateNode)
                             {
-                                ConeNode obj = (ConeNode)popNode;
-                                Debug.Log("Write a ConeNode");
-                                Vector2 c = obj.triangle(obj.angle);
-                                streamWriter.WriteLine("float dist" + i + " = sdCone(float3(pos.x - " + obj.p.x + ",pos.y - " + obj.p.y + ",pos.z - " + obj.p.z + "),float2(" + c.x + "," + c.y + ")," + obj.h + ");");
-                            }
-                            
-                            else if(popNode is CapsuleNode)
-                            {
-                                CapsuleNode obj = (CapsuleNode)popNode;
-                                Debug.Log("Write a CapsuleNode");
-                                streamWriter.WriteLine("float dist" + i + " = sdVerticalCapsule(float3(pos.x - " + obj.p.x + ",pos.y - " + obj.p.y + ",pos.z - " + obj.p.z + ")," + obj.h + "," + obj.r + ");");
+                                RotateNode obj = (RotateNode)popNode;
+                                Debug.Log("Write a RotateNode");
+                                streamWriter.WriteLine("pos." + obj.axis + " = rot(pos." + obj.axis + ", " + obj.rotation + ");");
                             }
                             else
                             {
                                 Debug.LogError("Selected an unknown Node.");
                                 break;
                             }
-                            */
+                            
 
                             streamWriter.Flush();
                             Debug.Log("Flush!");
@@ -220,7 +182,7 @@ namespace SDF
                     }
                 }
             }
-            else if (node is RepeatNode)
+            else if (node is RepeatNode || node is RotateNode)
             {
                 nodeQ.Enqueue(node);
                 foreach (NodePort p in node.Ports)

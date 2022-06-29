@@ -85,6 +85,10 @@
 				return mod(p, interval) - interval * 0.5;
 			}
 
+			float2 rot(float2 p, float a){
+				return float2(p.x * cos(a) - p.y*sin(a),p.x*sin(a) + p.y*cos(a));
+			}
+
 			float smin(float a, float b) {
 				float k = 0.2;
 				float h = clamp(0.5 + 0.5 * (b - a) / k, 0,1);
