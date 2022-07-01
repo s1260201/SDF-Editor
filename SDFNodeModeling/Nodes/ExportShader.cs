@@ -114,6 +114,17 @@ namespace SDF
                                 RotateNode obj = (RotateNode)popNode;
                                 Debug.Log("Write a RotateNode");
                                 streamWriter.WriteLine("pos." + obj.axis + " = rot(pos." + obj.axis + ", " + obj.rotation + ");");
+                            }else if(popNode is TransformNode)
+                            {
+                                TransformNode obj = (TransformNode)popNode;
+                                Debug.Log("Write a TransformNode");
+                                streamWriter.WriteLine("pos = float3(pos.x - " + obj.nodePosition.x + ",pos.y - " + obj.nodePosition.y + ",pos.z - " + obj.nodePosition.z + ");");
+                                streamWriter.WriteLine("pos.xy = rot(pos.xy," + obj.nodeRotate.z + ");");
+                                streamWriter.WriteLine("pos.yz = rot(pos.yz," + obj.nodeRotate.x + ");");
+                                streamWriter.WriteLine("pos.xz = rot(pos.xz," + obj.nodeRotate.y + ");");
+                                streamWriter.WriteLine("pos.x *= " + 1 / obj.nodeScale.x + ";");
+                                streamWriter.WriteLine("pos.y *= " + 1 / obj.nodeScale.y + ";");
+                                streamWriter.WriteLine("pos.z *= " + 1 / obj.nodeScale.z + ";");
                             }
                             else
                             {
@@ -182,7 +193,7 @@ namespace SDF
                     }
                 }
             }
-            else if (node is RepeatNode || node is RotateNode)
+            else if (node is RepeatNode || node is RotateNode || node is TransformNode)
             {
                 nodeQ.Enqueue(node);
                 foreach (NodePort p in node.Ports)

@@ -88,6 +88,26 @@
 			float2 rot(float2 p, float a){
 				return float2(p.x * cos(a) - p.y*sin(a),p.x*sin(a) + p.y*cos(a));
 			}
+			fixed2 random2(fixed2 st){
+            st = fixed2( dot(st,fixed2(127.1,311.7)),
+                           dot(st,fixed2(269.5,183.3)) );
+            return -1.0 + 2.0*frac(sin(st)*43758.5453123);
+        }
+			float perlinNoise(fixed2 st) 
+		    {
+            fixed2 p = floor(st);
+            fixed2 f = frac(st);
+            fixed2 u = f*f*(3.0-2.0*f);
+
+            float v00 = random2(p+fixed2(0,0));
+            float v10 = random2(p+fixed2(1,0));
+            float v01 = random2(p+fixed2(0,1));
+            float v11 = random2(p+fixed2(1,1));
+
+            return lerp( lerp( dot( v00, f - fixed2(0,0) ), dot( v10, f - fixed2(1,0) ), u.x ),
+                         lerp( dot( v01, f - fixed2(0,1) ), dot( v11, f - fixed2(1,1) ), u.x ), 
+                         u.y)+0.5f;
+	        }
 
 			float smin(float a, float b) {
 				float k = 0.2;
@@ -130,6 +150,12 @@
 			{
 				float2 q = float2(length(p.xz)-t.x,p.y);
 				return length(q)-t.y;
+			}
+
+			float sdTriPrism( float3 p, float2 h )
+			{
+				float3 q = abs(p);
+				return max(q.z-h.y,max(q.x*0.866025+p.y*0.5,-p.y)-h.x*0.5);
 			}
 
 			float getSdf(float3 pos){
@@ -187,11 +213,11 @@
 				return saturate((x * (a * x + b)) / (x * ( c * x + d) + e));
 			}
 
-			float4 rayMarch(float3 pos, float3 rayDir, int StepNum){
+			float4 rayMarch(float3 pos, float3 rayDir, int StepNum,float2 uv){
 				int fase = 0;
 				float t = 0;
 				float d = getSdf(pos);
-				float3 col = float3(0.0,0.0,0.0);
+				float3 col = float3(0,0,0);
 				float3 lightCol = float3(1,1,1);
 
 				while(fase < StepNum && abs(d) > 0.001){
@@ -202,6 +228,8 @@
 				}
 
 				if(step(StepNum,fase)){
+					//col =  * float3(1,1,1);
+					//return float4(col,perlinNoise(uv * 10));
 					return float4(col,0);
 				}else{
 					// ライティングのパラメーター
@@ -240,7 +268,8 @@
 				float3 rayDir = normalize(pos.xyz - _WorldSpaceCameraPos);
 				
 				int StepNum = 50;
-				float4 col = rayMarch(pos,rayDir,StepNum);
+				float4 col = rayMarch(pos,rayDir,StepNum,i.uv);
+				
 				return col;
 			}
 			ENDCG

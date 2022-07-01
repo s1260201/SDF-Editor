@@ -88,6 +88,26 @@ Shader "SDFE/Sample"
 			float2 rot(float2 p, float a){
 				return float2(p.x * cos(a) - p.y*sin(a),p.x*sin(a) + p.y*cos(a));
 			}
+			fixed2 random2(fixed2 st){
+            st = fixed2( dot(st,fixed2(127.1,311.7)),
+                           dot(st,fixed2(269.5,183.3)) );
+            return -1.0 + 2.0*frac(sin(st)*43758.5453123);
+        }
+			float perlinNoise(fixed2 st) 
+		    {
+            fixed2 p = floor(st);
+            fixed2 f = frac(st);
+            fixed2 u = f*f*(3.0-2.0*f);
+
+            float v00 = random2(p+fixed2(0,0));
+            float v10 = random2(p+fixed2(1,0));
+            float v01 = random2(p+fixed2(0,1));
+            float v11 = random2(p+fixed2(1,1));
+
+            return lerp( lerp( dot( v00, f - fixed2(0,0) ), dot( v10, f - fixed2(1,0) ), u.x ),
+                         lerp( dot( v01, f - fixed2(0,1) ), dot( v11, f - fixed2(1,1) ), u.x ), 
+                         u.y)+0.5f;
+	        }
 
 			float smin(float a, float b) {
 				float k = 0.2;
@@ -132,11 +152,23 @@ Shader "SDFE/Sample"
 				return length(q)-t.y;
 			}
 
+			float sdTriPrism( float3 p, float2 h )
+			{
+				float3 q = abs(p);
+				return max(q.z-h.y,max(q.x*0.866025+p.y*0.5,-p.y)-h.x*0.5);
+			}
+
 			float getSdf(float3 pos){
 				
 				float dist = 0;
-pos.xy = rot(pos.xy, 45);
-float dist1 = sdBox(float3(pos.x - 0, pos.y -  0, pos.z - 0), float3(1,1,1));
+pos = float3(pos.x - 0,pos.y - 0,pos.z - 0);
+pos.xy = rot(pos.xy,0);
+pos.yz = rot(pos.yz,0);
+pos.xz = rot(pos.xz,0);
+pos.x *= 1;
+pos.y *= 0.5;
+pos.z *= 1;
+float dist1 = sdSphere(float3(pos.x - 0, pos.y -  0, pos.z - 0), 1);
 dist = dist1;
 				return dist;
 			}
@@ -189,11 +221,11 @@ dist = dist1;
 				return saturate((x * (a * x + b)) / (x * ( c * x + d) + e));
 			}
 
-			float4 rayMarch(float3 pos, float3 rayDir, int StepNum){
+			float4 rayMarch(float3 pos, float3 rayDir, int StepNum,float2 uv){
 				int fase = 0;
 				float t = 0;
 				float d = getSdf(pos);
-				float3 col = float3(0.0,0.0,0.0);
+				float3 col = float3(0,0,0);
 				float3 lightCol = float3(1,1,1);
 
 				while(fase < StepNum && abs(d) > 0.001){
@@ -204,6 +236,8 @@ dist = dist1;
 				}
 
 				if(step(StepNum,fase)){
+					//col =  * float3(1,1,1);
+					//return float4(col,perlinNoise(uv * 10));
 					return float4(col,0);
 				}else{
 					// ライティングのパラメーター
@@ -242,7 +276,8 @@ dist = dist1;
 				float3 rayDir = normalize(pos.xyz - _WorldSpaceCameraPos);
 				
 				int StepNum = 50;
-				float4 col = rayMarch(pos,rayDir,StepNum);
+				float4 col = rayMarch(pos,rayDir,StepNum,i.uv);
+				
 				return col;
 			}
 			ENDCG
