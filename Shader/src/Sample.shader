@@ -52,9 +52,13 @@
 				v2f o;
 				o.vertex = UnityObjectToClipPos(v.vertex);
                                 //ローカル→ワールド座標に変換
+				//o.vertex = float4(v.vertex.xy * 2.0, 0.5,1.0);
 				o.pos = mul(unity_ObjectToWorld, v.vertex);
 				o.uv = v.uv;
 				//o.normal = UnityObjectToWorldNormal(v.normal);
+				#if UNITY_UV_STARTS_AT_TOP
+					o.uv.y = 1 - o.uv.y;
+				#endif
 				return o;
 			}
 
@@ -159,7 +163,7 @@
 			}
 
 			float getSdf(float3 pos){
-				
+				float3 original_pos = pos;
 				float dist = 0;
 				// SDF
 				return dist;

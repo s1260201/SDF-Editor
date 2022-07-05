@@ -118,6 +118,7 @@ namespace SDF
                             {
                                 TransformNode obj = (TransformNode)popNode;
                                 Debug.Log("Write a TransformNode");
+                                streamWriter.WriteLine("pos = original_pos;");
                                 streamWriter.WriteLine("pos = float3(pos.x - " + obj.nodePosition.x + ",pos.y - " + obj.nodePosition.y + ",pos.z - " + obj.nodePosition.z + ");");
                                 streamWriter.WriteLine("pos.xy = rot(pos.xy," + obj.nodeRotate.z + ");");
                                 streamWriter.WriteLine("pos.yz = rot(pos.yz," + obj.nodeRotate.x + ");");
@@ -135,8 +136,11 @@ namespace SDF
 
                             streamWriter.Flush();
                             Debug.Log("Flush!");
-                            taskStack.Push(i); // ControllNodeà»â∫Ç…Ç†ÇÈObjNodeÇÃî‘çÜiÇì¸ÇÍÇƒÇ®Ç≠ÅB
-                            i++;
+                            if (popNode is not TransformNode)
+                            {
+                                taskStack.Push(i); // ControllNodeà»â∫Ç…Ç†ÇÈObjNodeÇÃî‘çÜiÇì¸ÇÍÇƒÇ®Ç≠ÅB
+                                i++;
+                            }
                         }
                         Debug.Log("Clear");
                     }
@@ -203,7 +207,6 @@ namespace SDF
                         try
                         {
                             NextNode(p.Connection.node as SDFNode);
-                            break;
                         }
                         catch (NullReferenceException e)
                         {

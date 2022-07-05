@@ -52,9 +52,13 @@ Shader "SDFE/Sample"
 				v2f o;
 				o.vertex = UnityObjectToClipPos(v.vertex);
                                 //ローカル→ワールド座標に変換
+				//o.vertex = float4(v.vertex.xy * 2.0, 0.5,1.0);
 				o.pos = mul(unity_ObjectToWorld, v.vertex);
 				o.uv = v.uv;
 				//o.normal = UnityObjectToWorldNormal(v.normal);
+				#if UNITY_UV_STARTS_AT_TOP
+					o.uv.y = 1 - o.uv.y;
+				#endif
 				return o;
 			}
 
@@ -159,17 +163,28 @@ Shader "SDFE/Sample"
 			}
 
 			float getSdf(float3 pos){
-				
+				float3 original_pos = pos;
 				float dist = 0;
-pos = float3(pos.x - 0,pos.y - 0,pos.z - 0);
+pos = original_pos;
+pos = float3(pos.x - 0,pos.y - 1,pos.z - 0);
 pos.xy = rot(pos.xy,0);
 pos.yz = rot(pos.yz,0);
 pos.xz = rot(pos.xz,0);
 pos.x *= 1;
-pos.y *= 0.5;
+pos.y *= 1;
+pos.z *= 0.2;
+float dist0 = sdSphere(float3(pos.x - 0, pos.y -  0, pos.z - 0), 1);
+pos = original_pos;
+pos = float3(pos.x - 0,pos.y - 0,pos.z - 0);
+pos.xy = rot(pos.xy,0);
+pos.yz = rot(pos.yz,0);
+pos.xz = rot(pos.xz,0);
+pos.x *= 0.2;
+pos.y *= 1;
 pos.z *= 1;
-float dist1 = sdSphere(float3(pos.x - 0, pos.y -  0, pos.z - 0), 1);
-dist = dist1;
+float dist1 = sdBox(float3(pos.x - 0, pos.y -  0, pos.z - 0), float3(1,1,1));
+float dist2 = min(dist1,dist0);
+dist = dist2;
 				return dist;
 			}
 			float3 getNormal(float3 pos) {
