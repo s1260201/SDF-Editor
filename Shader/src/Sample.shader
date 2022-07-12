@@ -115,9 +115,16 @@
 
 			float smin(float a, float b) {
 				float k = 0.2;
-				float h = clamp(0.5 + 0.5 * (b - a) / k, 0,1);
+				//float h = clamp(0.5 + 0.5 * (b - a) / k, 0,1);
+				float h = saturate(0.5 + 0.5 * (b - a) / k);
 				//return mix(b, a, h) - k * h * (1 - h); 
 				return lerp(b,a,h) - k * h * (1 - h);
+			}
+
+			float sdCylinder( float3 p, float h, float r )
+			{
+				float2 d = abs(float2(length(p.xz),p.y)) - float2(h,r);
+				return min(max(d.x,d.y),0.0) + length(max(d,0.0));
 			}
 
 			// *Sphere

@@ -1,6 +1,8 @@
 using UnityEngine;
+
 namespace SDF.Controll
 {
+    [NodeWidth(250)]
     public class Head : SDFNode
     {
         public Noise noise = Noise.none;

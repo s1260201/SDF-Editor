@@ -115,9 +115,16 @@ Shader "SDFE/Sample"
 
 			float smin(float a, float b) {
 				float k = 0.2;
-				float h = clamp(0.5 + 0.5 * (b - a) / k, 0,1);
+				//float h = clamp(0.5 + 0.5 * (b - a) / k, 0,1);
+				float h = saturate(0.5 + 0.5 * (b - a) / k);
 				//return mix(b, a, h) - k * h * (1 - h); 
 				return lerp(b,a,h) - k * h * (1 - h);
+			}
+
+			float sdCylinder( float3 p, float h, float r )
+			{
+				float2 d = abs(float2(length(p.xz),p.y)) - float2(h,r);
+				return min(max(d.x,d.y),0.0) + length(max(d,0.0));
 			}
 
 			// *Sphere
@@ -166,25 +173,15 @@ Shader "SDFE/Sample"
 				float3 original_pos = pos;
 				float dist = 0;
 pos = original_pos;
-pos = float3(pos.x - 0,pos.y - 1,pos.z - 0);
-pos.xy = rot(pos.xy,0);
-pos.yz = rot(pos.yz,0);
-pos.xz = rot(pos.xz,0);
-pos.x *= 1;
-pos.y *= 1;
-pos.z *= 0.2;
-float dist0 = sdSphere(float3(pos.x - 0, pos.y -  0, pos.z - 0), 1);
-pos = original_pos;
 pos = float3(pos.x - 0,pos.y - 0,pos.z - 0);
 pos.xy = rot(pos.xy,0);
 pos.yz = rot(pos.yz,0);
-pos.xz = rot(pos.xz,0);
+pos.xz = rot(pos.xz,45);
 pos.x *= 0.2;
 pos.y *= 1;
 pos.z *= 1;
-float dist1 = sdBox(float3(pos.x - 0, pos.y -  0, pos.z - 0), float3(1,1,1));
-float dist2 = min(dist1,dist0);
-dist = dist2;
+float dist0 = sdBox(float3(pos.x - 0, pos.y -  0, pos.z - 0), float3(1,1,1));
+dist = dist0;
 				return dist;
 			}
 			float3 getNormal(float3 pos) {

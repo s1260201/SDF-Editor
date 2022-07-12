@@ -7,9 +7,9 @@ namespace SDF.Controll
     public class TransformNode : SDFNode
     {
         [Input] public SDFNode beforeNode;
-        [Input] public Vector3 nodePosition;
-        [Input] public Vector3 nodeRotate;
-        [Input] public Vector3 nodeScale = new Vector3(1, 1, 1);
+        public Vector3 nodePosition;
+        public Vector3 nodeRotate;
+        public Vector3 nodeScale = new Vector3(1, 1, 1);
         [Output] public SDFNode node;
 
         public Vector3 calcPos(Vector3 pos)

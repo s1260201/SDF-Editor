@@ -102,6 +102,14 @@ namespace SDF
                                 Debug.Log("Write a SmoothUnionNode");
                                 streamWriter.WriteLine("float dist" + i + " = smin(dist" + taskStack.Pop() + ", dist" + taskStack.Pop() + ");");
                             }
+                            /*
+                            else if (popNode is SmoothIntersectionNode)
+                            {
+                                SmoothIntersectionNode obj = (SmoothIntersectionNode)popNode;
+                                Debug.Log("Write a SmoothIntersectionNode");
+                                streamWriter.WriteLine("float dist" + i + " = smin(dist" + taskStack.Pop() + ", dist" + taskStack.Pop() + ");");
+                            }
+                            */
                             else if (popNode is RepeatNode)
                             {
                                 RepeatNode obj = (RepeatNode)popNode;
@@ -216,6 +224,10 @@ namespace SDF
                 }
                 return;
             }
+            else if(node is SDFObjNode)
+            {
+
+            }
             else
             {
                 foreach (NodePort p in node.Ports)
@@ -233,9 +245,6 @@ namespace SDF
                     }
                 }
             }
-            if (node is UnionNode) Debug.Log("Union node");
-            else if (node is SphereNode) Debug.Log("Sphere node");
-            else if (node is BoxNode) Debug.Log("Box node");
             nodeQ.Enqueue(node);
 
         }
