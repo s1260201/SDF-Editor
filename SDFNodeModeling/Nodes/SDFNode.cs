@@ -5,9 +5,15 @@ namespace SDF
 {
     public class SDFNode : Node
     {
-
-
-        public virtual string calcsd(int i) {
+        public virtual string CalcOpe()
+        {
+            return "";
+        }
+        public virtual string CalcOpe(int i)
+        {
+            return "";
+        }
+        public virtual string Calcsd(int i) {
             return "";
         }
     }

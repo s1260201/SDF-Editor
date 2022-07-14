@@ -83,28 +83,8 @@ MonoBehaviour:
   position: {x: -440, y: 376}
   ports:
     keys:
-    - p
-    - b
     - beforeNode
     values:
-    - _fieldName: p
-      _node: {fileID: -7233205041560905841}
-      _typeQualifiedName: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      connections: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: b
-      _node: {fileID: -7233205041560905841}
-      _typeQualifiedName: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      connections: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
     - _fieldName: beforeNode
       _node: {fileID: -7233205041560905841}
       _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
@@ -176,6 +156,40 @@ MonoBehaviour:
   beforeNode: {fileID: 0}
   a: {fileID: 0}
   b: {fileID: 0}
+--- !u!114 &-6125906142334552083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eed48816539da9b4ba663bf7b9c7e6bb, type: 3}
+  m_Name: Menger Sponge
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -1048, y: 440}
+  ports:
+    keys:
+    - beforeNode
+    values:
+    - _fieldName: beforeNode
+      _node: {fileID: -6125906142334552083}
+      _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: nextNode
+        node: {fileID: 429305641501491868}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  beforeNode: {fileID: 0}
+  p: {x: 0, y: 0, z: 0}
+  b: {x: 1, y: 1, z: 1}
+  scale: 5
 --- !u!114 &-5780004997850417337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -192,28 +206,8 @@ MonoBehaviour:
   position: {x: -573.10626, y: 603.59485}
   ports:
     keys:
-    - p
-    - b
     - beforeNode
     values:
-    - _fieldName: p
-      _node: {fileID: -5780004997850417337}
-      _typeQualifiedName: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      connections: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
-    - _fieldName: b
-      _node: {fileID: -5780004997850417337}
-      _typeQualifiedName: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      connections: []
-      _direction: 0
-      _connectionType: 0
-      _typeConstraint: 0
-      _dynamic: 0
     - _fieldName: beforeNode
       _node: {fileID: -5780004997850417337}
       _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
@@ -303,6 +297,7 @@ MonoBehaviour:
   - {fileID: -5780004997850417337}
   - {fileID: 1941911077891626955}
   - {fileID: 3870723025392802564}
+  - {fileID: -6125906142334552083}
   current: {fileID: 0}
 --- !u!114 &429305641501491868
 MonoBehaviour:
@@ -317,7 +312,7 @@ MonoBehaviour:
   m_Name: Head
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -1144, y: 248}
+  position: {x: -1416, y: 472}
   ports:
     keys:
     - nextNode
@@ -328,7 +323,7 @@ MonoBehaviour:
         PublicKeyToken=null
       connections:
       - fieldName: beforeNode
-        node: {fileID: 6500762854110367739}
+        node: {fileID: -6125906142334552083}
         reroutePoints: []
       _direction: 1
       _connectionType: 1
@@ -566,7 +561,7 @@ MonoBehaviour:
   m_Name: Transform
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -776, y: 296}
+  position: {x: -792, y: 312}
   ports:
     keys:
     - beforeNode
@@ -576,10 +571,7 @@ MonoBehaviour:
       _node: {fileID: 6500762854110367739}
       _typeQualifiedName: SDF.SDFNode, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
-      connections:
-      - fieldName: nextNode
-        node: {fileID: 429305641501491868}
-        reroutePoints: []
+      connections: []
       _direction: 0
       _connectionType: 0
       _typeConstraint: 0

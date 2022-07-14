@@ -18,7 +18,7 @@ namespace SDF.Model
 			return new Vector2(sin, cos);
 		}
 
-		public override string calcsd(int i)
+		public override string Calcsd(int i)
         {
 			Debug.Log("Write a ConeNode");
 			Vector2 c = this.triangle(this.angle);

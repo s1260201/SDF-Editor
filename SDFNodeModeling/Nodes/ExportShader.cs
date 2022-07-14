@@ -18,7 +18,6 @@ namespace SDF
         [SerializeField] string writePath = "Assets/Shader/Export/Sample1.shader";
 
         Queue<SDFNode> nodeQ = new Queue<SDFNode>();
-        List<SDFNode> taskList = new List<SDFNode>();
 
         public void OutputShader()
         {
@@ -55,7 +54,11 @@ namespace SDF
                             
                             if(popNode is SDFObjNode)
                             {
-                                streamWriter.WriteLine(popNode.calcsd(i));
+                                streamWriter.WriteLine(popNode.Calcsd(i));
+                            }
+                            else if(popNode is SDFOperate)
+                            {
+                                streamWriter.WriteLine(popNode.CalcOpe());
                             }
                             else if (popNode is UnionNode)
                             {
@@ -102,14 +105,6 @@ namespace SDF
                                 Debug.Log("Write a SmoothUnionNode");
                                 streamWriter.WriteLine("float dist" + i + " = smin(dist" + taskStack.Pop() + ", dist" + taskStack.Pop() + ");");
                             }
-                            /*
-                            else if (popNode is SmoothIntersectionNode)
-                            {
-                                SmoothIntersectionNode obj = (SmoothIntersectionNode)popNode;
-                                Debug.Log("Write a SmoothIntersectionNode");
-                                streamWriter.WriteLine("float dist" + i + " = smin(dist" + taskStack.Pop() + ", dist" + taskStack.Pop() + ");");
-                            }
-                            */
                             else if (popNode is RepeatNode)
                             {
                                 RepeatNode obj = (RepeatNode)popNode;
@@ -117,23 +112,6 @@ namespace SDF
                                 String repPlane = obj.RepPlane();
                                 //streamWriter.WriteLine("float3 rp = pos;");
                                 streamWriter.WriteLine("pos." + repPlane + " = repeat(pos." + repPlane + ", " + obj.interval + ");");
-                            }else if(popNode is RotateNode)
-                            {
-                                RotateNode obj = (RotateNode)popNode;
-                                Debug.Log("Write a RotateNode");
-                                streamWriter.WriteLine("pos." + obj.axis + " = rot(pos." + obj.axis + ", " + obj.rotation + ");");
-                            }else if(popNode is TransformNode)
-                            {
-                                TransformNode obj = (TransformNode)popNode;
-                                Debug.Log("Write a TransformNode");
-                                streamWriter.WriteLine("pos = original_pos;");
-                                streamWriter.WriteLine("pos = float3(pos.x - " + obj.nodePosition.x + ",pos.y - " + obj.nodePosition.y + ",pos.z - " + obj.nodePosition.z + ");");
-                                streamWriter.WriteLine("pos.xy = rot(pos.xy," + obj.nodeRotate.z + ");");
-                                streamWriter.WriteLine("pos.yz = rot(pos.yz," + obj.nodeRotate.x + ");");
-                                streamWriter.WriteLine("pos.xz = rot(pos.xz," + obj.nodeRotate.y + ");");
-                                streamWriter.WriteLine("pos.x *= " + 1 / obj.nodeScale.x + ";");
-                                streamWriter.WriteLine("pos.y *= " + 1 / obj.nodeScale.y + ";");
-                                streamWriter.WriteLine("pos.z *= " + 1 / obj.nodeScale.z + ";");
                             }
                             else
                             {

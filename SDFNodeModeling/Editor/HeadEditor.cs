@@ -13,10 +13,12 @@ public class HeadEditor : NodeEditor
     {
         if (head == null) head = target as Head;
         serializedObject.Update();
+        /*
         if (GUILayout.Button("Export"))
         {
 
         }
+        */
         NodeEditorGUILayout.PropertyField(serializedObject.FindProperty("noise"));
         NodeEditorGUILayout.PropertyField(serializedObject.FindProperty("shadow"));
         NodeEditorGUILayout.PropertyField(serializedObject.FindProperty("nextNode"));

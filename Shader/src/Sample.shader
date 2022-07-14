@@ -169,6 +169,24 @@
 				return max(q.z-h.y,max(q.x*0.866025+p.y*0.5,-p.y)-h.x*0.5);
 			}
 
+			float sdMengerSponge(float3 p, float3 b, float scale){
+				p = p / scale;
+				float d = sdBox(p, b);
+				float s = 3.00; 
+				for (int m = 0; m < 6; m++)
+				{
+					float3 a = mod(p * s, 2.0) - 1.0;
+					s *= 3.0;
+					float3 r = abs(1.0 - 3.0 * abs(a));
+					float da = max(r.x, r.y); 
+					float db = max(r.y, r.z); 
+					float dc = max(r.z, r.x);
+					float c = (min(da, min(db, dc)) - 1.0) / s;
+					d = max(d, c);
+				}
+				return d * scale;
+			}
+
 			float getSdf(float3 pos){
 				float3 original_pos = pos;
 				float dist = 0;

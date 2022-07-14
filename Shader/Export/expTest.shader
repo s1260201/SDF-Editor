@@ -169,18 +169,28 @@ Shader "SDFE/Sample"
 				return max(q.z-h.y,max(q.x*0.866025+p.y*0.5,-p.y)-h.x*0.5);
 			}
 
+			float sdMengerSponge(float3 p, float3 b, float scale){
+				p = p / scale;
+				float d = sdBox(p, b);
+				float s = 3.00; 
+				for (int m = 0; m < 6; m++)
+				{
+					float3 a = mod(p * s, 2.0) - 1.0;
+					s *= 3.0;
+					float3 r = abs(1.0 - 3.0 * abs(a));
+					float da = max(r.x, r.y); 
+					float db = max(r.y, r.z); 
+					float dc = max(r.z, r.x);
+					float c = (min(da, min(db, dc)) - 1.0) / s;
+					d = max(d, c);
+				}
+				return d * scale;
+			}
+
 			float getSdf(float3 pos){
 				float3 original_pos = pos;
 				float dist = 0;
-pos = original_pos;
-pos = float3(pos.x - 0,pos.y - 0,pos.z - 0);
-pos.xy = rot(pos.xy,0);
-pos.yz = rot(pos.yz,0);
-pos.xz = rot(pos.xz,45);
-pos.x *= 0.2;
-pos.y *= 1;
-pos.z *= 1;
-float dist0 = sdBox(float3(pos.x - 0, pos.y -  0, pos.z - 0), float3(1,1,1));
+float dist0 = sdMengerSponge(float3(pos.x - 0, pos.y -  0, pos.z - 0), float3(1,1,1), 5);
 dist = dist0;
 				return dist;
 			}
