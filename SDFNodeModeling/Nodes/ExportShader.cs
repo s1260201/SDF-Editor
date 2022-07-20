@@ -21,7 +21,6 @@ namespace SDF
 
         public void OutputShader()
         {
-            //NextNode(sdfGraph.HeadNode());
             Stack<int> taskStack = new Stack<int>();
 
             NextNode(sdfGraph.HeadNode());
@@ -35,6 +34,7 @@ namespace SDF
                 StreamWriter streamWriter = new StreamWriter(writePath);
                 string line = null;
                 int i = 0;
+                bool transforemReset = false;
 
                 while ((line = streamReader.ReadLine()) != null)
                 {
@@ -42,6 +42,7 @@ namespace SDF
                     {
                         while (nodeQ.Count != 0)
                         {
+
                             if (i > 10)
                             {
                                 Debug.Log("i is more than 10.");
@@ -51,33 +52,36 @@ namespace SDF
                             SDFNode popNode = nodeQ.Dequeue();
 
                             Debug.Log(i);
-                            
-                            if(popNode is SDFObjNode)
+
+                            if (popNode is SDFObjNode)
                             {
-                                streamWriter.WriteLine(popNode.Calcsd(i));
+                                SDFObjNode obj = (SDFObjNode)popNode;
+                                streamWriter.WriteLine(obj.Calcsd(i));
                             }
-                            else if(popNode is SDFOperate)
+                            else if (popNode is TransformNode)
+                            {
+                                TransformNode obj = (TransformNode)popNode;
+                                if (transforemReset)
+                                {
+                                    int a = i - 1;
+                                    streamWriter.WriteLine("dist" + a + " /= " + Mathf.Max(1 / obj.nodeScale.x, 1 / obj.nodeScale.y, 1 / obj.nodeScale.z) + ";");
+                                    streamWriter.WriteLine("pos = original_pos;");
+                                    transforemReset = false;
+                                }
+                                else
+                                {
+                                    streamWriter.Write(obj.CalcOpe());
+                                    transforemReset = true;
+                                }
+                            }
+                            else if (popNode is SDFOperate)
                             {
                                 streamWriter.WriteLine(popNode.CalcOpe());
                             }
-                            else if (popNode is UnionNode)
+                            else if (popNode is SDFBoolNode)
                             {
-                                UnionNode obj = (UnionNode)popNode;
-                                Debug.Log("Write a Union code");
-                                int a = obj.listCounter();
-
-                                streamWriter.Write("float dist" + i + " = ");
-
-                                for (int j = 0; j < a - 1; j++)
-                                {
-                                    streamWriter.Write("min(");
-                                }
-                                streamWriter.Write("dist" + taskStack.Pop());
-                                for (int j = 1; j < a; j++)
-                                {
-                                    streamWriter.Write(",dist" + taskStack.Pop() + ")");
-                                }
-                                streamWriter.WriteLine(";");
+                                SDFBoolNode obj = (SDFBoolNode)popNode;
+                                streamWriter.WriteLine(obj.CalcBool(taskStack.Pop(), taskStack.Pop(), i));
                             }
                             else if (popNode is Head)
                             {
@@ -91,13 +95,6 @@ namespace SDF
                                 Debug.Log("Write a DifferenceNode");
 
                                 streamWriter.WriteLine("float dist" + i + " = max(-dist" + taskStack.Pop() + ", dist" + taskStack.Pop() + ");");
-                            }
-                            else if (popNode is IntersectionNode)
-                            {
-                                // Intersect is max(A, B)
-                                IntersectionNode obj = (IntersectionNode)popNode;
-                                Debug.Log("Write a IntersectionNode");
-                                streamWriter.WriteLine("float dist" + i + " = max(dist" + taskStack.Pop() + ", dist" + taskStack.Pop() + ");");
                             }
                             else if (popNode is SmoothUnionNode)
                             {
@@ -118,7 +115,6 @@ namespace SDF
                                 Debug.LogError("Selected an unknown Node.");
                                 break;
                             }
-                            
 
                             streamWriter.Flush();
                             Debug.Log("Flush!");
@@ -144,7 +140,6 @@ namespace SDF
             {
                 Debug.LogError("The file could not be read");
             }
-
         }
 
         public void NextNode(SDFNode node)
@@ -183,7 +178,7 @@ namespace SDF
                     }
                 }
             }
-            else if (node is RepeatNode || node is RotateNode || node is TransformNode)
+            else if (node is RepeatNode || node is TransformNode)
             {
                 nodeQ.Enqueue(node);
                 foreach (NodePort p in node.Ports)
@@ -193,6 +188,8 @@ namespace SDF
                         try
                         {
                             NextNode(p.Connection.node as SDFNode);
+                            if (node is TransformNode)
+                                nodeQ.Enqueue(node);
                         }
                         catch (NullReferenceException e)
                         {
@@ -202,7 +199,7 @@ namespace SDF
                 }
                 return;
             }
-            else if(node is SDFObjNode)
+            else if (node is SDFObjNode)
             {
 
             }

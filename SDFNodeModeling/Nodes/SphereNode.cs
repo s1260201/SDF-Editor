@@ -5,8 +5,8 @@ namespace SDF.Model
 {
     public class SphereNode : SDFObjNode
     {
-        [Input] public Vector3 p;
-        [Input] public float s = 1;
+        public Vector3 p;
+        public float s = 1;
 
         public override string Calcsd(int i)
         {

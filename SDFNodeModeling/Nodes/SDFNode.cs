@@ -13,8 +13,6 @@ namespace SDF
         {
             return "";
         }
-        public virtual string Calcsd(int i) {
-            return "";
-        }
+        
     }
 }

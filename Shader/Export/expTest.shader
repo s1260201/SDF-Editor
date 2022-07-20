@@ -190,8 +190,16 @@ Shader "SDFE/Sample"
 			float getSdf(float3 pos){
 				float3 original_pos = pos;
 				float dist = 0;
-float dist0 = sdMengerSponge(float3(pos.x - 0, pos.y -  0, pos.z - 0), float3(1,1,1), 5);
-dist = dist0;
+pos = float3(pos.x - 0,pos.y - 0,pos.z - 0);
+pos.x *= 1;
+pos.y *= 0.3333333;
+pos.z *= 1;
+float dist0 = sdSphere(float3(pos.x - 0, pos.y -  0, pos.z - 0), 2);
+dist0 /= 1;
+pos = original_pos;
+float dist1 = sdSphere(float3(pos.x - 0, pos.y -  0, pos.z - 2), 1);
+float dist2 = max(dist1, dist0);
+dist = dist2;
 				return dist;
 			}
 			float3 getNormal(float3 pos) {

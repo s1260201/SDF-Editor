@@ -15,17 +15,22 @@ namespace SDF.Controll
 
         public override string CalcOpe()
         {
-            string str = "pos = original_pos;\n";
+            string str = "";
             str += "pos = float3(pos.x - " + this.nodePosition.x + ",pos.y - " + this.nodePosition.y + ",pos.z - " + this.nodePosition.z + ");\n";
-            str += "pos.xy = rot(pos.xy," + this.nodeRotate.z + ");\n";
-            str += "pos.yz = rot(pos.yz," + this.nodeRotate.x + ");\n";
-            str += "pos.xz = rot(pos.xz," + this.nodeRotate.y + ");\n";
-            str += "pos.x *= " + 1 / this.nodeScale.x + ";\n";
-            str += "pos.y *= " + 1 / this.nodeScale.y + ";\n";
-            str += "pos.z *= " + 1 / this.nodeScale.z + ";\n";
+            if(this.nodeRotate.z != 0)
+                str += "pos.xy = rot(pos.xy," + this.nodeRotate.z + ");\n";
+            if (this.nodeRotate.x != 0)
+                str += "pos.yz = rot(pos.yz," + this.nodeRotate.x + ");\n";
+            if (this.nodeRotate.y != 0)
+                str += "pos.xz = rot(pos.xz," + this.nodeRotate.y + ");\n";
+            if (this.nodeScale.x != 0)
+                str += "pos.x *= " + 1 / this.nodeScale.x + ";\n";
+            if (this.nodeScale.y != 0)
+                str += "pos.y *= " + 1 / this.nodeScale.y + ";\n";
+            if (this.nodeScale.z != 0)
+                str += "pos.z *= " + 1 / this.nodeScale.z + ";\n";
             return str;
         }
-
     }
 }
 
