@@ -114,7 +114,7 @@
 	        }
 
 			float smin(float a, float b) {
-				float k = 0.2;
+				float k = 0.9;
 				//float h = clamp(0.5 + 0.5 * (b - a) / k, 0,1);
 				float h = saturate(0.5 + 0.5 * (b - a) / k);
 				//return mix(b, a, h) - k * h * (1 - h); 
@@ -249,7 +249,7 @@
 				float3 col = float3(0,0,0);
 				float3 lightCol = float3(1,1,1);
 
-				while(fase < StepNum && abs(d) > 0.001){
+				while(fase < StepNum && abs(d) > 0.01){
 					t += d;
 					pos += rayDir * d;
 					d = getSdf(pos);

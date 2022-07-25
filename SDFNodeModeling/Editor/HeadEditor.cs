@@ -19,8 +19,8 @@ public class HeadEditor : NodeEditor
 
         }
         */
-        NodeEditorGUILayout.PropertyField(serializedObject.FindProperty("noise"));
-        NodeEditorGUILayout.PropertyField(serializedObject.FindProperty("shadow"));
+        //NodeEditorGUILayout.PropertyField(serializedObject.FindProperty("noise"));
+        //NodeEditorGUILayout.PropertyField(serializedObject.FindProperty("shadow"));
         NodeEditorGUILayout.PropertyField(serializedObject.FindProperty("nextNode"));
     }
 }

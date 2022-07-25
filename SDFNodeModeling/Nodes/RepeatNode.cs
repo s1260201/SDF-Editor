@@ -2,13 +2,23 @@
 
 namespace SDF.Controll
 {
-    public class RepeatNode : SDFNode
+    public class RepeatNode : SDFOperate
     {
         [Input(backingValue = ShowBackingValue.Never)] public SDFNode beforeNode;
-        [Input] public float interval = 50.0f;
+        public float interval = 50.0f;
         public bool x, y, z;
         [Output] public SDFNode node;
 
+        /*
+        public override string CalcOpe()
+        {
+            Debug.Log("Write a repeat code");
+            string str = "";
+            string repPlane = this.RepPlane();
+            str += "pos." + repPlane + " = repeat(pos." + repPlane + ", " + this.interval + ");";
+            return str;
+        }
+        */
 
         public string RepPlane()
         {

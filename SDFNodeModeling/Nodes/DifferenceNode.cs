@@ -1,12 +1,15 @@
 using UnityEngine;
 namespace SDF.Controll.Bool
 {
-    public class DifferenceNode : SDFNode
+    public class DifferenceNode : SDFBoolNode
     {
-        [Input(connectionType = ConnectionType.Multiple, backingValue = ShowBackingValue.Never)] public SDFNode beforeNode;
         [Output] public SDFNode targetNodes;
-        //[Output(dynamicPortList = true)] public List<SDFNode> nodes;
         [Output] public SDFNode negativeNodes;
+
+        public override string CalcBool(int a, int b, int i)
+        {
+            return "float dist" + i + " = max(-dist" + a + ", dist" + b + ");";
+        }
     }
 }
 
