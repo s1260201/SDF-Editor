@@ -12,6 +12,7 @@ namespace SDF.Controll.Bool
             return this.nodes.Count;
         }
         
+        /*
         public override string CalcBool(int a, int b, int i)
         {
             int c = this.listCounter();
@@ -23,11 +24,12 @@ namespace SDF.Controll.Bool
             str += "dist" + a;
             for (int j = 1; j < c; j++)
             {
-                str += ",dist" + b + ")";
+                str += ",dist" + b + ")"; //list ‚©‚ç“ü‚ê‚é
             }
             str += ";";
             return str;
         }
+        */
         
     }
     

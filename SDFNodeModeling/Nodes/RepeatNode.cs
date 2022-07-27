@@ -9,7 +9,7 @@ namespace SDF.Controll
         public bool x, y, z;
         [Output] public SDFNode node;
 
-        /*
+        
         public override string CalcOpe()
         {
             Debug.Log("Write a repeat code");
@@ -18,7 +18,7 @@ namespace SDF.Controll
             str += "pos." + repPlane + " = repeat(pos." + repPlane + ", " + this.interval + ");";
             return str;
         }
-        */
+        
 
         public string RepPlane()
         {

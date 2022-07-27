@@ -114,7 +114,7 @@
 	        }
 
 			float smin(float a, float b) {
-				float k = 0.9;
+				float k = 5.0;
 				//float h = clamp(0.5 + 0.5 * (b - a) / k, 0,1);
 				float h = saturate(0.5 + 0.5 * (b - a) / k);
 				//return mix(b, a, h) - k * h * (1 - h); 

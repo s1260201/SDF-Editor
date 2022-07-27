@@ -21,6 +21,8 @@ namespace SDF
 
         public void OutputShader()
         {
+            var sw = new System.Diagnostics.Stopwatch();
+            sw.Start();
             Stack<int> taskStack = new Stack<int>();
 
             NextNode(sdfGraph.HeadNode());
@@ -74,6 +76,25 @@ namespace SDF
                                     transforemReset = true;
                                 }
                             }
+                            else if (popNode is UnionNode)
+                            {
+                                UnionNode obj = (UnionNode)popNode;
+                                Debug.Log("Write a Union code");
+                                int a = obj.listCounter();
+
+                                streamWriter.Write("float dist" + i + " = ");
+
+                                for (int j = 0; j < a - 1; j++)
+                                {
+                                    streamWriter.Write("min(");
+                                }
+                                streamWriter.Write("dist" + taskStack.Pop());
+                                for (int j = 1; j < a; j++)
+                                {
+                                    streamWriter.Write(",dist" + taskStack.Pop() + ")");
+                                }
+                                streamWriter.WriteLine(";");
+                            }
                             else if (popNode is SDFOperate)
                             {
                                 streamWriter.WriteLine(popNode.CalcOpe());
@@ -87,14 +108,6 @@ namespace SDF
                             {
                                 Debug.Log("Write a Head Code");
                                 streamWriter.WriteLine("dist = dist" + --i + ";");
-                            }
-                            else if (popNode is DifferenceNode)
-                            {
-                                // Diff is max(-A, B)
-                                DifferenceNode obj = (DifferenceNode)popNode;
-                                Debug.Log("Write a DifferenceNode");
-
-                                streamWriter.WriteLine("float dist" + i + " = max(-dist" + taskStack.Pop() + ", dist" + taskStack.Pop() + ");");
                             }
                             else if (popNode is SmoothUnionNode)
                             {
@@ -120,8 +133,13 @@ namespace SDF
                             Debug.Log("Flush!");
                             if (popNode is not TransformNode)
                             {
-                                taskStack.Push(i); // ControllNodeˆÈ‰º‚É‚ ‚éObjNode‚Ì”Ô†i‚ð“ü‚ê‚Ä‚¨‚­B
-                                i++;
+                                if (popNode is RepeatNode) Debug.Log("repnode");
+                                else
+                                {
+                                    taskStack.Push(i); // ControllNodeˆÈ‰º‚É‚ ‚éObjNode‚Ì”Ô†i‚ð“ü‚ê‚Ä‚¨‚­B
+                                    i++;
+                                }
+                                
                             }
                         }
                         Debug.Log("Clear");
@@ -140,6 +158,8 @@ namespace SDF
             {
                 Debug.LogError("The file could not be read");
             }
+            sw.Stop();
+            Debug.Log(sw.Elapsed);
         }
 
         public void NextNode(SDFNode node)

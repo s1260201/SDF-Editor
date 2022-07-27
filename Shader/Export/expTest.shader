@@ -114,7 +114,7 @@ Shader "SDFE/Sample"
 	        }
 
 			float smin(float a, float b) {
-				float k = 0.2;
+				float k = 5.0;
 				//float h = clamp(0.5 + 0.5 * (b - a) / k, 0,1);
 				float h = saturate(0.5 + 0.5 * (b - a) / k);
 				//return mix(b, a, h) - k * h * (1 - h); 
@@ -192,14 +192,47 @@ Shader "SDFE/Sample"
 				float dist = 0;
 pos = float3(pos.x - 0,pos.y - 0,pos.z - 0);
 pos.x *= 1;
-pos.y *= 0.3333333;
+pos.y *= 0.2;
 pos.z *= 1;
-float dist0 = sdSphere(float3(pos.x - 0, pos.y -  0, pos.z - 0), 2);
+float dist0 = sdSphere(float3(pos.x - 0, pos.y -  0, pos.z - 0), 10);
 dist0 /= 1;
 pos = original_pos;
-float dist1 = sdSphere(float3(pos.x - 0, pos.y -  0, pos.z - 2), 1);
-float dist2 = max(dist1, dist0);
-dist = dist2;
+pos = float3(pos.x - 0,pos.y - -70,pos.z - 20);
+pos.yz = rot(pos.yz,0.5236);
+pos.x *= 1;
+pos.y *= 0.3333333;
+pos.z *= 1;
+float dist1 = sdSphere(float3(pos.x - 0, pos.y -  0, pos.z - 0), 8);
+dist1 /= 1;
+pos = original_pos;
+pos = float3(pos.x - 0,pos.y - -70,pos.z - -20);
+pos.yz = rot(pos.yz,-0.5236);
+pos.x *= 1;
+pos.y *= 0.3333333;
+pos.z *= 1;
+float dist2 = sdSphere(float3(pos.x - 0, pos.y -  0, pos.z - 0), 8);
+dist2 /= 1;
+pos = original_pos;
+pos = float3(pos.x - 0,pos.y - 0,pos.z - -20);
+pos.yz = rot(pos.yz,0.5236);
+pos.x *= 1;
+pos.y *= 0.3333333;
+pos.z *= 1;
+float dist3 = sdSphere(float3(pos.x - 0, pos.y -  0, pos.z - 0), 8);
+dist3 /= 1;
+pos = original_pos;
+pos = float3(pos.x - 0,pos.y - 0,pos.z - 20);
+pos.yz = rot(pos.yz,-0.5236);
+pos.x *= 1;
+pos.y *= 0.3333333;
+pos.z *= 1;
+float dist4 = sdSphere(float3(pos.x - 0, pos.y -  0, pos.z - 0), 8);
+dist4 /= 1;
+pos = original_pos;
+float dist5 = min(min(min(min(dist4,dist3),dist2),dist1),dist0);
+float dist6 = sdSphere(float3(pos.x - 0, pos.y -  40, pos.z - 0), 20);
+float dist7 = smin(dist6, dist5);
+dist = dist7;
 				return dist;
 			}
 			float3 getNormal(float3 pos) {
@@ -258,7 +291,7 @@ dist = dist2;
 				float3 col = float3(0,0,0);
 				float3 lightCol = float3(1,1,1);
 
-				while(fase < StepNum && abs(d) > 0.001){
+				while(fase < StepNum && abs(d) > 0.01){
 					t += d;
 					pos += rayDir * d;
 					d = getSdf(pos);
