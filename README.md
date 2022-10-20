@@ -1,13 +1,16 @@
 # SDF-Editor
 s1260201 GT
 
-This motivation is exact?
-
  SDF (Signed Distance Field) modeling is a better  method for rendering curves than polygon modeling. In this research, I’ll implement SDF-based modeling system to make easier in Unity.
 <br>
 
-How to use
+# Features
+* Node based UI: Library of 3D primitives, operations.
+* Define models by graph, not by programs
+* Should be able to generate shader code corresponding to the graph
+* Use ray-marching for real-time rendering. Blend the rendered model with the rest of the scene (“impostor”)
 
+# How to use
 1. Connecting nodes
 ![Nodes](Doc/img/Nodes.png)
 
@@ -16,8 +19,6 @@ How to use
 ![Shader](Doc/img/SceneView.png)
 
 <br>
-
-
 
 Link
 https://github.com/Siccity/xNode/releases/tag/1.7
