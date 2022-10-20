@@ -20,6 +20,14 @@ s1260201 GT
 ![Inspector](Doc/img/Inspector.png)
 ![Shader](Doc/img/middium.png)
 
+
+# Future tasks
+<dl>
+  <dt>Usable functions depend on original shader file.</dt>
+  <dd>Add functions too when the exporter add codes.</dd>
+  <dd>Create original shader files for each case.</dd>
+</dl>
+
 <br>
 
 Link
